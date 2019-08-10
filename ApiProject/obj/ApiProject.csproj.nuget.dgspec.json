@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Admin\\source\\repos\\Api\\ApiProject\\ApiProject.csproj": {}
+    "C:\\Users\\Treinamento 6\\Desktop\\Sabados !\\Sabado1008\\ApiProjeto\\ApiProject\\ApiProject.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Admin\\source\\repos\\Api\\ApiProject\\ApiProject.csproj": {
+    "C:\\Users\\Treinamento 6\\Desktop\\Sabados !\\Sabado1008\\ApiProjeto\\ApiProject\\ApiProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Admin\\source\\repos\\Api\\ApiProject\\ApiProject.csproj",
+        "projectUniqueName": "C:\\Users\\Treinamento 6\\Desktop\\Sabados !\\Sabado1008\\ApiProjeto\\ApiProject\\ApiProject.csproj",
         "projectName": "ApiProject",
-        "projectPath": "C:\\Users\\Admin\\source\\repos\\Api\\ApiProject\\ApiProject.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Admin\\source\\repos\\Api\\ApiProject\\obj\\",
+        "projectPath": "C:\\Users\\Treinamento 6\\Desktop\\Sabados !\\Sabado1008\\ApiProjeto\\ApiProject\\ApiProject.csproj",
+        "packagesPath": "C:\\Users\\Treinamento 6\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Treinamento 6\\Desktop\\Sabados !\\Sabado1008\\ApiProjeto\\ApiProject\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Treinamento 6\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -30,11 +30,11 @@
         "frameworks": {
           "netcoreapp2.2": {
             "projectReferences": {
-              "C:\\Users\\Admin\\source\\repos\\Api\\Core\\Core.csproj": {
-                "projectPath": "C:\\Users\\Admin\\source\\repos\\Api\\Core\\Core.csproj"
+              "C:\\Users\\Treinamento 6\\Desktop\\Sabados !\\Sabado1008\\ApiProjeto\\Core\\Core.csproj": {
+                "projectPath": "C:\\Users\\Treinamento 6\\Desktop\\Sabados !\\Sabado1008\\ApiProjeto\\Core\\Core.csproj"
               },
-              "C:\\Users\\Admin\\source\\repos\\Api\\Model\\Model.csproj": {
-                "projectPath": "C:\\Users\\Admin\\source\\repos\\Api\\Model\\Model.csproj"
+              "C:\\Users\\Treinamento 6\\Desktop\\Sabados !\\Sabado1008\\ApiProjeto\\Model\\Model.csproj": {
+                "projectPath": "C:\\Users\\Treinamento 6\\Desktop\\Sabados !\\Sabado1008\\ApiProjeto\\Model\\Model.csproj"
               }
             }
           }
@@ -78,20 +78,20 @@
         }
       }
     },
-    "C:\\Users\\Admin\\source\\repos\\Api\\Core\\Core.csproj": {
+    "C:\\Users\\Treinamento 6\\Desktop\\Sabados !\\Sabado1008\\ApiProjeto\\Core\\Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Admin\\source\\repos\\Api\\Core\\Core.csproj",
+        "projectUniqueName": "C:\\Users\\Treinamento 6\\Desktop\\Sabados !\\Sabado1008\\ApiProjeto\\Core\\Core.csproj",
         "projectName": "Core",
-        "projectPath": "C:\\Users\\Admin\\source\\repos\\Api\\Core\\Core.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Admin\\source\\repos\\Api\\Core\\obj\\",
+        "projectPath": "C:\\Users\\Treinamento 6\\Desktop\\Sabados !\\Sabado1008\\ApiProjeto\\Core\\Core.csproj",
+        "packagesPath": "C:\\Users\\Treinamento 6\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Treinamento 6\\Desktop\\Sabados !\\Sabado1008\\ApiProjeto\\Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Treinamento 6\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -104,8 +104,8 @@
         "frameworks": {
           "netcoreapp2.2": {
             "projectReferences": {
-              "C:\\Users\\Admin\\source\\repos\\Api\\Model\\Model.csproj": {
-                "projectPath": "C:\\Users\\Admin\\source\\repos\\Api\\Model\\Model.csproj"
+              "C:\\Users\\Treinamento 6\\Desktop\\Sabados !\\Sabado1008\\ApiProjeto\\Model\\Model.csproj": {
+                "projectPath": "C:\\Users\\Treinamento 6\\Desktop\\Sabados !\\Sabado1008\\ApiProjeto\\Model\\Model.csproj"
               }
             }
           }
@@ -134,20 +134,20 @@
         }
       }
     },
-    "C:\\Users\\Admin\\source\\repos\\Api\\Model\\Model.csproj": {
+    "C:\\Users\\Treinamento 6\\Desktop\\Sabados !\\Sabado1008\\ApiProjeto\\Model\\Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Admin\\source\\repos\\Api\\Model\\Model.csproj",
+        "projectUniqueName": "C:\\Users\\Treinamento 6\\Desktop\\Sabados !\\Sabado1008\\ApiProjeto\\Model\\Model.csproj",
         "projectName": "Model",
-        "projectPath": "C:\\Users\\Admin\\source\\repos\\Api\\Model\\Model.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Admin\\source\\repos\\Api\\Model\\obj\\",
+        "projectPath": "C:\\Users\\Treinamento 6\\Desktop\\Sabados !\\Sabado1008\\ApiProjeto\\Model\\Model.csproj",
+        "packagesPath": "C:\\Users\\Treinamento 6\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Treinamento 6\\Desktop\\Sabados !\\Sabado1008\\ApiProjeto\\Model\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Treinamento 6\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

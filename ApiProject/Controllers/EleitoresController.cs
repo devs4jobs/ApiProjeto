@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Model;
+using Core;
 
 namespace ApiProject.Controllers
 {
@@ -12,24 +10,20 @@ namespace ApiProject.Controllers
     public class EleitoresController : ControllerBase
     {
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Eleitor eleitor)
-        {
-            var Eleitor = new Core.EleitorCore(eleitor);
-            return Created("", null);
-        }
+        public async Task<IActionResult> Post([FromBody] string eleitor) => Ok(new EleitorCore().Create(eleitor));
 
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(string id) => Ok(new Eleitor());
+        public async Task<IActionResult> Get(string id) => Ok(new EleitorCore().FindBy(id));
 
         [HttpGet]
-        public async Task<IActionResult> Get() => Ok(new Eleitor());
+        public async Task<IActionResult> Get() => Ok(new EleitorCore().FindAll());
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(string id) => NoContent();
+        public async Task<IActionResult> Put(string id) => Ok(new EleitorCore().Update(id));
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(string id) => Accepted();
+        public async Task<IActionResult> Delete(string id) => Ok(new EleitorCore().Delete(id));
 
     }
 }
