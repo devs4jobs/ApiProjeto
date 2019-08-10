@@ -9,27 +9,26 @@ namespace ApiProject.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EleitoresController : ControllerBase
+    public class PautaEleitoresController : ControllerBase
     {
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Eleitor eleitor)
+        public async Task<IActionResult> Post([FromBody] PautaEleitor pautaEleitor)
         {
-            var Eleitor = new Core.EleitorCore(eleitor);
+            var PautaEleitor = new Core.PautaEleitorCore(pautaEleitor);
             return Created("", null);
         }
-
+        
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(string id) => Ok(new Eleitor());
+        public async Task<IActionResult> Get(string id) => Ok(new PautaEleitor());
 
         [HttpGet]
-        public async Task<IActionResult> Get() => Ok(new Eleitor());
+        public async Task<IActionResult> Get() => Ok(new PautaEleitor());
 
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(string id) => NoContent();
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(string id) => Accepted();
-
     }
 }

@@ -702,23 +702,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Admin\\.nuget\\packages\\": {},
+    "C:\\Users\\Treinamento 3\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Admin\\source\\repos\\Api\\Core\\Core.csproj",
+      "projectUniqueName": "C:\\Users\\Treinamento 3\\Documents\\API 2\\ApiProjeto\\Core\\Core.csproj",
       "projectName": "Core",
-      "projectPath": "C:\\Users\\Admin\\source\\repos\\Api\\Core\\Core.csproj",
-      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Admin\\source\\repos\\Api\\Core\\obj\\",
+      "projectPath": "C:\\Users\\Treinamento 3\\Documents\\API 2\\ApiProjeto\\Core\\Core.csproj",
+      "packagesPath": "C:\\Users\\Treinamento 3\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Treinamento 3\\Documents\\API 2\\ApiProjeto\\Core\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Treinamento 3\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -731,8 +731,8 @@
       "frameworks": {
         "netcoreapp2.2": {
           "projectReferences": {
-            "C:\\Users\\Admin\\source\\repos\\Api\\Model\\Model.csproj": {
-              "projectPath": "C:\\Users\\Admin\\source\\repos\\Api\\Model\\Model.csproj"
+            "C:\\Users\\Treinamento 3\\Documents\\API 2\\ApiProjeto\\Model\\Model.csproj": {
+              "projectPath": "C:\\Users\\Treinamento 3\\Documents\\API 2\\ApiProjeto\\Model\\Model.csproj"
             }
           }
         }

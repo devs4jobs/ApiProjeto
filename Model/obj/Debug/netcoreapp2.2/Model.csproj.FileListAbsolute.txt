@@ -7,3 +7,12 @@ C:\Users\Admin\source\repos\Model\obj\Debug\netcoreapp2.2\Model.AssemblyInfoInpu
 C:\Users\Admin\source\repos\Model\obj\Debug\netcoreapp2.2\Model.AssemblyInfo.cs
 C:\Users\Admin\source\repos\Model\obj\Debug\netcoreapp2.2\Model.dll
 C:\Users\Admin\source\repos\Model\obj\Debug\netcoreapp2.2\Model.pdb
+C:\Users\Treinamento 3\Documents\API 2\ApiProjeto\Model\bin\Debug\netcoreapp2.2\Model.deps.json
+C:\Users\Treinamento 3\Documents\API 2\ApiProjeto\Model\bin\Debug\netcoreapp2.2\Model.dll
+C:\Users\Treinamento 3\Documents\API 2\ApiProjeto\Model\bin\Debug\netcoreapp2.2\Model.pdb
+C:\Users\Treinamento 3\Documents\API 2\ApiProjeto\Model\obj\Debug\netcoreapp2.2\Model.csprojAssemblyReference.cache
+C:\Users\Treinamento 3\Documents\API 2\ApiProjeto\Model\obj\Debug\netcoreapp2.2\Model.csproj.CoreCompileInputs.cache
+C:\Users\Treinamento 3\Documents\API 2\ApiProjeto\Model\obj\Debug\netcoreapp2.2\Model.AssemblyInfoInputs.cache
+C:\Users\Treinamento 3\Documents\API 2\ApiProjeto\Model\obj\Debug\netcoreapp2.2\Model.AssemblyInfo.cs
+C:\Users\Treinamento 3\Documents\API 2\ApiProjeto\Model\obj\Debug\netcoreapp2.2\Model.dll
+C:\Users\Treinamento 3\Documents\API 2\ApiProjeto\Model\obj\Debug\netcoreapp2.2\Model.pdb
