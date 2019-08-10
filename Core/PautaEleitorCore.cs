@@ -1,31 +1,27 @@
-﻿using Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
+using Model;
 namespace Core
 {
-    public class EleitorCore
+    public class PautaEleitorCore
     {
-        private Eleitor _eleitor { get; set; }
-        
-        
-        public EleitorCore( Eleitor eleitor)
-        {
-            _eleitor = eleitor;
-        }
+        private PautaEleitor pautaEleitor;
 
-        public EleitorCore()
+        public PautaEleitorCore(PautaEleitor pautaEleitor)
+        {
+            this.pautaEleitor = pautaEleitor;
+        }
+        public PautaEleitorCore()
         {
 
         }
-
-        public Eleitor Achar(string id )
+        public PautaEleitor Achar(string id)
         {
             return null;
         }
-        
-        public Eleitor AcharTodos()
+
+        public PautaEleitor AcharTodos()
         {
             return null;
         }
@@ -38,6 +34,5 @@ namespace Core
         {
 
         }
-
     }
 }

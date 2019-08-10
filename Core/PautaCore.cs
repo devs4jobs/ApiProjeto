@@ -5,27 +5,21 @@ using System.Text;
 
 namespace Core
 {
-    public class EleitorCore
+    public class PautaCore
     {
-        private Eleitor _eleitor { get; set; }
-        
-        
-        public EleitorCore( Eleitor eleitor)
+        private Pauta _pauta { get; set; }
+        public PautaCore(Pauta Pauta)
         {
-            _eleitor = eleitor;
+            _pauta = Pauta;
         }
+        public PautaCore() { }
 
-        public EleitorCore()
-        {
-
-        }
-
-        public Eleitor Achar(string id )
+        public Pauta Achar(string id)
         {
             return null;
         }
-        
-        public Eleitor AcharTodos()
+
+        public Pauta AcharTodos()
         {
             return null;
         }
@@ -38,6 +32,5 @@ namespace Core
         {
 
         }
-
     }
 }

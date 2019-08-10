@@ -1,4 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Model;
 using Core;
@@ -7,14 +10,12 @@ namespace ApiProject.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EleitoresController : ControllerBase
+    public class PautaEleitorController : ControllerBase
     {
-       
-
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Eleitor eleitor)
+        public async Task<IActionResult> Post([FromBody] PautaEleitor pautaeleitor)
         {
-            var Eleitor = new Core.EleitorCore(eleitor);
+            var Pauta = new Core.PautaEleitorCore(pautaeleitor);
             return Created("", null);
         }
 
@@ -26,18 +27,17 @@ namespace ApiProject.Controllers
         public async Task<IActionResult> Get() => Ok(new Eleitor());
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put([FromBody] Eleitor eleitor ,string id)
+        public async Task<IActionResult> Put([FromBody]PautaEleitor pautaEleitor, string id)
         {
-            EleitorCore e = new EleitorCore();
+            var e = new PautaEleitorCore();
             e.Atualizar(id);
             return Ok();
         }
-         
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(string id)
         {
-            PautaCore e = new PautaCore();
+            var e = new PautaEleitorCore();
             e.DeletarUm(id);
             return Ok();
         }

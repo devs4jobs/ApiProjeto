@@ -7,14 +7,12 @@ namespace ApiProject.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EleitoresController : ControllerBase
+    public class PautasController : ControllerBase
     {
-       
-
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Eleitor eleitor)
+        public async Task<IActionResult> Post([FromBody] Pauta pauta)
         {
-            var Eleitor = new Core.EleitorCore(eleitor);
+            var Eleitor = new Core.PautaCore(pauta);
             return Created("", null);
         }
 
@@ -26,19 +24,18 @@ namespace ApiProject.Controllers
         public async Task<IActionResult> Get() => Ok(new Eleitor());
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put([FromBody] Eleitor eleitor ,string id)
+        public async Task<IActionResult> Put([FromBody] Pauta pauta, string id)
         {
-            EleitorCore e = new EleitorCore();
-            e.Atualizar(id);
+            var p = new PautaCore();
+            p.Atualizar(id);
             return Ok();
         }
-         
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(string id)
         {
-            PautaCore e = new PautaCore();
-            e.DeletarUm(id);
+            var p = new PautaCore();
+            p.DeletarUm(id);
             return Ok();
         }
 
