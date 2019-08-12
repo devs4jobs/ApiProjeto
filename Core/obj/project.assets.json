@@ -708,11 +708,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Treinamento 5\\Desktop\\Sabado-10-08\\ApiProjeto\\Core\\Core.csproj",
+      "projectUniqueName": "C:\\Users\\Treinamento 5\\Desktop\\FirstApi\\ApiProjeto\\Core\\Core.csproj",
       "projectName": "Core",
-      "projectPath": "C:\\Users\\Treinamento 5\\Desktop\\Sabado-10-08\\ApiProjeto\\Core\\Core.csproj",
+      "projectPath": "C:\\Users\\Treinamento 5\\Desktop\\FirstApi\\ApiProjeto\\Core\\Core.csproj",
       "packagesPath": "C:\\Users\\Treinamento 5\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Treinamento 5\\Desktop\\Sabado-10-08\\ApiProjeto\\Core\\obj\\",
+      "outputPath": "C:\\Users\\Treinamento 5\\Desktop\\FirstApi\\ApiProjeto\\Core\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -731,8 +731,8 @@
       "frameworks": {
         "netcoreapp2.2": {
           "projectReferences": {
-            "C:\\Users\\Treinamento 5\\Desktop\\Sabado-10-08\\ApiProjeto\\Model\\Model.csproj": {
-              "projectPath": "C:\\Users\\Treinamento 5\\Desktop\\Sabado-10-08\\ApiProjeto\\Model\\Model.csproj"
+            "C:\\Users\\Treinamento 5\\Desktop\\FirstApi\\ApiProjeto\\Model\\Model.csproj": {
+              "projectPath": "C:\\Users\\Treinamento 5\\Desktop\\FirstApi\\ApiProjeto\\Model\\Model.csproj"
             }
           }
         }

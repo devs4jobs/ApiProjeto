@@ -1,11 +1,12 @@
-﻿using Model;
+﻿using Core.Interface;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Core
 {
-    public class PautaCore
+    public class PautaCore :ICore<Pauta>
     {
         private Pauta _pauta { get; set; }
         public PautaCore(Pauta Pauta)
@@ -14,23 +15,12 @@ namespace Core
         }
         public PautaCore() { }
 
-        public Pauta Achar(string id)
-        {
-            return null;
-        }
+        public Pauta Cadastrar(Pauta pauta) => null;
+        public Pauta Achar(string id) => null;
+        public Pauta AcharTodos() => null;
+        public Pauta Atualizar(string id) => null;
+        public void DeletarUm(string id) { }
 
-        public Pauta AcharTodos()
-        {
-            return null;
-        }
-        public void DeletarUm(string id)
-        {
 
-        }
-
-        public void Atualizar(string id)
-        {
-
-        }
     }
 }

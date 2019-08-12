@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Model;
 using Core;
+using Core.Interface;
 
 namespace ApiProject.Controllers
 {
@@ -9,35 +10,28 @@ namespace ApiProject.Controllers
     [ApiController]
     public class PautasController : ControllerBase
     {
+        public ICore<Pauta> _Core{ get; set; }
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Pauta pauta)
-        {
-            var Eleitor = new Core.PautaCore(pauta);
-            return Created("", null);
-        }
+        public async Task<IActionResult> Post([FromBody] Pauta pauta) => Created("", new PautaCore().Cadastrar(pauta));
+
 
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(string id) => Ok(new Eleitor());
+        public async Task<IActionResult> Get(string id) => Ok(new PautaCore().Achar(id));
 
         [HttpGet]
-        public async Task<IActionResult> Get() => Ok(new Eleitor());
+        public async Task<IActionResult> Get() => Ok(new PautaCore().AcharTodos());
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put([FromBody] Pauta pauta, string id)
-        {
-            var p = new PautaCore();
-            p.Atualizar(id);
-            return Ok();
-        }
+        public async Task<IActionResult> Put([FromBody] Pauta pauta, string id) => Ok(new PautaCore().Atualizar(id));
+
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(string id)
-        {
-            var p = new PautaCore();
-            p.DeletarUm(id);
-            return Ok();
-        }
+        public async Task<IActionResult> Delete(string id) {
+            new PautaCore().DeletarUm(id);
+            return NoContent();
+        } 
+       
 
     }
 }

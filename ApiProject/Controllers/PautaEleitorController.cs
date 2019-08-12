@@ -13,34 +13,26 @@ namespace ApiProject.Controllers
     public class PautaEleitorController : ControllerBase
     {
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] PautaEleitor pautaeleitor)
-        {
-            var Pauta = new Core.PautaEleitorCore(pautaeleitor);
-            return Created("", null);
-        }
+        public async Task<IActionResult> Post([FromBody] PautaEleitor pautaeleitor) => Created("", new PautaEleitorCore().Cadastrar(pautaeleitor));
 
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(string id) => Ok(new Eleitor());
+        public async Task<IActionResult> Get(string id) => Ok(new PautaEleitorCore().Achar(id));
 
         [HttpGet]
-        public async Task<IActionResult> Get() => Ok(new Eleitor());
+        public async Task<IActionResult> Get() => Ok(new PautaEleitorCore().AcharTodos());
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put([FromBody]PautaEleitor pautaEleitor, string id)
-        {
-            var e = new PautaEleitorCore();
-            e.Atualizar(id);
-            return Ok();
-        }
+        public async Task<IActionResult> Put([FromBody]PautaEleitor pautaEleitor, string id) => Ok(new PautaEleitorCore().Atualizar(id));
+
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(string id)
         {
-            var e = new PautaEleitorCore();
-            e.DeletarUm(id);
-            return Ok();
-        }
+            new PautaEleitorCore().DeletarUm(id);
+            return NoContent();
+        } 
+     
 
     }
 }

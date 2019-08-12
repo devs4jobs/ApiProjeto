@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Core.Interface;
 using Model;
 namespace Core
 {
-    public class PautaEleitorCore
+    public class PautaEleitorCore : ICore<PautaEleitor>
     {
         private PautaEleitor pautaEleitor;
 
@@ -12,27 +13,12 @@ namespace Core
         {
             this.pautaEleitor = pautaEleitor;
         }
-        public PautaEleitorCore()
-        {
+        public PautaEleitorCore() { }
 
-        }
-        public PautaEleitor Achar(string id)
-        {
-            return null;
-        }
-
-        public PautaEleitor AcharTodos()
-        {
-            return null;
-        }
-        public void DeletarUm(string id)
-        {
-
-        }
-
-        public void Atualizar(string id)
-        {
-
-        }
+        public PautaEleitor Cadastrar(PautaEleitor pauta) => null;
+        public PautaEleitor Achar(string id) => null;
+        public PautaEleitor AcharTodos() => null;
+        public PautaEleitor Atualizar(string id) => null;
+        public void DeletarUm(string id) { }
     }
 }

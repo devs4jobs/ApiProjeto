@@ -9,38 +9,27 @@ namespace ApiProject.Controllers
     [ApiController]
     public class EleitoresController : ControllerBase
     {
-       
+
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Eleitor eleitor)
-        {
-            var Eleitor = new Core.EleitorCore(eleitor);
-            return Created("", null);
-        }
+        public async Task<IActionResult> Post([FromBody] Eleitor eleitor) => Created("", new EleitorCore().Cadastrar(eleitor));
 
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(string id) => Ok(new Eleitor());
+        public async Task<IActionResult> Get(string id) => Ok(new EleitorCore().Achar(id));
 
         [HttpGet]
-        public async Task<IActionResult> Get() => Ok(new Eleitor());
+        public async Task<IActionResult> Get() => Ok(new EleitorCore().AcharTodos());
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put([FromBody] Eleitor eleitor ,string id)
-        {
-            EleitorCore e = new EleitorCore();
-            e.Atualizar(id);
-            return Ok();
-        }
-         
+        public async Task<IActionResult> Put([FromBody] Eleitor eleitor, string id) => Ok(new EleitorCore().Atualizar(id));
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(string id)
         {
-            PautaCore e = new PautaCore();
-            e.DeletarUm(id);
-            return Ok();
+            new EleitorCore().DeletarUm(id);
+            return NoContent();
         }
-
+       
     }
 }
