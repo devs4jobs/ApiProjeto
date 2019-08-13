@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Model;
 using Core;
+using System.Collections.Generic;
+
 namespace ApiProject.Controllers
 {
     [Route("api/[controller]")]
@@ -9,19 +11,22 @@ namespace ApiProject.Controllers
     public class PautaEleitorControler : ControllerBase
     {
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] string id) => Ok(new PautaEleitorCore().Create(id));
-
+        public async Task<IActionResult> Post([FromBody] PautaEleitor pautaEleitor) => Ok(new PautaEleitorCore().Cadastrar(pautaEleitor));
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(string id) => Ok(new PautaEleitorCore().FindBy(id));
+        public async Task<ActionResult<PautaEleitor>> Get(string id) => Ok(new PautaEleitorCore().ProcurarID(id));
         [HttpGet]
-        public async Task<IActionResult> Get() => Ok(new PautaEleitorCore().FindAll());
+        public async Task<ActionResult<List<PautaEleitor>>> GetAll() => Ok(new PautaEleitorCore().ProcurarTodos());
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(string id) => Ok(new PautaEleitorCore().Update(id));
+        public async Task<ActionResult<PautaEleitor>> Put(string id) => Ok(new PautaEleitorCore().Atualizar(id));
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(string id) => Ok(new PautaEleitorCore().Delete(id));
+        public async Task<IActionResult> Delete(string id)
+        {
+            new PautaEleitorCore().Excluir(id);
+            return NoContent();
+        }
 
     }
 }

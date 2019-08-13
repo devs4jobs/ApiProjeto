@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Model;
 using Core;
+using System.Collections.Generic;
 
 namespace ApiProject.Controllers
 {
@@ -10,20 +11,23 @@ namespace ApiProject.Controllers
     public class EleitoresController : ControllerBase
     {
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] string eleitor) => Ok(new EleitorCore().Create(eleitor));
+        public async Task<IActionResult> Post([FromBody] Eleitor eleitor) => Ok(new EleitorCore().Cadastrar(eleitor));
 
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(string id) => Ok(new EleitorCore().FindBy(id));
+        public async Task<ActionResult<Eleitor>> Get(string id) => Ok(new EleitorCore().ProcurarID(id));
 
         [HttpGet]
-        public async Task<IActionResult> Get() => Ok(new EleitorCore().FindAll());
+        public async Task<ActionResult<List<Eleitor>>> GetAll() => Ok(new EleitorCore().ProcurarTodos());
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(string id) => Ok(new EleitorCore().Update(id));
+        public async Task<ActionResult<Eleitor>> Put(string id) => Ok(new EleitorCore().Atualizar(id));
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(string id) => Ok(new EleitorCore().Delete(id));
-
+        public async Task<IActionResult> Delete(string id)
+        {
+            new EleitorCore().Excluir(id);
+           return NoContent();
+        }
     }
 }

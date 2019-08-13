@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections.Generic;
 using Model;
 
 namespace Core
@@ -12,16 +13,16 @@ namespace Core
         {
             _pautaEleitor = pautaEleitor;
         }
-
+ 
         public PautaEleitorCore() { }
 
 
-        public PautaEleitor Create(string id) => null;
-        public PautaEleitor FindBy(string id) => null;
-        public PautaEleitor FindAll() => null;
+        public PautaEleitor Cadastrar(PautaEleitor pautaEleitor) => null;
+        public PautaEleitor ProcurarID(string id) => null;
+        public List<PautaEleitor> ProcurarTodos() => null;
 
-        public PautaEleitor Update(string id) => null;
+        public PautaEleitor Atualizar(string id) => null;
 
-        public PautaEleitor Delete(string id) => null;
+        public void Excluir(string id) { }
     }
 }

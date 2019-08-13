@@ -14,14 +14,14 @@ namespace Core
         }
         public PautaCore() { }
 
-        public Pauta Create(string id) => null;
+        public Pauta Cadastrar(Pauta pauta) => null;
 
-        public Pauta FindBy(string id) => null;
+        public Pauta ProcurarID(string id) => null;
 
-        public Pauta FindAll() => null;
+        public List<Pauta> ProcurarTodos() => null;
 
-        public Pauta Update(string id) => null;
+        public Pauta Atualizar(string id) => null;
 
-        public Pauta Delete(string id) => null;
+        public void Excluir(string id) { }
     }
 }

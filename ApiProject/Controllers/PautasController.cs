@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Model;
+using System.Collections.Generic;
 
 namespace ApiProject.Controllers
 {
@@ -10,21 +11,25 @@ namespace ApiProject.Controllers
     public class PautasController : ControllerBase
     {
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] string pauta) => Ok(new PautaCore().Create(pauta));
+        public async Task<IActionResult> Post([FromBody] Pauta pauta) => Ok(new PautaCore().Cadastrar(pauta));
 
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetId(string id) => Ok(new PautaCore().FindBy(id));
+        public async Task<ActionResult<Pauta>> GetId(string id) => Ok(new PautaCore().ProcurarID(id));
 
 
         [HttpGet]
-        public async Task<IActionResult> GetAll() => Ok(new PautaCore().FindAll());
+        public async Task<ActionResult<List<Pauta>>> GetAll() => Ok(new PautaCore().ProcurarTodos());
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(string id) => Ok(new PautaCore().Update(id));
+        public async Task<ActionResult<Pauta>> Put(string id) => Ok(new PautaCore().Atualizar(id));
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(string id) => Ok(new PautaCore().Delete(id));
+        public async Task<IActionResult> Delete(string id)
+        {
+            new PautaCore().Excluir(id);
+            return NoContent();
+        }
 
     }
 }
