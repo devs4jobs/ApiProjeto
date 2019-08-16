@@ -17,22 +17,43 @@ namespace ApiProject.Controllers
         public EleitoresController(EleicaoContext eleicaoContext) { _eleicaoContext = eleicaoContext; }
         //Request Post chamando o método do core.
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Eleitor eleitor) => Created("", new EleitorCore(_eleicaoContext).Cadastrar(eleitor));
+        public async Task<IActionResult> Post([FromBody] Eleitor eleitor)
+        {
+            var Core = new EleitorCore(_eleicaoContext).Cadastrar(eleitor);
+            if (Core == null) return BadRequest();
+            return Created("",Core );
+        }
         //Request Get chamando o método do core.
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(string id) => Ok(new EleitorCore(_eleicaoContext).AcharUm(id));
+        public async Task<IActionResult> Get(string id)
+        {
+            var Core = new EleitorCore(_eleicaoContext).AcharUm(id);
+
+            if (Core == null)
+                return BadRequest();
+            return Ok(Core);
+        } 
         //Request Get chamando o método do core.
         [HttpGet]
         public async Task<IActionResult> Get() => Ok(new EleitorCore(_eleicaoContext).AcharTodos());
         //Request put chamando o método do core.
         [HttpPut("{Att}")]
-        public async Task<IActionResult> Put([FromBody] Eleitor eleitor) => Ok(new EleitorCore(_eleicaoContext).Atualizar(eleitor));
+        public async Task<IActionResult> Put([FromBody] Eleitor eleitor)
+        {
+            var Core = new EleitorCore(_eleicaoContext).Atualizar(eleitor);
+            if (Core == null)
+                return BadRequest();
+            return Ok();
+        } 
 
         //Request delete chamando o método do core.
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(string id)
         {
-            new EleitorCore(_eleicaoContext).DeletarUm(id);
+           var Core = new EleitorCore(_eleicaoContext);
+            if (!Core.VerificarId(id))
+                return BadRequest("Esse registro não existe!");
+            Core.DeletarUm(id);
             return NoContent();
         }
     }

@@ -60,5 +60,7 @@ namespace Core
             _eleicaoContext.Pautas.Remove(umaPauta);
             _eleicaoContext.SaveChanges();
         }
+        //Método para vefificar o id
+        public bool VerificaId(string id) => _eleicaoContext.Pautas.Any(c => c.Id.ToString() == id);
     }
 }

@@ -59,5 +59,7 @@ namespace Core
             _eleicaoContext.Eleitores.Remove(umEleitor);
             _eleicaoContext.SaveChanges();
         }
+        //Método para vefificar o id
+        public bool VerificarId(string id) => _eleicaoContext.Eleitores.Any(c => c.Id.ToString() == id);
     }
 }
