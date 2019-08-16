@@ -43,7 +43,7 @@ namespace ApiProject.Controllers
             var Core = new EleitorCore(_eleicaoContext).Atualizar(eleitor);
             if (Core == null)
                 return BadRequest();
-            return Ok();
+            return Ok(eleitor);
         } 
 
         //Request delete chamando o método do core.

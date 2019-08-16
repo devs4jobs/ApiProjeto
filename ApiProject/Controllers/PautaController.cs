@@ -44,7 +44,7 @@ namespace ApiProject.Controllers
             var Core = new PautaCore(_eleicaoContext).Atualizar(pauta);
             if (Core == null)
                 return BadRequest();
-            return Ok();
+            return Ok(pauta);
         } 
 
         //Request delete chamando o método do core.
