@@ -1,26 +1,48 @@
 ﻿using Model;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Core
 {
     public class EleitorCore
     {
-        private Eleitor _eleitor { get; set; }
-        
-        public EleitorCore(Eleitor eleitor)
+        private Conectionn _context;
+        public EleitorCore(Conectionn context)
         {
-            _eleitor = eleitor;
+            _context = context;
+            _context.Eleitores = context.Set<Eleitor>();
         }
-        public EleitorCore() { }
 
-        public Eleitor Cadastrar(Eleitor eleitor) => null;
+        public Eleitor Cadastrar(Eleitor cliente) { _context.Eleitores.Add(cliente); _context.SaveChanges(); return cliente; }
+        public List<Eleitor> Procurar() { var lstProdutos = _context.Eleitores.OrderBy(p => p.DataCadastro).ToList(); return lstProdutos; }
+        public Eleitor ProcurarPorId(string id) => _context.Eleitores.SingleOrDefault(p => p.Id.ToString().Equals(id));
+        public void Deletar(string id) { _context.Eleitores.Remove(_context.Eleitores.SingleOrDefault(p => p.Id.ToString().Equals(id))); _context.SaveChanges(); }
+        public Eleitor Atualizar(Eleitor item)
+        {
+            if (!Exists(item.Id)) return null;
 
-        public Eleitor ProcurarID(string id) => null;
-
-        public List<Eleitor> ProcurarTodos() => null;
-
-        public Eleitor Atualizar(string id) => null;
-
-        public void Excluir(string id) { }
+            // Pega o estado atual do registro no banco
+            // seta as alterações e salva
+            var result = _context.Eleitores.SingleOrDefault(b => b.Id == item.Id);
+            if (result != null)
+            {
+                try
+                {
+                    _context.Entry(result).CurrentValues.SetValues(item);
+                    _context.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+            return result;
+        }
+    
+        public bool Exists(Guid id)
+        {
+            return _context.Eleitores.Any(b => b.Id.Equals(id));
+        }
     }
 }

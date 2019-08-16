@@ -10,26 +10,30 @@ namespace ApiProject.Controllers
     [ApiController]
     public class PautasController : ControllerBase
     {
-        [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Pauta pauta) => Ok(new PautaCore().Cadastrar(pauta));
-
-
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Pauta>> GetId(string id) => Ok(new PautaCore().ProcurarID(id));
-
-
-        [HttpGet]
-        public async Task<ActionResult<List<Pauta>>> GetAll() => Ok(new PautaCore().ProcurarTodos());
-
-        [HttpPut("{id}")]
-        public async Task<ActionResult<Pauta>> Put(string id) => Ok(new PautaCore().Atualizar(id));
-
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(string id)
+        private readonly Conectionn _context;
+        public PautasController(Conectionn conectionn)
         {
-            new PautaCore().Excluir(id);
-            return NoContent();
+            _context = conectionn;
         }
+        //GET ALL
+        [HttpGet]
+        public async Task<ActionResult<List<Pauta>>> GetAll() => new PautaCore(_context).Procurar();
+
+        //GET BY ID
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Pauta>> GetByID(string id) => new PautaCore(_context).ProcurarPorId(id);
+
+        // POST
+        [HttpPost]
+        public async Task<ActionResult<Pauta>> Post([FromBody] Pauta cliente) => new PautaCore(_context).Cadastrar(cliente);
+
+        // PUT
+        [HttpPut]
+        public async Task<ActionResult<Pauta>> Put([FromBody]Pauta cliente) => new PautaCore(_context).Atualizar(cliente);
+
+        // DELETE
+        [HttpDelete("{id}")]
+        public void Delete(string id) => new PautaCore(_context).Deletar(id);
 
     }
 }
