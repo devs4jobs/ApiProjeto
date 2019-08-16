@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Model;
 using Core;
+using Model.Db;
 
 namespace ApiProject.Controllers
 {
@@ -9,27 +10,30 @@ namespace ApiProject.Controllers
     [ApiController]
     public class EleitoresController : ControllerBase
     {
+        // Refencia ao Contexto(db).
+        private EleicaoContext _eleicaoContext;
 
-
+        //Construtor contendo o contexto.
+        public EleitoresController(EleicaoContext eleicaoContext) { _eleicaoContext = eleicaoContext; }
+        //Request Post chamando o método do core.
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Eleitor eleitor) => Created("", new EleitorCore().Cadastrar(eleitor));
-
-
+        public async Task<IActionResult> Post([FromBody] Eleitor eleitor) => Created("", new EleitorCore(_eleicaoContext).Cadastrar(eleitor));
+        //Request Get chamando o método do core.
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(string id) => Ok(new EleitorCore().Achar(id));
-
+        public async Task<IActionResult> Get(string id) => Ok(new EleitorCore(_eleicaoContext).AcharUm(id));
+        //Request Get chamando o método do core.
         [HttpGet]
-        public async Task<IActionResult> Get() => Ok(new EleitorCore().AcharTodos());
+        public async Task<IActionResult> Get() => Ok(new EleitorCore(_eleicaoContext).AcharTodos());
+        //Request put chamando o método do core.
+        [HttpPut("{Att}")]
+        public async Task<IActionResult> Put([FromBody] Eleitor eleitor) => Ok(new EleitorCore(_eleicaoContext).Atualizar(eleitor));
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Put([FromBody] Eleitor eleitor, string id) => Ok(new EleitorCore().Atualizar(id));
-
+        //Request delete chamando o método do core.
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(string id)
         {
-            new EleitorCore().DeletarUm(id);
+            new EleitorCore(_eleicaoContext).DeletarUm(id);
             return NoContent();
         }
-       
     }
 }

@@ -12,9 +12,9 @@ namespace ApiProject.Controllers
     [ApiController]
     public class PautaEleitorController : ControllerBase
     {
+        // Classe ainda par ser implantada.
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] PautaEleitor pautaeleitor) => Created("", new PautaEleitorCore().Cadastrar(pautaeleitor));
-
 
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(string id) => Ok(new PautaEleitorCore().Achar(id));
@@ -25,14 +25,11 @@ namespace ApiProject.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put([FromBody]PautaEleitor pautaEleitor, string id) => Ok(new PautaEleitorCore().Atualizar(id));
 
-
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(string id)
         {
             new PautaEleitorCore().DeletarUm(id);
             return NoContent();
         } 
-     
-
     }
 }

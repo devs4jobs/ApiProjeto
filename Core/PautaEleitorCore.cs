@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Core.Interface;
-using Model;
+﻿using Model;
 namespace Core
 {
-    public class PautaEleitorCore : ICore<PautaEleitor>
+    public class PautaEleitorCore 
     {
+        // Classe ainda par ser implantada.
         private PautaEleitor pautaEleitor;
 
         public PautaEleitorCore(PautaEleitor pautaEleitor)
