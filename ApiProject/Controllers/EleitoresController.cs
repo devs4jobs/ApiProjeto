@@ -19,21 +19,50 @@ namespace ApiProject.Controllers
             if (cadastro.Status)
                 return Created("https://localhost", cadastro.Resultado);
 
-            return BadRequest(cadastro.Resultado);
+            return BadRequest(cadastro);
         }
 
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(string id) => Ok(new Eleitor());
+        public async Task<IActionResult> GetPorId(string id)
+        {
+            var eleitor = new EleitorCore().BuscaEleitorPorId(id);
+            if (eleitor.Status)
+                return Ok(eleitor.Resultado);
+            return NoContent();
+        }
 
-        [HttpGet]
-        public async Task<IActionResult> Get() => Ok(new Eleitor());
+        [HttpGet()]
+        public async Task<IActionResult> Get()
+        {
+            var eleitor = new EleitorCore().BuscaEleitores();
+            if (eleitor.Status)
+                return Ok(eleitor.Resultado);
+            return NoContent();
+        }
+
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(string id) => NoContent();
+        public async Task<IActionResult> Put(string id,[FromBody] Eleitor eleitor)
+        {
+            var resultado = new EleitorCore(eleitor).AtualizaEleitor(id);
+            if (resultado.Status)
+                return Accepted(resultado.Resultado);
+
+            return BadRequest(resultado);
+        }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(string id) => Accepted();
+        public async Task<IActionResult> Delete(string id)
+        {
+
+            var resultado = new EleitorCore().DeletaEleitor(id);
+            if (resultado.Status)
+                return Accepted(resultado);
+
+            return BadRequest(resultado);
+
+        }
 
     }
 }
