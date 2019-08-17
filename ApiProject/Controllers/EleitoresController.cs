@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Model;
 using Core;
-using Model.Db;
 
 namespace ApiProject.Controllers
 {
@@ -10,51 +9,27 @@ namespace ApiProject.Controllers
     [ApiController]
     public class EleitoresController : ControllerBase
     {
-        // Refencia ao Contexto(db).
-        private EleicaoContext _eleicaoContext;
 
-        //Construtor contendo o contexto.
-        public EleitoresController(EleicaoContext eleicaoContext) { _eleicaoContext = eleicaoContext; }
-        //Request Post chamando o método do core.
+
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Eleitor eleitor)
-        {
-            var Core = new EleitorCore(_eleicaoContext).Cadastrar(eleitor);
-            if (Core == null) return BadRequest();
-            return Created("",Core );
-        }
-        //Request Get chamando o método do core.
+        public async Task<IActionResult> Post([FromBody] Eleitor eleitor) => Created("", new EleitorCore().Cadastrar(eleitor));
+
+
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(string id)
-        {
-            var Core = new EleitorCore(_eleicaoContext).AcharUm(id);
+        public async Task<IActionResult> Get(string id) => Ok(new EleitorCore().Achar(id));
 
-            if (Core == null)
-                return BadRequest();
-            return Ok(Core);
-        } 
-        //Request Get chamando o método do core.
         [HttpGet]
-        public async Task<IActionResult> Get() => Ok(new EleitorCore(_eleicaoContext).AcharTodos());
-        //Request put chamando o método do core.
-        [HttpPut("{Att}")]
-        public async Task<IActionResult> Put([FromBody] Eleitor eleitor)
-        {
-            var Core = new EleitorCore(_eleicaoContext).Atualizar(eleitor);
-            if (Core == null)
-                return BadRequest();
-            return Ok(eleitor);
-        } 
+        public async Task<IActionResult> Get() => Ok(new EleitorCore().AcharTodos());
 
-        //Request delete chamando o método do core.
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put([FromBody] Eleitor eleitor, string id) => Ok(new EleitorCore().Atualizar(id));
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(string id)
         {
-           var Core = new EleitorCore(_eleicaoContext);
-            if (!Core.VerificarId(id))
-                return BadRequest("Esse registro não existe!");
-            Core.DeletarUm(id);
+            new EleitorCore().DeletarUm(id);
             return NoContent();
         }
+       
     }
 }

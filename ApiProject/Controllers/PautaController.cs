@@ -2,8 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Model;
 using Core;
-using Model.Db;
-using System.Linq;
 
 namespace ApiProject.Controllers
 {
@@ -11,51 +9,28 @@ namespace ApiProject.Controllers
     [ApiController]
     public class PautasController : ControllerBase
     {
-        // Refencia ao Contexto(db).
-        private EleicaoContext _eleicaoContext;
-        //Construtor contendo o contexto.
-        public PautasController(EleicaoContext eleicaoContext) { _eleicaoContext = eleicaoContext; }
-        //Request Post chamando o método do core.
+        
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Pauta pauta)
-        {
-            var Core = new PautaCore(_eleicaoContext).Cadastrar(pauta);
-            if (pauta == null)
-                return BadRequest();
-            return Created("", Core);
-        }
-        //Request Get chamando o método do core.
+        public async Task<IActionResult> Post([FromBody] Pauta pauta) => Created("", new PautaCore().Cadastrar(pauta));
+
+
+
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(string id)
-        {
-            var Core = new PautaCore(_eleicaoContext).AcharUm(id);
-            if (Core == null)
-                return BadRequest();
-            return Ok(Core);
-        }
-        //Request Get chamando o método do core.
+        public async Task<IActionResult> Get(string id) => Ok(new PautaCore().Achar(id));
+
         [HttpGet]
-        public async Task<IActionResult> Get() => Ok(new PautaCore(_eleicaoContext).AcharTodos());
-        //Request put chamando o método do core.
-        [HttpPut("{Att}")]
-        public async Task<IActionResult> Put([FromBody] Pauta pauta)
+        public async Task<IActionResult> Get() => Ok(new PautaCore().AcharTodos());
 
-        {
-            var Core = new PautaCore(_eleicaoContext).Atualizar(pauta);
-            if (Core == null)
-                return BadRequest();
-            return Ok(pauta);
-        } 
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put([FromBody] Pauta pauta, string id) => Ok(new PautaCore().Atualizar(id));
 
-        //Request delete chamando o método do core.
+
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(string id)
-        {
-            var Core = new PautaCore(_eleicaoContext);
-            if (!Core.VerificaId(id))
-                return BadRequest("Esse registro não existe!");
-            Core.DeletarUm(id);
+        public async Task<IActionResult> Delete(string id) {
+            new PautaCore().DeletarUm(id);
             return NoContent();
-        }
+        } 
+       
+
     }
 }

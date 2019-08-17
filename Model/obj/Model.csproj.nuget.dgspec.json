@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Treinamento 5\\Desktop\\FirstApi\\ApiProjeto\\Model\\Model.csproj": {}
+    "C:\\Users\\Treinamento 5\\Desktop\\Nova pasta\\ApiProjeto\\Model\\Model.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Treinamento 5\\Desktop\\FirstApi\\ApiProjeto\\Model\\Model.csproj": {
+    "C:\\Users\\Treinamento 5\\Desktop\\Nova pasta\\ApiProjeto\\Model\\Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Treinamento 5\\Desktop\\FirstApi\\ApiProjeto\\Model\\Model.csproj",
+        "projectUniqueName": "C:\\Users\\Treinamento 5\\Desktop\\Nova pasta\\ApiProjeto\\Model\\Model.csproj",
         "projectName": "Model",
-        "projectPath": "C:\\Users\\Treinamento 5\\Desktop\\FirstApi\\ApiProjeto\\Model\\Model.csproj",
+        "projectPath": "C:\\Users\\Treinamento 5\\Desktop\\Nova pasta\\ApiProjeto\\Model\\Model.csproj",
         "packagesPath": "C:\\Users\\Treinamento 5\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Treinamento 5\\Desktop\\FirstApi\\ApiProjeto\\Model\\obj\\",
+        "outputPath": "C:\\Users\\Treinamento 5\\Desktop\\Nova pasta\\ApiProjeto\\Model\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -41,23 +41,11 @@
       "frameworks": {
         "netcoreapp2.2": {
           "dependencies": {
-            "Microsoft.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[2.2.6, )"
-            },
             "Microsoft.NETCore.App": {
               "suppressParent": "All",
               "target": "Package",
               "version": "[2.2.0, )",
               "autoReferenced": true
-            },
-            "Pomelo.EntityFrameworkCore.MySql": {
-              "target": "Package",
-              "version": "[2.2.0, )"
-            },
-            "Swashbuckle.AspNetCore": {
-              "target": "Package",
-              "version": "[2.4.0, )"
             }
           },
           "imports": [

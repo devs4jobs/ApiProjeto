@@ -3,7 +3,6 @@ namespace Core
 {
     public class PautaEleitorCore 
     {
-        // Classe ainda par ser implantada.
         private PautaEleitor pautaEleitor;
 
         public PautaEleitorCore(PautaEleitor pautaEleitor)

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Treinamento 5\\Desktop\\FirstApi\\ApiProjeto\\ApiProject\\ApiProject.csproj": {}
+    "C:\\Users\\Treinamento 5\\Desktop\\Nova pasta\\ApiProjeto\\ApiProject\\ApiProject.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Treinamento 5\\Desktop\\FirstApi\\ApiProjeto\\ApiProject\\ApiProject.csproj": {
+    "C:\\Users\\Treinamento 5\\Desktop\\Nova pasta\\ApiProjeto\\ApiProject\\ApiProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Treinamento 5\\Desktop\\FirstApi\\ApiProjeto\\ApiProject\\ApiProject.csproj",
+        "projectUniqueName": "C:\\Users\\Treinamento 5\\Desktop\\Nova pasta\\ApiProjeto\\ApiProject\\ApiProject.csproj",
         "projectName": "ApiProject",
-        "projectPath": "C:\\Users\\Treinamento 5\\Desktop\\FirstApi\\ApiProjeto\\ApiProject\\ApiProject.csproj",
+        "projectPath": "C:\\Users\\Treinamento 5\\Desktop\\Nova pasta\\ApiProjeto\\ApiProject\\ApiProject.csproj",
         "packagesPath": "C:\\Users\\Treinamento 5\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Treinamento 5\\Desktop\\FirstApi\\ApiProjeto\\ApiProject\\obj\\",
+        "outputPath": "C:\\Users\\Treinamento 5\\Desktop\\Nova pasta\\ApiProjeto\\ApiProject\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -30,11 +30,11 @@
         "frameworks": {
           "netcoreapp2.2": {
             "projectReferences": {
-              "C:\\Users\\Treinamento 5\\Desktop\\FirstApi\\ApiProjeto\\Core\\Core.csproj": {
-                "projectPath": "C:\\Users\\Treinamento 5\\Desktop\\FirstApi\\ApiProjeto\\Core\\Core.csproj"
+              "C:\\Users\\Treinamento 5\\Desktop\\Nova pasta\\ApiProjeto\\Core\\Core.csproj": {
+                "projectPath": "C:\\Users\\Treinamento 5\\Desktop\\Nova pasta\\ApiProjeto\\Core\\Core.csproj"
               },
-              "C:\\Users\\Treinamento 5\\Desktop\\FirstApi\\ApiProjeto\\Model\\Model.csproj": {
-                "projectPath": "C:\\Users\\Treinamento 5\\Desktop\\FirstApi\\ApiProjeto\\Model\\Model.csproj"
+              "C:\\Users\\Treinamento 5\\Desktop\\Nova pasta\\ApiProjeto\\Model\\Model.csproj": {
+                "projectPath": "C:\\Users\\Treinamento 5\\Desktop\\Nova pasta\\ApiProjeto\\Model\\Model.csproj"
               }
             }
           }
@@ -59,10 +59,6 @@
               "target": "Package",
               "version": "[2.2.0, )"
             },
-            "Microsoft.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[2.2.6, )"
-            },
             "Microsoft.NETCore.App": {
               "suppressParent": "All",
               "target": "Package",
@@ -72,14 +68,6 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[2.2.3, )"
-            },
-            "Pomelo.EntityFrameworkCore.MySql": {
-              "target": "Package",
-              "version": "[2.2.0, )"
-            },
-            "Swashbuckle.AspNetCore": {
-              "target": "Package",
-              "version": "[2.4.0, )"
             }
           },
           "imports": [
@@ -90,14 +78,14 @@
         }
       }
     },
-    "C:\\Users\\Treinamento 5\\Desktop\\FirstApi\\ApiProjeto\\Core\\Core.csproj": {
+    "C:\\Users\\Treinamento 5\\Desktop\\Nova pasta\\ApiProjeto\\Core\\Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Treinamento 5\\Desktop\\FirstApi\\ApiProjeto\\Core\\Core.csproj",
+        "projectUniqueName": "C:\\Users\\Treinamento 5\\Desktop\\Nova pasta\\ApiProjeto\\Core\\Core.csproj",
         "projectName": "Core",
-        "projectPath": "C:\\Users\\Treinamento 5\\Desktop\\FirstApi\\ApiProjeto\\Core\\Core.csproj",
+        "projectPath": "C:\\Users\\Treinamento 5\\Desktop\\Nova pasta\\ApiProjeto\\Core\\Core.csproj",
         "packagesPath": "C:\\Users\\Treinamento 5\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Treinamento 5\\Desktop\\FirstApi\\ApiProjeto\\Core\\obj\\",
+        "outputPath": "C:\\Users\\Treinamento 5\\Desktop\\Nova pasta\\ApiProjeto\\Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -116,8 +104,8 @@
         "frameworks": {
           "netcoreapp2.2": {
             "projectReferences": {
-              "C:\\Users\\Treinamento 5\\Desktop\\FirstApi\\ApiProjeto\\Model\\Model.csproj": {
-                "projectPath": "C:\\Users\\Treinamento 5\\Desktop\\FirstApi\\ApiProjeto\\Model\\Model.csproj"
+              "C:\\Users\\Treinamento 5\\Desktop\\Nova pasta\\ApiProjeto\\Model\\Model.csproj": {
+                "projectPath": "C:\\Users\\Treinamento 5\\Desktop\\Nova pasta\\ApiProjeto\\Model\\Model.csproj"
               }
             }
           }
@@ -131,23 +119,15 @@
       "frameworks": {
         "netcoreapp2.2": {
           "dependencies": {
-            "Microsoft.EntityFrameworkCore": {
+            "FluentValidation.AspNetCore": {
               "target": "Package",
-              "version": "[2.2.6, )"
+              "version": "[8.4.0, )"
             },
             "Microsoft.NETCore.App": {
               "suppressParent": "All",
               "target": "Package",
               "version": "[2.2.0, )",
               "autoReferenced": true
-            },
-            "Pomelo.EntityFrameworkCore.MySql": {
-              "target": "Package",
-              "version": "[2.2.0, )"
-            },
-            "Swashbuckle.AspNetCore": {
-              "target": "Package",
-              "version": "[2.4.0, )"
             }
           },
           "imports": [
@@ -158,14 +138,14 @@
         }
       }
     },
-    "C:\\Users\\Treinamento 5\\Desktop\\FirstApi\\ApiProjeto\\Model\\Model.csproj": {
+    "C:\\Users\\Treinamento 5\\Desktop\\Nova pasta\\ApiProjeto\\Model\\Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Treinamento 5\\Desktop\\FirstApi\\ApiProjeto\\Model\\Model.csproj",
+        "projectUniqueName": "C:\\Users\\Treinamento 5\\Desktop\\Nova pasta\\ApiProjeto\\Model\\Model.csproj",
         "projectName": "Model",
-        "projectPath": "C:\\Users\\Treinamento 5\\Desktop\\FirstApi\\ApiProjeto\\Model\\Model.csproj",
+        "projectPath": "C:\\Users\\Treinamento 5\\Desktop\\Nova pasta\\ApiProjeto\\Model\\Model.csproj",
         "packagesPath": "C:\\Users\\Treinamento 5\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Treinamento 5\\Desktop\\FirstApi\\ApiProjeto\\Model\\obj\\",
+        "outputPath": "C:\\Users\\Treinamento 5\\Desktop\\Nova pasta\\ApiProjeto\\Model\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -195,23 +175,11 @@
       "frameworks": {
         "netcoreapp2.2": {
           "dependencies": {
-            "Microsoft.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[2.2.6, )"
-            },
             "Microsoft.NETCore.App": {
               "suppressParent": "All",
               "target": "Package",
               "version": "[2.2.0, )",
               "autoReferenced": true
-            },
-            "Pomelo.EntityFrameworkCore.MySql": {
-              "target": "Package",
-              "version": "[2.2.0, )"
-            },
-            "Swashbuckle.AspNetCore": {
-              "target": "Package",
-              "version": "[2.4.0, )"
             }
           },
           "imports": [
