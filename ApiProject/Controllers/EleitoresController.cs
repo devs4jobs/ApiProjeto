@@ -16,9 +16,9 @@ namespace ApiProject.Controllers
         public async Task<IActionResult> Post([FromBody] Eleitor eleitor)
         {
             var cadastro = new EleitorCore(eleitor).CadastroEleitor();
+
             if (cadastro.Status)
                 return Created($"https://localhost/api/eleitores/{eleitor.Id}", cadastro.Resultado);
-
             
             return BadRequest(cadastro);
         }
@@ -30,11 +30,24 @@ namespace ApiProject.Controllers
         [HttpGet]
         public async Task<IActionResult> Get() => Ok(new EleitorCore().Lista());
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Put(string id) => NoContent();
+        [HttpPut]
+        public async Task<IActionResult> Put([FromBody] Eleitor eleitor)
+        {
+            var cadastro = new EleitorCore(eleitor).AtualizaEleitor();
+
+            if (cadastro.Status)
+                return Accepted($"https://localhost/api/eleitores/{eleitor.Id}", cadastro.Resultado);
+
+            return BadRequest(cadastro);
+        }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(string id) => Accepted();
-
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var cadastro = new EleitorCore().DeletaEleitor(id);
+            if (cadastro.Status)
+                return Accepted(cadastro);
+            return NotFound(cadastro);
+        }
     }
 }

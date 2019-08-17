@@ -61,11 +61,46 @@ namespace Core
         }
         public Retorno Lista()
         {
-            // Caso o modelo seja válido, escreve no arquivo db
             var db = file.ManipulacaoDeArquivos(true, null);
 
             return new Retorno() { Status = true, Resultado = db.sistema.Eleitores};
         }
 
+        public Retorno AtualizaEleitor()
+        {
+
+            var results = Validate(_eleitor);
+
+            // Se o modelo é inválido retorno false
+            if (!results.IsValid)
+                return new Retorno { Status = false, Resultado = results.Errors };
+
+            var db = file.ManipulacaoDeArquivos(true, null);
+
+            var eleitor=db.sistema.Eleitores.Find(c => c.Id == _eleitor.Id);
+            if(eleitor==null)
+                return new Retorno { Status = false, Resultado = "Eleitor não existe" };
+
+            db.sistema.Eleitores.Remove(eleitor);
+            db.sistema.Eleitores.Add(_eleitor);
+
+            file.ManipulacaoDeArquivos(false, db.sistema);
+
+            return new Retorno() { Status = true, Resultado = _eleitor };
+        }
+        public Retorno DeletaEleitor(Guid id)
+        {
+            var db = file.ManipulacaoDeArquivos(true, null);
+
+            _eleitor=db.sistema.Eleitores.Find(c => c.Id == id);
+
+            if (_eleitor == null)
+                return new Retorno() { Status = false, Resultado = "Eleitor não existe" };
+
+            db.sistema.Eleitores.Remove(_eleitor);
+            file.ManipulacaoDeArquivos(false, db.sistema);
+
+            return new Retorno() { Status = true, Resultado = _eleitor };
+        }
     }
 }
