@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Core;
 using Microsoft.AspNetCore.Mvc;
 using Model;
 
@@ -14,8 +15,11 @@ namespace ApiProject.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Eleitor eleitor)
         {
-            var Eleitor = new Core.EleitorCore(eleitor);
-            return Created("", null);
+            var cadastro = new EleitorCore(eleitor).CadastroEleitor();
+            if (cadastro.Status)
+                return Created("https://localhost", cadastro.Resultado);
+
+            return BadRequest(cadastro.Resultado);
         }
 
 
