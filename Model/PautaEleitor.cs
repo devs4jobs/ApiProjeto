@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Model
 {
-   public class PautaEleitor : Base
+    public class PautaEleitor
     {
         public Guid PautaId { get; set; }
         public Guid EleitorId { get; set; }

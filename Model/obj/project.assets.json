@@ -692,11 +692,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Treinamento 5\\Desktop\\Nova pasta\\ApiProjeto\\Model\\Model.csproj",
+      "projectUniqueName": "C:\\Users\\Treinamento 5\\Desktop\\A\\ApiProjeto\\Model\\Model.csproj",
       "projectName": "Model",
-      "projectPath": "C:\\Users\\Treinamento 5\\Desktop\\Nova pasta\\ApiProjeto\\Model\\Model.csproj",
+      "projectPath": "C:\\Users\\Treinamento 5\\Desktop\\A\\ApiProjeto\\Model\\Model.csproj",
       "packagesPath": "C:\\Users\\Treinamento 5\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Treinamento 5\\Desktop\\Nova pasta\\ApiProjeto\\Model\\obj\\",
+      "outputPath": "C:\\Users\\Treinamento 5\\Desktop\\A\\ApiProjeto\\Model\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
