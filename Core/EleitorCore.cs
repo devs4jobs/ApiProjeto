@@ -110,33 +110,19 @@ namespace Core
 
 
          
-            if (eleitor.Nome == null)
-            {
-                umEleitor.Nome = umEleitor.Nome;
-            }
-            umEleitor.Nome = eleitor.Nome;
+            if (!(eleitor.Nome == null))
+                umEleitor.Nome = eleitor.Nome;
 
-
-            if (eleitor.Id == null)
-            {
-                umEleitor.Id = umEleitor.Id;
-            }
+            if (!(eleitor.Id == null))
             umEleitor.Id = eleitor.Id;
 
-            if (eleitor.Documento == null)
-            {
-                umEleitor.Documento = umEleitor.Documento;
-            }
-
+            if (!(eleitor.Documento == null))
             umEleitor.Documento = eleitor.Documento;
 
-            if (eleitor.Sexo == null)
-            {
-
-            }
+            if (!(eleitor.Sexo == null))
             umEleitor.Sexo = eleitor.Sexo;
 
-
+           
       
             umEleitor.Idade = eleitor.Idade;
          
