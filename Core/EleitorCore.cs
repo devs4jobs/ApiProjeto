@@ -40,11 +40,15 @@ namespace Core
             if (db.sistema == null)
                 db.sistema = new Sistema();
 
-            db.sistema.Eleitores.Add(_eleitor);
-            file.ManipulacaoDeArquivos(false, db.sistema);
+            if (!db.sistema.Eleitores.Exists(e => e.Documento.Equals(_eleitor.Documento)))
+            {
+                db.sistema.Eleitores.Add(_eleitor);
+                file.ManipulacaoDeArquivos(false, db.sistema);
+                return new Retorno() { Status = true, Resultado = _eleitor };
+            }else
+                return new Retorno() { Status = false, Resultado = "Já existe um eleitor com esse documento." };
 
-            return new Retorno() { Status = true, Resultado = _eleitor};
-        }
+            }
 
     }
 }
