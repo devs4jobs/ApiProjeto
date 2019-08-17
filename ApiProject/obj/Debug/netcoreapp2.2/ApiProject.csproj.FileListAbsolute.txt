@@ -36,3 +36,22 @@ C:\Users\Admin\source\repos\Api\ApiProject\obj\Debug\netcoreapp2.2\ApiProject.Ra
 C:\Users\Admin\source\repos\Api\ApiProject\obj\Debug\netcoreapp2.2\ApiProject.csproj.CopyComplete
 C:\Users\Admin\source\repos\Api\ApiProject\obj\Debug\netcoreapp2.2\ApiProject.dll
 C:\Users\Admin\source\repos\Api\ApiProject\obj\Debug\netcoreapp2.2\ApiProject.pdb
+C:\Users\Treinamento 2\Desktop\ApiProjeto\ApiProject\bin\Debug\netcoreapp2.2\ApiProject.deps.json
+C:\Users\Treinamento 2\Desktop\ApiProjeto\ApiProject\bin\Debug\netcoreapp2.2\ApiProject.runtimeconfig.json
+C:\Users\Treinamento 2\Desktop\ApiProjeto\ApiProject\bin\Debug\netcoreapp2.2\ApiProject.runtimeconfig.dev.json
+C:\Users\Treinamento 2\Desktop\ApiProjeto\ApiProject\bin\Debug\netcoreapp2.2\ApiProject.dll
+C:\Users\Treinamento 2\Desktop\ApiProjeto\ApiProject\bin\Debug\netcoreapp2.2\ApiProject.pdb
+C:\Users\Treinamento 2\Desktop\ApiProjeto\ApiProject\bin\Debug\netcoreapp2.2\Core.dll
+C:\Users\Treinamento 2\Desktop\ApiProjeto\ApiProject\bin\Debug\netcoreapp2.2\Model.dll
+C:\Users\Treinamento 2\Desktop\ApiProjeto\ApiProject\bin\Debug\netcoreapp2.2\Core.pdb
+C:\Users\Treinamento 2\Desktop\ApiProjeto\ApiProject\bin\Debug\netcoreapp2.2\Model.pdb
+C:\Users\Treinamento 2\Desktop\ApiProjeto\ApiProject\obj\Debug\netcoreapp2.2\ApiProject.csprojAssemblyReference.cache
+C:\Users\Treinamento 2\Desktop\ApiProjeto\ApiProject\obj\Debug\netcoreapp2.2\ApiProject.csproj.CoreCompileInputs.cache
+C:\Users\Treinamento 2\Desktop\ApiProjeto\ApiProject\obj\Debug\netcoreapp2.2\ApiProject.RazorAssemblyInfo.cache
+C:\Users\Treinamento 2\Desktop\ApiProjeto\ApiProject\obj\Debug\netcoreapp2.2\ApiProject.RazorAssemblyInfo.cs
+C:\Users\Treinamento 2\Desktop\ApiProjeto\ApiProject\obj\Debug\netcoreapp2.2\ApiProject.AssemblyInfoInputs.cache
+C:\Users\Treinamento 2\Desktop\ApiProjeto\ApiProject\obj\Debug\netcoreapp2.2\ApiProject.AssemblyInfo.cs
+C:\Users\Treinamento 2\Desktop\ApiProjeto\ApiProject\obj\Debug\netcoreapp2.2\ApiProject.RazorTargetAssemblyInfo.cache
+C:\Users\Treinamento 2\Desktop\ApiProjeto\ApiProject\obj\Debug\netcoreapp2.2\ApiProject.csproj.CopyComplete
+C:\Users\Treinamento 2\Desktop\ApiProjeto\ApiProject\obj\Debug\netcoreapp2.2\ApiProject.dll
+C:\Users\Treinamento 2\Desktop\ApiProjeto\ApiProject\obj\Debug\netcoreapp2.2\ApiProject.pdb

@@ -6132,7 +6132,7 @@
       ]
     },
     "Microsoft.CodeAnalysis.Analyzers/1.1.0": {
-      "sha512": "HS3iRWZKcUw/8eZ/08GXKY2Bn7xNzQPzf8gRPHGSowX7u7XXu9i9YEaBeBNKUXWfI7qjvT2zXtLUvbN0hds8vg==",
+      "sha512": "C25zktB+RQenM5lxqLfPOMsrpDo8NVn7QS9qW3drzMyvWkiGU31xLeSHwzeuRgg17Yp8CMj/ujWGnOBpGR6S8Q==",
       "type": "package",
       "path": "microsoft.codeanalysis.analyzers/1.1.0",
       "hasTools": true,
@@ -8365,7 +8365,7 @@
       ]
     },
     "runtime.opensuse.42.1-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
-      "sha512": "KeLz4HClKf+nFS7p/6Fi/CqyLXh81FpiGzcmuS8DGi9lUqSnZ6Es23/gv2O+1XVGfrbNmviF7CckBpavkBoIFQ==",
+      "sha512": "2GQ86ujO96jqyAntLuyjvW5j6Okejxbn8tj9wKlOprCLP0GnS9/Qqht67KW5/vzosZbTOM4KaAQy0CCJJHEDVA==",
       "type": "package",
       "path": "runtime.opensuse.42.1-x64.runtime.native.system.security.cryptography.openssl/4.3.0",
       "files": [
@@ -8391,7 +8391,7 @@
       ]
     },
     "runtime.osx.10.10-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
-      "sha512": "X7IdhILzr4ROXd8mI1BUCQMSHSQwelUlBjF1JyTKCjXaOGn2fB4EKBxQbCK2VjO3WaWIdlXZL3W6TiIVnrhX4g==",
+      "sha512": "DEs+3tYUW40t6GlnGSUPjOhrep5FbfqAX0pP7Od/wS2Bc+A5ZL25TM/7u6uC12AkXShrs5/NEyGNqUHleTup/Q==",
       "type": "package",
       "path": "runtime.osx.10.10-x64.runtime.native.system.security.cryptography.openssl/4.3.0",
       "files": [
@@ -8404,7 +8404,7 @@
       ]
     },
     "runtime.rhel.7-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
-      "sha512": "nyFNiCk/r+VOiIqreLix8yN+q3Wga9+SE8BCgkf+2BwEKiNx6DyvFjCgkfV743/grxv8jHJ8gUK4XEQw7yzRYg==",
+      "sha512": "OBV/yGfFP7zfjQBARINNUeC9ycG6u5Rou8ZE2vhnzd3DOKCOUhjamZYxRvzpnuEzDBs1UR68hof6l8z52lWFKw==",
       "type": "package",
       "path": "runtime.rhel.7-x64.runtime.native.system.security.cryptography.openssl/4.3.0",
       "files": [
@@ -8417,7 +8417,7 @@
       ]
     },
     "runtime.ubuntu.14.04-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
-      "sha512": "JGc0pAWRE8lB4Ucygk2pYSKbUPLlAIq6Bczf5/WF2D/VKJEPtYlVUMxk8fbl1zRfTWzSHi+VcFZlaPlWiNxeKg==",
+      "sha512": "dnCO4CMg1Qfxd0Ffku37vpx+uPt4GPVaC/oabSHoMNpUFqh7b7oMhLcSpphaGIPqv60MEApZ5L6HEz7wf+UFvw==",
       "type": "package",
       "path": "runtime.ubuntu.14.04-x64.runtime.native.system.security.cryptography.openssl/4.3.0",
       "files": [
@@ -8430,7 +8430,7 @@
       ]
     },
     "runtime.ubuntu.16.04-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
-      "sha512": "I8bKw2I8k58Wx7fMKQJn2R8lamboCAiHfHeV/pS65ScKWMMI0+wJkLYlEKvgW1D/XvSl/221clBoR2q9QNNM7A==",
+      "sha512": "rRnNGAM33s8KBOjkW68Z7hC4Dn54gKO1If53UxHX6GySv9mLYIyeuAw0AlxMFnk2mtPQkSaBVBAgYGDMVlzy+A==",
       "type": "package",
       "path": "runtime.ubuntu.16.04-x64.runtime.native.system.security.cryptography.openssl/4.3.0",
       "files": [
@@ -8443,7 +8443,7 @@
       ]
     },
     "runtime.ubuntu.16.10-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
-      "sha512": "VB5cn/7OzUfzdnC8tqAIMQciVLiq2epm2NrAm1E9OjNRyG4lVhfR61SMcLizejzQP8R8Uf/0l5qOIbUEi+RdEg==",
+      "sha512": "STEWirmi0Mhgqqe8ML7sWZUnAkZwlydvSSXti8DtXi5UNMu4LaK2RzbKwRfh5q168fi3gR1+zIcTMpRXG82OIQ==",
       "type": "package",
       "path": "runtime.ubuntu.16.10-x64.runtime.native.system.security.cryptography.openssl/4.3.0",
       "files": [
@@ -8741,7 +8741,7 @@
       ]
     },
     "System.Collections.NonGeneric/4.3.0": {
-      "sha512": "prtjIEMhGUnQq6RnPEYLpFt8AtLbp9yq2zxOSrY7KJJZrw25Fi97IzBqY7iqssbM61Ek5b8f3MG/sG1N2sN5KA==",
+      "sha512": "eJ2340yFacDF739Xp05Lcy7reH15jGmyKHeLhsHFTGk3XHLncPdOK43vAh2eL8NtHUso/yVUa40DAXqzvuXKwQ==",
       "type": "package",
       "path": "system.collections.nongeneric/4.3.0",
       "files": [
@@ -8779,7 +8779,7 @@
       ]
     },
     "System.Collections.Specialized/4.3.0": {
-      "sha512": "NoPBj0ykejqAWW4p4gGtrrL+3c84ZLSvGnHgq422ew1Rj4WKj1FA8/BCybqC111EtgcqUl6ZJNFYYS22HLgbjA==",
+      "sha512": "zvx31BxfMiCvOSqIONCH0P7fBPEDnu/ZMQgk7NqmrQhMOebAYRiFepIMIpGSnCe0WbeoIxANu1B+acd4gvH/WQ==",
       "type": "package",
       "path": "system.collections.specialized/4.3.0",
       "files": [
@@ -9099,7 +9099,7 @@
       ]
     },
     "System.Diagnostics.Contracts/4.3.0": {
-      "sha512": "eelRRbnm+OloiQvp9CXS0ixjNQldjjkHO4iIkR5XH2VIP8sUB/SIpa1TdUW6/+HDcQ+MlhP3pNa1u5SbzYuWGA==",
+      "sha512": "zl70xv76vW6AWF0F3fDsmVHDNq9GhlIxbpGwuy5wsnBYBO9goFJtiZwLW3mMrEnhH3MvotVdowt7Z1fSk/5sSw==",
       "type": "package",
       "path": "system.diagnostics.contracts/4.3.0",
       "files": [
@@ -13054,23 +13054,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Admin\\.nuget\\packages\\": {},
+    "C:\\Users\\Treinamento 2\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Admin\\source\\repos\\Api\\ApiProject\\ApiProject.csproj",
+      "projectUniqueName": "C:\\Users\\Treinamento 2\\Desktop\\ApiProjeto\\ApiProject\\ApiProject.csproj",
       "projectName": "ApiProject",
-      "projectPath": "C:\\Users\\Admin\\source\\repos\\Api\\ApiProject\\ApiProject.csproj",
-      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Admin\\source\\repos\\Api\\ApiProject\\obj\\",
+      "projectPath": "C:\\Users\\Treinamento 2\\Desktop\\ApiProjeto\\ApiProject\\ApiProject.csproj",
+      "packagesPath": "C:\\Users\\Treinamento 2\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Treinamento 2\\Desktop\\ApiProjeto\\ApiProject\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Treinamento 2\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -13083,11 +13083,11 @@
       "frameworks": {
         "netcoreapp2.2": {
           "projectReferences": {
-            "C:\\Users\\Admin\\source\\repos\\Api\\Core\\Core.csproj": {
-              "projectPath": "C:\\Users\\Admin\\source\\repos\\Api\\Core\\Core.csproj"
+            "C:\\Users\\Treinamento 2\\Desktop\\ApiProjeto\\Core\\Core.csproj": {
+              "projectPath": "C:\\Users\\Treinamento 2\\Desktop\\ApiProjeto\\Core\\Core.csproj"
             },
-            "C:\\Users\\Admin\\source\\repos\\Api\\Model\\Model.csproj": {
-              "projectPath": "C:\\Users\\Admin\\source\\repos\\Api\\Model\\Model.csproj"
+            "C:\\Users\\Treinamento 2\\Desktop\\ApiProjeto\\Model\\Model.csproj": {
+              "projectPath": "C:\\Users\\Treinamento 2\\Desktop\\ApiProjeto\\Model\\Model.csproj"
             }
           }
         }

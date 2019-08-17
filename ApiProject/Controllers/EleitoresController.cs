@@ -17,17 +17,18 @@ namespace ApiProject.Controllers
         {
             var cadastro = new EleitorCore(eleitor).CadastroEleitor();
             if (cadastro.Status)
-                return Created("https://localhost", cadastro.Resultado);
+                return Created($"https://localhost/api/eleitores/{eleitor.Id}", cadastro.Resultado);
 
-            return BadRequest(cadastro.Resultado);
+            
+            return BadRequest(cadastro);
         }
 
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(string id) => Ok(new Eleitor());
+        public async Task<IActionResult> Get(Guid id) => Ok(new EleitorCore().ID(id));
 
         [HttpGet]
-        public async Task<IActionResult> Get() => Ok(new Eleitor());
+        public async Task<IActionResult> Get() => Ok(new EleitorCore().Lista());
 
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(string id) => NoContent();
