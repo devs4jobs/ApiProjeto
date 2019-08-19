@@ -10,7 +10,7 @@ namespace Core
 {
     public class EleitorCore : AbstractValidator<Eleitor>
     {
-        private Eleitor _eleitor { get; set; }
+        private Eleitor _eleitor;
         public EleitorCore()
         {
 
@@ -47,6 +47,7 @@ namespace Core
 
             var eleitores = db.sistema.Eleitores;
 
+            
             if (eleitores.Exists(c => c.Documento == _eleitor.Documento))
                 return new Retorno() { Status = false, Resultado = null };
             
@@ -65,9 +66,12 @@ namespace Core
             if (db.sistema == null)
                 db.sistema = new Sistema();
 
+            if (!db.sistema.Eleitores.Exists(e => e.Id.ToString() == id))
+                return new Retorno() { Status = false, Resultado = null };
+
+
 
             var UmEleitor = db.sistema.Eleitores.Find(c => c.Id.ToString() == id);
-
             return new Retorno() { Status = true, Resultado = UmEleitor };
         }
 
@@ -89,9 +93,11 @@ namespace Core
             if (db.sistema == null)
                 db.sistema = new Sistema();
 
-            var umEleitor = db.sistema.Eleitores.Find(c => c.Id.ToString() == id);
+             var umEleitor = db.sistema.Eleitores.Find(c => c.Id.ToString() == id);
 
             db.sistema.Eleitores.Remove(umEleitor);
+
+            file.ManipulacaoDeArquivos(false, db.sistema);
 
             return new Retorno { Status = true, Resultado = null };
 
@@ -108,29 +114,28 @@ namespace Core
             var umEleitor = db.sistema.Eleitores.Find(c => c.Id.ToString() == id);
             db.sistema.Eleitores.Remove(umEleitor);
 
-
          
-            if (!(eleitor.Nome == null))
+            if (eleitor.Nome != null)
                 umEleitor.Nome = eleitor.Nome;
 
-            if (!(eleitor.Id == null))
+            if (eleitor.Id != null)
             umEleitor.Id = eleitor.Id;
 
-            if (!(eleitor.Documento == null))
+            if (eleitor.Documento != null)
             umEleitor.Documento = eleitor.Documento;
 
-            if (!(eleitor.Sexo == null))
+            if (eleitor.Sexo != null)
             umEleitor.Sexo = eleitor.Sexo;
 
-           
-      
-            umEleitor.Idade = eleitor.Idade;
-         
+            if (eleitor.Idade != 0)
+              umEleitor.Idade = eleitor.Idade;
 
-         
+
             db.sistema.Eleitores.Add(umEleitor);
 
-            return new Retorno { Status = true, Resultado = eleitor };
+            file.ManipulacaoDeArquivos(false, db.sistema);
+
+            return new Retorno { Status = true, Resultado = umEleitor };
 
 
         }
