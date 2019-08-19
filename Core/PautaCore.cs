@@ -32,8 +32,7 @@ namespace Core
             // Caso o modelo seja válido, escreve no arquivo db
             var db = file.ManipulacaoDeArquivos(true,null);
 
-            if (db.sistema == null)
-                db.sistema = new Sistema();
+            if (db.sistema == null) db.sistema = new Sistema();
 
             if (!db.sistema.Pautas.Exists(e => e.Descricao.Equals(_pauta.Descricao)))
             {
@@ -48,17 +47,10 @@ namespace Core
         public Retorno ProcurarPorID(string id)
         {
             var db = file.ManipulacaoDeArquivos(true, null);
+            
+            if (db.sistema == null) db.sistema = new Sistema();
 
-            if (db.sistema == null)
-                db.sistema = new Sistema();
-
-            if (db.sistema.Pautas.Any(e => e.Id.ToString().Equals(id)))
-            {
-                return new Retorno() { Status = true, Resultado = db.sistema.Pautas.SingleOrDefault(e => e.Id.ToString().Equals(id)) };
-            }
-            else
-                return new Retorno() { Status = false, Resultado = "Não existe uma Pauta com esse ID." };
-
+            return db.sistema.Pautas.Any(e => e.Id.ToString().Equals(id))? new Retorno() { Status = true, Resultado = db.sistema.Pautas.SingleOrDefault(e => e.Id.ToString().Equals(id))}: new Retorno() { Status = false, Resultado = "Não existe uma Pauta com esse ID." };
         }
 
         public Retorno ProcurarTodos()
@@ -75,8 +67,7 @@ namespace Core
         {
             var db = file.ManipulacaoDeArquivos(true, null);
 
-            if (db.sistema == null)
-                db.sistema = new Sistema();
+            if (db.sistema == null) db.sistema = new Sistema();
 
             if (db.sistema.Pautas.Exists(e => e.Id.ToString().Equals(id)))
             { 
@@ -94,10 +85,10 @@ namespace Core
         { 
             var db = file.ManipulacaoDeArquivos(true, null);
 
-            if (db.sistema == null)
-                db.sistema = new Sistema();
+            if (db.sistema == null) db.sistema = new Sistema();
 
-            if (db.sistema.Eleitores.Exists(e => e.Id.ToString().Equals(id)))
+
+            if (db.sistema.Pautas.Exists(e => e.Id.ToString().Equals(id)))
             {
                 var elementoAtualizado = TrocaDadosPautas(pauta, db.sistema.Pautas.SingleOrDefault(e => e.Id.ToString().Equals(id)));
                 db.sistema.Pautas.Add(elementoAtualizado);
@@ -106,13 +97,12 @@ namespace Core
                 return new Retorno() { Status = true, Resultado = elementoAtualizado};
             }
             else
-                return new Retorno() { Status = false, Resultado = "Não existe uma Pauta com esse ID, Nenhum eleitor foi atualizado." };
+                return new Retorno() { Status = false, Resultado = "Não existe uma Pauta com esse ID, Nenhuma Pauta foi atualizado." };
 
         }
 
         protected Pauta TrocaDadosPautas(Pauta inserida, Pauta Existente)
         { 
-            if (inserida.Concluida == false) inserida.Concluida = Existente.Concluida;
 
             if (inserida.Descricao == null) inserida.Descricao = Existente.Descricao;
 
