@@ -7,12 +7,12 @@ namespace ApiProject.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EleitoresController : ControllerBase
+    public class PautasController : ControllerBase
     {
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Eleitor eleitor)
+        public async Task<IActionResult> Post([FromBody] Pauta pauta)
         {
-            var cadastro = new EleitorCore(eleitor).CadastroEleitor();
+            var cadastro = new PautaCore(pauta).CadastroPauta();
             if (cadastro.Status)
                 return Created("https://localhost", cadastro.Resultado);
             return BadRequest(cadastro.Resultado);
@@ -21,8 +21,7 @@ namespace ApiProject.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(string id)
         {
-
-            var exibe = new EleitorCore().ExibirEleitorId(id);
+            var exibe = new PautaCore().ExibirPautaId(id);
             if (exibe.Status)
                 return Ok(exibe.Resultado);
             return BadRequest(exibe.Resultado);
@@ -31,26 +30,25 @@ namespace ApiProject.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-
-            var exibe = new EleitorCore().ExibirTodos();
+            var exibe = new PautaCore().ExibirTodasPautas();
             if (exibe.Status)
                 return Ok(exibe.Resultado);
             return BadRequest(exibe.Resultado);
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> DeletarPautaId(string id)
         {
-            var deleta = new EleitorCore().DeletarEleitorId(id);
+            var deleta = new PautaCore().DeletarPautaId(id);
             if (deleta.Status)
                 return Ok(deleta.Resultado);
             return BadRequest(deleta.Resultado);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(string id, [FromBody] Eleitor eleitor)
+        public async Task<IActionResult> Put(string id, [FromBody] Pauta pauta)
         {
-            var atualiza = new EleitorCore().AtualizarId(eleitor, id);
+            var atualiza = new PautaCore().AtualizarPautaId(pauta, id);
             if (atualiza.Status)
                 return Ok(atualiza.Resultado);
             return BadRequest(atualiza.Resultado);
