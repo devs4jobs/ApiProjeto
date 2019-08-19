@@ -1,25 +1,42 @@
 ﻿using Model;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using FluentValidation;
-using Microsoft.AspNetCore.Mvc;
 using Core.util;
+using System.Linq;
 
 namespace Core
 {
     public class EleitorCore : AbstractValidator<Eleitor>
     {
         private Eleitor _eleitor { get; set; }
-        public EleitorCore() { }
+        private Sistema Db { get; set; }
+        public EleitorCore()
+        {
+            Db = file.ManipulacaoDeArquivos(true, null).sistema;
+
+            if (Db == null)
+                Db = new Sistema();
+        }
         public EleitorCore( Eleitor eleitor)
         {
+            Db = file.ManipulacaoDeArquivos(true, null).sistema;
+
+            if (Db == null)
+                Db = new Sistema();
             _eleitor = eleitor;
 
             RuleFor(e => e.Documento)
                 .Length(11,11)
                 .NotNull()
                 .WithMessage("Cpf inválido");
+
+            RuleFor(e => e.Idade)
+                .GreaterThan(12)
+                .WithMessage("O eleitor deve ter mais de 12 anos");
+
+            RuleFor(e => e.Sexo)
+                .NotNull()
+                .WithMessage("O eleitor deve registrar o sexo");
 
             RuleFor(e => e.Nome)
                 .MinimumLength(3)
@@ -35,70 +52,52 @@ namespace Core
             if(!results.IsValid)
                 return new Retorno { Status = false, Resultado = results.Errors};
 
-            // Caso o modelo seja válido, escreve no arquivo db
-            var db = file.ManipulacaoDeArquivos(true,null);
-
-            if (db.sistema == null)
-                db.sistema = new Sistema();
-
-            if(db.sistema.Eleitores.Find(c=>c.Documento==_eleitor.Documento)!=null)
+            if(Db.Eleitores.Find(c=>c.Documento==_eleitor.Documento)!=null)
                 return new Retorno() { Status = false, Resultado = "Usuario ja cadastrado" };
 
-            db.sistema.Eleitores.Add(_eleitor);
-            file.ManipulacaoDeArquivos(false, db.sistema);
+            Db.Eleitores.Add(_eleitor);
+            file.ManipulacaoDeArquivos(false, Db);
 
             return new Retorno() { Status = true, Resultado = _eleitor};
         }
 
         public Retorno ID(Guid id)
         {
-            // Caso o modelo seja válido, escreve no arquivo db
-            var db = file.ManipulacaoDeArquivos(true, null);
+           var eleitor = Db.Eleitores.SingleOrDefault(x => x.Id == id);
 
-            var ELEITOR = db.sistema.Eleitores.Find(x => x.Id == id);
+            if (eleitor == null)
+                return new Retorno() { Status = false, Resultado = "Eleitor não existe" };
 
-            return new Retorno() { Status = true, Resultado =ELEITOR};
-        }
-        public Retorno Lista()
-        {
-            var db = file.ManipulacaoDeArquivos(true, null);
-
-            return new Retorno() { Status = true, Resultado = db.sistema.Eleitores};
+           return new Retorno() { Status = true, Resultado = eleitor };
         }
 
+        public Retorno Lista()=> new Retorno() { Status = true, Resultado = Db.Eleitores};
+        
         public Retorno AtualizaEleitor()
         {
 
-            var results = Validate(_eleitor);
-
-            // Se o modelo é inválido retorno false
-            if (!results.IsValid)
-                return new Retorno { Status = false, Resultado = results.Errors };
-
-            var db = file.ManipulacaoDeArquivos(true, null);
-
-            var eleitor=db.sistema.Eleitores.Find(c => c.Id == _eleitor.Id);
+            var eleitor=Db.Eleitores.Find(c => c.Id == _eleitor.Id);
             if(eleitor==null)
                 return new Retorno { Status = false, Resultado = "Eleitor não existe" };
 
-            db.sistema.Eleitores.Remove(eleitor);
-            db.sistema.Eleitores.Add(_eleitor);
+            if (_eleitor.Sexo != null) eleitor.Sexo = _eleitor.Sexo;
+            if (_eleitor.Idade != 0) eleitor.Idade = _eleitor.Idade;
+            if (_eleitor.Documento != null) eleitor.Documento = _eleitor.Documento;
+            if (_eleitor.Nome != null) eleitor.Nome = _eleitor.Nome;
 
-            file.ManipulacaoDeArquivos(false, db.sistema);
+            file.ManipulacaoDeArquivos(false, Db);
 
-            return new Retorno() { Status = true, Resultado = _eleitor };
+            return new Retorno() { Status = true, Resultado = eleitor };
         }
         public Retorno DeletaEleitor(Guid id)
         {
-            var db = file.ManipulacaoDeArquivos(true, null);
-
-            _eleitor=db.sistema.Eleitores.Find(c => c.Id == id);
+            _eleitor=Db.Eleitores.Find(c => c.Id == id);
 
             if (_eleitor == null)
                 return new Retorno() { Status = false, Resultado = "Eleitor não existe" };
 
-            db.sistema.Eleitores.Remove(_eleitor);
-            file.ManipulacaoDeArquivos(false, db.sistema);
+            Db.Eleitores.Remove(_eleitor);
+            file.ManipulacaoDeArquivos(false, Db);
 
             return new Retorno() { Status = true, Resultado = _eleitor };
         }

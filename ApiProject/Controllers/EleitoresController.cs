@@ -20,15 +20,15 @@ namespace ApiProject.Controllers
             if (cadastro.Status)
                 return Created($"https://localhost/api/eleitores/{eleitor.Id}", cadastro.Resultado);
             
-            return BadRequest(cadastro);
+            return BadRequest(cadastro.Resultado);
         }
 
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(Guid id) => Ok(new EleitorCore().ID(id));
+        public async Task<IActionResult> Get(Guid id) => Ok(new EleitorCore().ID(id).Resultado);
 
         [HttpGet]
-        public async Task<IActionResult> Get() => Ok(new EleitorCore().Lista());
+        public async Task<IActionResult> Get() => Ok(new EleitorCore().Lista().Resultado);
 
         [HttpPut]
         public async Task<IActionResult> Put([FromBody] Eleitor eleitor)
@@ -38,7 +38,7 @@ namespace ApiProject.Controllers
             if (cadastro.Status)
                 return Accepted($"https://localhost/api/eleitores/{eleitor.Id}", cadastro.Resultado);
 
-            return BadRequest(cadastro);
+            return BadRequest(cadastro.Resultado);
         }
 
         [HttpDelete("{id}")]
@@ -46,8 +46,8 @@ namespace ApiProject.Controllers
         {
             var cadastro = new EleitorCore().DeletaEleitor(id);
             if (cadastro.Status)
-                return Accepted(cadastro);
-            return NotFound(cadastro);
+                return NoContent();
+            return BadRequest(cadastro.Resultado);
         }
     }
 }
