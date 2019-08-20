@@ -34,9 +34,10 @@ namespace Core
                 .GreaterThan(12)
                 .WithMessage("O eleitor deve ter mais de 12 anos");
 
-            RuleFor(e => e.Sexo)
+            RuleFor(e => e.Sexo.ToLower())
                 .NotNull()
-                .WithMessage("O eleitor deve registrar o sexo");
+                .Must(e => e == "masculino" || e == "feminino")
+                .WithMessage("Sexo Invalido");
 
             RuleFor(e => e.Nome)
                 .MinimumLength(3)
