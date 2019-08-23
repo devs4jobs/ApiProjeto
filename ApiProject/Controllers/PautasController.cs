@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Core;
 using Microsoft.AspNetCore.Mvc;
 using Model;
@@ -10,6 +11,9 @@ namespace ApiProject.Controllers
     public class PautasController : ControllerBase
     {
         [HttpPost]
+        [ProducesResponseType(201, Type = typeof(Pauta))]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
         public async Task<IActionResult> Post([FromBody] Pauta pauta)
         {
             var cadastro = new PautaCore(pauta).CadastroPauta();
@@ -19,6 +23,10 @@ namespace ApiProject.Controllers
         }
 
         [HttpGet("{id}")]
+        [ProducesResponseType(200, Type = typeof(Pauta))]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
         public async Task<IActionResult> Get(string id)
         {
             var exibe = new PautaCore().ExibirPautaId(id);
@@ -28,6 +36,10 @@ namespace ApiProject.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(200, Type = typeof(List<Pauta>))]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
         public async Task<IActionResult> GetAll()
         {
             var exibe = new PautaCore().ExibirTodasPautas();
@@ -37,6 +49,9 @@ namespace ApiProject.Controllers
         }
 
         [HttpDelete("{id}")]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
         public async Task<IActionResult> DeletarPautaId(string id)
         {
             var deleta = new PautaCore().DeletarPautaId(id);
@@ -46,6 +61,9 @@ namespace ApiProject.Controllers
         }
 
         [HttpPut("{id}")]
+        [ProducesResponseType(202, Type = typeof(Pauta))]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
         public async Task<IActionResult> Put(string id, [FromBody] Pauta pauta)
         {
             var atualiza = new PautaCore().AtualizarPautaId(pauta, id);

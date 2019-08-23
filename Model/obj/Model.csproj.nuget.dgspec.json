@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Admin\\source\\repos\\Api\\Model\\Model.csproj": {}
+    "C:\\Users\\Treinamento 1\\Desktop\\CloneDesafio\\ApiProjeto\\Model\\Model.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Admin\\source\\repos\\Api\\Model\\Model.csproj": {
+    "C:\\Users\\Treinamento 1\\Desktop\\CloneDesafio\\ApiProjeto\\Model\\Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Admin\\source\\repos\\Api\\Model\\Model.csproj",
+        "projectUniqueName": "C:\\Users\\Treinamento 1\\Desktop\\CloneDesafio\\ApiProjeto\\Model\\Model.csproj",
         "projectName": "Model",
-        "projectPath": "C:\\Users\\Admin\\source\\repos\\Api\\Model\\Model.csproj",
-        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Admin\\source\\repos\\Api\\Model\\obj\\",
+        "projectPath": "C:\\Users\\Treinamento 1\\Desktop\\CloneDesafio\\ApiProjeto\\Model\\Model.csproj",
+        "packagesPath": "C:\\Users\\Treinamento 1\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Treinamento 1\\Desktop\\CloneDesafio\\ApiProjeto\\Model\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Treinamento 1\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
