@@ -1,9 +1,5 @@
 ﻿using Model;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using FluentValidation;
-using Microsoft.AspNetCore.Mvc;
 using Core.util;
 
 namespace Core
@@ -11,10 +7,8 @@ namespace Core
     public class EleitorCore : AbstractValidator<Eleitor>
     {
         private Eleitor _eleitor;
-        public EleitorCore()
-        {
-
-        }
+        public EleitorCore()  { }
+       
         public EleitorCore( Eleitor eleitor)
         {
             _eleitor = eleitor;
@@ -29,7 +23,7 @@ namespace Core
                 .NotNull()
                 .WithMessage("O nome deve ser preenchido e deve ter o mínimo de 3 caracteres");
         }
-
+        // Método para cadastro.
         public Retorno CadastroEleitor() {
 
             var results = Validate(_eleitor);
@@ -59,7 +53,7 @@ namespace Core
             return new Retorno() { Status = true, Resultado = _eleitor};
         }
 
-
+        // Método para buscar um eleitor
         public Retorno AcharUm(string id)
         {
             var db = file.ManipulacaoDeArquivos(true, null);
@@ -74,7 +68,7 @@ namespace Core
             var UmEleitor = db.sistema.Eleitores.Find(c => c.Id.ToString() == id);
             return new Retorno() { Status = true, Resultado = UmEleitor };
         }
-
+        //Método para buscar todos os eleitores 
         public Retorno AcharTodos()
         {
             var db = file.ManipulacaoDeArquivos(true, null);
@@ -82,11 +76,11 @@ namespace Core
                 db.sistema = new Sistema();
 
 
-          //  var eleitores = db.sistema.Eleitores;
+     
             return new Retorno() { Status = true, Resultado = db.sistema.Eleitores };
         }
 
-
+        // Método deletar por id
         public Retorno DeletarId(string id)
         {
             var db = file.ManipulacaoDeArquivos(true, null);
@@ -103,7 +97,7 @@ namespace Core
 
         }
 
-
+        // Método para efetuar a atualização de um eleitor por id
         public Retorno AtualizarUm(string id, Eleitor eleitor )
         {
 

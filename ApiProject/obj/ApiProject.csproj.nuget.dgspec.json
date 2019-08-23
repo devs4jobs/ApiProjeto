@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Treinamento 5\\Desktop\\A\\ApiProjeto\\ApiProject\\ApiProject.csproj": {}
+    "C:\\Users\\Treinamento 5\\Desktop\\EleicaoApi\\ApiProjeto\\ApiProject\\ApiProject.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Treinamento 5\\Desktop\\A\\ApiProjeto\\ApiProject\\ApiProject.csproj": {
+    "C:\\Users\\Treinamento 5\\Desktop\\EleicaoApi\\ApiProjeto\\ApiProject\\ApiProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Treinamento 5\\Desktop\\A\\ApiProjeto\\ApiProject\\ApiProject.csproj",
+        "projectUniqueName": "C:\\Users\\Treinamento 5\\Desktop\\EleicaoApi\\ApiProjeto\\ApiProject\\ApiProject.csproj",
         "projectName": "ApiProject",
-        "projectPath": "C:\\Users\\Treinamento 5\\Desktop\\A\\ApiProjeto\\ApiProject\\ApiProject.csproj",
+        "projectPath": "C:\\Users\\Treinamento 5\\Desktop\\EleicaoApi\\ApiProjeto\\ApiProject\\ApiProject.csproj",
         "packagesPath": "C:\\Users\\Treinamento 5\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Treinamento 5\\Desktop\\A\\ApiProjeto\\ApiProject\\obj\\",
+        "outputPath": "C:\\Users\\Treinamento 5\\Desktop\\EleicaoApi\\ApiProjeto\\ApiProject\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -30,11 +30,11 @@
         "frameworks": {
           "netcoreapp2.2": {
             "projectReferences": {
-              "C:\\Users\\Treinamento 5\\Desktop\\A\\ApiProjeto\\Core\\Core.csproj": {
-                "projectPath": "C:\\Users\\Treinamento 5\\Desktop\\A\\ApiProjeto\\Core\\Core.csproj"
+              "C:\\Users\\Treinamento 5\\Desktop\\EleicaoApi\\ApiProjeto\\Core\\Core.csproj": {
+                "projectPath": "C:\\Users\\Treinamento 5\\Desktop\\EleicaoApi\\ApiProjeto\\Core\\Core.csproj"
               },
-              "C:\\Users\\Treinamento 5\\Desktop\\A\\ApiProjeto\\Model\\Model.csproj": {
-                "projectPath": "C:\\Users\\Treinamento 5\\Desktop\\A\\ApiProjeto\\Model\\Model.csproj"
+              "C:\\Users\\Treinamento 5\\Desktop\\EleicaoApi\\ApiProjeto\\Model\\Model.csproj": {
+                "projectPath": "C:\\Users\\Treinamento 5\\Desktop\\EleicaoApi\\ApiProjeto\\Model\\Model.csproj"
               }
             }
           }
@@ -71,7 +71,7 @@
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[2.4.0, )"
+              "version": "[4.0.1, )"
             }
           },
           "imports": [
@@ -82,14 +82,14 @@
         }
       }
     },
-    "C:\\Users\\Treinamento 5\\Desktop\\A\\ApiProjeto\\Core\\Core.csproj": {
+    "C:\\Users\\Treinamento 5\\Desktop\\EleicaoApi\\ApiProjeto\\Core\\Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Treinamento 5\\Desktop\\A\\ApiProjeto\\Core\\Core.csproj",
+        "projectUniqueName": "C:\\Users\\Treinamento 5\\Desktop\\EleicaoApi\\ApiProjeto\\Core\\Core.csproj",
         "projectName": "Core",
-        "projectPath": "C:\\Users\\Treinamento 5\\Desktop\\A\\ApiProjeto\\Core\\Core.csproj",
+        "projectPath": "C:\\Users\\Treinamento 5\\Desktop\\EleicaoApi\\ApiProjeto\\Core\\Core.csproj",
         "packagesPath": "C:\\Users\\Treinamento 5\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Treinamento 5\\Desktop\\A\\ApiProjeto\\Core\\obj\\",
+        "outputPath": "C:\\Users\\Treinamento 5\\Desktop\\EleicaoApi\\ApiProjeto\\Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -108,8 +108,8 @@
         "frameworks": {
           "netcoreapp2.2": {
             "projectReferences": {
-              "C:\\Users\\Treinamento 5\\Desktop\\A\\ApiProjeto\\Model\\Model.csproj": {
-                "projectPath": "C:\\Users\\Treinamento 5\\Desktop\\A\\ApiProjeto\\Model\\Model.csproj"
+              "C:\\Users\\Treinamento 5\\Desktop\\EleicaoApi\\ApiProjeto\\Model\\Model.csproj": {
+                "projectPath": "C:\\Users\\Treinamento 5\\Desktop\\EleicaoApi\\ApiProjeto\\Model\\Model.csproj"
               }
             }
           }
@@ -146,14 +146,14 @@
         }
       }
     },
-    "C:\\Users\\Treinamento 5\\Desktop\\A\\ApiProjeto\\Model\\Model.csproj": {
+    "C:\\Users\\Treinamento 5\\Desktop\\EleicaoApi\\ApiProjeto\\Model\\Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Treinamento 5\\Desktop\\A\\ApiProjeto\\Model\\Model.csproj",
+        "projectUniqueName": "C:\\Users\\Treinamento 5\\Desktop\\EleicaoApi\\ApiProjeto\\Model\\Model.csproj",
         "projectName": "Model",
-        "projectPath": "C:\\Users\\Treinamento 5\\Desktop\\A\\ApiProjeto\\Model\\Model.csproj",
+        "projectPath": "C:\\Users\\Treinamento 5\\Desktop\\EleicaoApi\\ApiProjeto\\Model\\Model.csproj",
         "packagesPath": "C:\\Users\\Treinamento 5\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Treinamento 5\\Desktop\\A\\ApiProjeto\\Model\\obj\\",
+        "outputPath": "C:\\Users\\Treinamento 5\\Desktop\\EleicaoApi\\ApiProjeto\\Model\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

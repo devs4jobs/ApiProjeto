@@ -1,14 +1,11 @@
 ﻿using Model;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 
 namespace Core.util
 {
-
+    // classe para lidar com os arquivos
     public static class file
     {
         public static string arquivoDb = AppDomain.CurrentDomain.BaseDirectory + "db.json";

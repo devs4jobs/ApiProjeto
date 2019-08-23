@@ -1,9 +1,5 @@
 ﻿using Model;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using FluentValidation;
-using Microsoft.AspNetCore.Mvc;
 using Core.util;
 
 namespace Core
@@ -25,6 +21,7 @@ namespace Core
                 .WithMessage("Tamanho da descrição invalida");
         }
 
+        // Método para cadastro.
         public Retorno CadastroEleitor()
         {
 
@@ -54,7 +51,7 @@ namespace Core
             return new Retorno() { Status = true, Resultado = _pauta };
         }
 
-
+        // Método para buscar uma pauta
         public Retorno AcharUm(string id)
         {
             var db = file.ManipulacaoDeArquivos(true, null);
@@ -70,6 +67,7 @@ namespace Core
             return new Retorno() { Status = true, Resultado = UmaPauta };
         }
 
+        // Método para retornar todas as pautas
         public Retorno AcharTodos()
         {
             var db = file.ManipulacaoDeArquivos(true, null);
@@ -80,7 +78,7 @@ namespace Core
             return new Retorno() { Status = true, Resultado = db.sistema.Pautas };
         }
 
-
+        // Método para deletar por id
         public Retorno DeletarId(string id)
         {
             var db = file.ManipulacaoDeArquivos(true, null);
@@ -97,7 +95,7 @@ namespace Core
 
         }
 
-
+        // Método para atualizar a pauta por id
         public Retorno AtualizarUm(string id, Pauta pauta)
         {
 
