@@ -1,18 +1,26 @@
 ﻿using Model;
 using FluentValidation;
 using Core.util;
+using System.Linq;
 
 namespace Core
 {
     public class PautaCore : AbstractValidator<Pauta>
     {
         private Pauta _pauta;
+        public Sistema db { get; set; }
         public PautaCore()
         {
+            db = file.ManipulacaoDeArquivos(true, null).sistema;
 
+            if (db == null) db = new Sistema();
         }
         public PautaCore(Pauta Pauta)
         {
+            db = file.ManipulacaoDeArquivos(true, null).sistema;
+
+            if (db == null) db = new Sistema();
+
             _pauta = Pauta;
 
             RuleFor(e => e.Descricao).
@@ -32,20 +40,13 @@ namespace Core
             if (!results.IsValid)
                 return new Retorno { Status = false, Resultado = results.Errors };
 
-            // Caso o modelo seja válido, escreve no arquivo db
-            var db = file.ManipulacaoDeArquivos(true, null);
 
-            if (db.sistema == null)
-                db.sistema = new Sistema();
-
-            var pautas = db.sistema.Pautas;
-
-            if (pautas.Exists(c => c.Descricao == _pauta.Descricao))
+            if (db.Pautas.Exists(c => c.Descricao == _pauta.Descricao))
                 return new Retorno() { Status = false, Resultado = null };
 
 
-            db.sistema.Pautas.Add(_pauta);
-            file.ManipulacaoDeArquivos(false, db.sistema);
+            db.Pautas.Add(_pauta);
+            file.ManipulacaoDeArquivos(false, db);
 
 
             return new Retorno() { Status = true, Resultado = _pauta };
@@ -54,42 +55,30 @@ namespace Core
         // Método para buscar uma pauta
         public Retorno AcharUm(string id)
         {
-            var db = file.ManipulacaoDeArquivos(true, null);
-            if (db.sistema == null)
-                db.sistema = new Sistema();
-
-            if (!db.sistema.Eleitores.Exists(e => e.Id.ToString() == id))
+      
+            if (!db.Eleitores.Exists(e => e.Id.ToString() == id))
                 return new Retorno() { Status = false, Resultado = null };
 
 
 
-            var UmaPauta = db.sistema.Pautas.Find(c => c.Id.ToString() == id);
+            var UmaPauta = db.Pautas.Find(c => c.Id.ToString() == id);
             return new Retorno() { Status = true, Resultado = UmaPauta };
         }
 
         // Método para retornar todas as pautas
-        public Retorno AcharTodos()
-        {
-            var db = file.ManipulacaoDeArquivos(true, null);
-            if (db.sistema == null)
-                db.sistema = new Sistema();
-
-
-            return new Retorno() { Status = true, Resultado = db.sistema.Pautas };
-        }
+        public Retorno AcharTodos() => new Retorno() { Status = true, Resultado = db.Pautas };
+     
+     
 
         // Método para deletar por id
         public Retorno DeletarId(string id)
         {
-            var db = file.ManipulacaoDeArquivos(true, null);
-            if (db.sistema == null)
-                db.sistema = new Sistema();
+       
+            var umaPauta = db.Pautas.Find(c => c.Id.ToString() == id);
 
-            var umaPauta = db.sistema.Pautas.Find(c => c.Id.ToString() == id);
+            db.Pautas.Remove(umaPauta);
 
-            db.sistema.Pautas.Remove(umaPauta);
-
-            file.ManipulacaoDeArquivos(false, db.sistema);
+            file.ManipulacaoDeArquivos(false, db);
 
             return new Retorno { Status = true, Resultado = null };
 
@@ -98,14 +87,11 @@ namespace Core
         // Método para atualizar a pauta por id
         public Retorno AtualizarUm(string id, Pauta pauta)
         {
+            if (!db.Eleitores.Exists(e => e.Id.ToString() == id))
+                return new Retorno() { Status = false, Resultado = null };
 
-            var db = file.ManipulacaoDeArquivos(true, null);
-            if (db.sistema == null)
-                db.sistema = new Sistema();
-
-            var umaPauta = db.sistema.Pautas.Find(c => c.Id.ToString() == id);
-            db.sistema.Pautas.Remove(umaPauta);
-
+            var umaPauta = db.Pautas.Find(c => c.Id.ToString() == id);
+     
 
             if (pauta.Descricao != null)
                 umaPauta.Descricao = pauta.Descricao;
@@ -117,14 +103,9 @@ namespace Core
                 umaPauta.Concluida = pauta.Concluida;
 
 
-            db.sistema.Pautas.Add(umaPauta);
-
-            file.ManipulacaoDeArquivos(false, db.sistema);
+            file.ManipulacaoDeArquivos(false, db);
 
             return new Retorno { Status = true, Resultado = umaPauta };
-
-
-
         }
     }
 }
