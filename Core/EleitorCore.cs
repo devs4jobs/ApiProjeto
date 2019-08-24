@@ -8,9 +8,11 @@ namespace Core
 {
     public class EleitorCore : AbstractValidator<Eleitor>
     {
+        //getters setters privados
         private Eleitor _eleitor { get; set; }
         public EleitorCore(Eleitor eleitor)
         {
+            //regras para os atributos de eleitor
             _eleitor = eleitor;
 
             RuleFor(e => e.Documento)
@@ -23,9 +25,10 @@ namespace Core
                 .NotNull()
                 .WithMessage("O nome deve ser preenchido e deve ter o mínimo de 3 caracteres");
         }
-
+        //construtor
         public EleitorCore(){ }
 
+        //método de criação de Eleitor 
         public Retorno CadastroEleitor() {
 
             var results = Validate(_eleitor);
@@ -39,7 +42,7 @@ namespace Core
 
             if (db.sistema == null)
                 db.sistema = new Sistema();
-
+            
             if (db.sistema.Eleitores.Exists(x => x.Documento == _eleitor.Documento)) {
 
                 return new Retorno() { Status = true, Resultado = "CPF já cadastrado" };

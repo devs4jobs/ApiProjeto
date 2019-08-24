@@ -17,7 +17,6 @@ namespace Core
                 .Length(5, 35)
                 .NotNull()
                 .WithMessage("Descrição inválida");
-
         }
 
         public PautaCore() { }
@@ -56,7 +55,6 @@ namespace Core
 
             if (t.sistema == null)
                 t.sistema = new Sistema();
-
             var p = t.sistema.Pautas.Where(x => x.Id == new Guid(id));
             return new Retorno() { Status = true, Resultado = p };
 
