@@ -59,7 +59,7 @@ namespace Core
 
             if (db.sistema == null) db.sistema = new Sistema();
 
-            return (db.sistema.Eleitores.Any()? new Retorno() { Status = true, Resultado = db.sistema.Eleitores }: new Retorno() { Status = false, Resultado = "Não existe nenhum elemento." };
+            return (db.sistema.Eleitores.Any())? new Retorno() { Status = true, Resultado = db.sistema.Eleitores }: new Retorno() { Status = false, Resultado = "Não existe nenhum elemento." };
         }
 
         public Retorno DeletarPorID(string id)
