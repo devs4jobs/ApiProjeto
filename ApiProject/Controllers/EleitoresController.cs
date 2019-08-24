@@ -25,7 +25,15 @@ namespace ApiProject.Controllers
 
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(Guid id) => Ok(new EleitorCore().ID(id).Resultado);
+        public async Task<IActionResult> Get(Guid id)
+        {
+            var retorno=new EleitorCore().ID(id);
+
+            if (retorno.Status)
+                return Ok(retorno.Resultado);
+
+            return BadRequest(retorno.Resultado);
+        }
 
         [HttpGet]
         public async Task<IActionResult> Get() => Ok(new EleitorCore().Lista().Resultado);

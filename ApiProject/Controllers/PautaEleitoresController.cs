@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Core;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Model;
 
@@ -8,15 +11,15 @@ namespace ApiProject.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PautasController : ControllerBase
+    public class VotacoesController : ControllerBase
     {
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Pauta pauta)
+        public async Task<IActionResult> Post([FromBody] PautaEleitor Voto)
         {
-            var cadastro = new PautaCore(pauta).CadastroPauta();
+            var cadastro = new PautaEleitorCore(Voto).Votacao();
 
             if (cadastro.Status)
-                return Created($"https://localhost/api/pautas/{pauta.Id}", cadastro.Resultado);
+                return Created($"https://localhost/api/votacoes/{Voto.PautaId}", cadastro.Resultado);
 
             return BadRequest(cadastro.Resultado);
         }
@@ -24,7 +27,7 @@ namespace ApiProject.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
-            var retorno=new PautaCore().ID(id).Resultado;
+            var retorno = new PautaEleitorCore().ID(id);
 
             if (retorno.Status)
                 return Ok(retorno.Resultado);
@@ -33,15 +36,15 @@ namespace ApiProject.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get() => Ok(new PautaCore().Lista().Resultado);
+        public async Task<IActionResult> Get() => Ok(new PautaEleitorCore().Lista().Resultado);
 
         [HttpPut]
-        public async Task<IActionResult> Put([FromBody] Pauta pauta)
+        public async Task<IActionResult> Put([FromBody] PautaEleitor Voto)
         {
-            var cadastro = new PautaCore(pauta).AtualizaPauta();
+            var cadastro = new PautaEleitorCore(Voto).AtualizaVoto();
 
             if (cadastro.Status)
-                return Accepted($"https://localhost/api/pautas/{pauta.Id}", cadastro.Resultado);
+                return Accepted($"https://localhost/api/votacoes/{Voto.PautaId}", cadastro.Resultado);
 
             return BadRequest(cadastro.Resultado);
         }
@@ -49,7 +52,7 @@ namespace ApiProject.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
-            var cadastro = new PautaCore().DeletaPauta(id);
+            var cadastro = new EleitorCore().DeletaEleitor(id);
             if (cadastro.Status)
                 return NoContent();
             return NotFound(cadastro.Resultado);
