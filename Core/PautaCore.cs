@@ -38,7 +38,7 @@ namespace Core
 
             // Se o modelo é inválido retorno false
             if (!results.IsValid)
-                return new Retorno { Status = false, Resultado = results.Errors };
+                return new Retorno { Status = false, Resultado = results.Errors.Select(c => c.ErrorMessage).ToList() };
 
 
             if (db.Pautas.Exists(c => c.Descricao == _pauta.Descricao))

@@ -25,23 +25,37 @@ namespace Core
 
             RuleFor(e => e.EleitorId).NotEmpty().WithMessage("O eleitor Id nao pode ser vazio");
             RuleFor(e => e.PautaId).NotEmpty().WithMessage("a pauta id nao pode ser vazia");
+            RuleFor(a => a.Voto.ToUpper()).NotNull().Must(a => a == "A FAVOR" || a == "CONTRA").WithMessage($"Campo Inválido.");
+
         }
 
         // Método para cadastro.
-        public Retorno Cadastro()
+        public Retorno Votar()
         {
 
             var results = Validate(_pautaeleitor);
 
             // Se o modelo é inválido retorno false
             if (!results.IsValid)
-                return new Retorno { Status = false, Resultado = results.Errors };
-            
-            
+                return new Retorno { Status = false, Resultado = results.Errors.Select(c => c.ErrorMessage).ToList() };
+
+
+            var umaSessao = db.Sessoes.SingleOrDefault(c => c.LstPautas.SingleOrDefault(e => e.Id == _pautaeleitor.PautaId) != null);
+
+            if (umaSessao == null || umaSessao.Status == false )
+                return new Retorno { Status = false, Resultado = "Essa Sessão é invalida!" };
+
+           
+            if(!(umaSessao.LstEleitores.SingleOrDefault(c => c.Id == _pautaeleitor.EleitorId) != null))
+                return new Retorno { Status = false, Resultado = "Esse eleitor não existe" };
+
+
+
+
+
+
             db.EleitoresPauta.Add(_pautaeleitor);
             file.ManipulacaoDeArquivos(false, db);
-
-
             return new Retorno() { Status = true, Resultado = _pautaeleitor };
         }
 

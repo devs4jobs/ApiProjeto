@@ -1,6 +1,7 @@
 ﻿using Model;
 using FluentValidation;
 using Core.util;
+using System.Linq;
 
 namespace Core
 {
@@ -32,6 +33,10 @@ namespace Core
                 .MinimumLength(3)
                 .NotNull()
                 .WithMessage("O nome deve ser preenchido e deve ter o mínimo de 3 caracteres");
+
+            RuleFor(a => a.Sexo.ToUpper())
+                .NotNull().Must(a => a == "MASCULINO" || a == "FEMININO")
+                .WithMessage("Sexo inválida.");
         }
         // Método para cadastro.
         public Retorno CadastroEleitor()
@@ -40,7 +45,7 @@ namespace Core
 
             // Se o modelo é inválido retorno false
             if (!results.IsValid)
-                return new Retorno { Status = false, Resultado = results.Errors };
+                return new Retorno { Status = false, Resultado = results.Errors.Select(c => c.ErrorMessage).ToList() };
 
             if (db.Eleitores.Exists(c => c.Documento == _eleitor.Documento))
                 return new Retorno() { Status = false, Resultado = null };
@@ -63,6 +68,10 @@ namespace Core
         }
         //Método para buscar todos os eleitores 
         public Retorno AcharTodos() => new Retorno() { Status = true, Resultado = db.Eleitores };
+    //    public Retorno AcharTodos() => new Retorno() { Status = true, Resultado = db.Eleitores };
+
+
+
 
         // Método deletar por id
         public Retorno DeletarId(string id)

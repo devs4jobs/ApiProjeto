@@ -2,6 +2,7 @@
 using FluentValidation;
 using Core.util;
 using System.Linq;
+using System;
 
 namespace Core
 {
@@ -23,11 +24,11 @@ namespace Core
 
             if (db == null) db = new Sistema();
 
-            RuleFor(c => c.LstPautaEleitores).NotEmpty().WithMessage("Lista de PautaEleitores nao ser vazia");
+         //   RuleFor(a => a.LstPautaEleitores).Empty().WithMessage("A lista de votos precisa estar vazia");
             RuleFor(a => a.LstPautas).NotEmpty().WithMessage("Lista de Pautas nao pode ser vazia");
+            RuleFor(a => a.Status).NotEqual(true).WithMessage("Não é possivel cadastrar uma sessao ja finalizada.");
           
         }
-
         // Método para cadastro.
         public Retorno Cadastro()
         {
@@ -36,7 +37,8 @@ namespace Core
 
             // Se o modelo é inválido retorno false
             if (!results.IsValid)
-                return new Retorno { Status = false, Resultado = results.Errors };
+                return new Retorno { Status = false, Resultado = results.Errors.Select(c => c.ErrorMessage).ToList() };
+
             
             
             db.Sessoes.Add(_sessao);
@@ -73,7 +75,6 @@ namespace Core
             return new Retorno { Status = true, Resultado = null };
 
         }
-
         // Método para atualizar a pauta por id
         public Retorno AtualizarUm(string id, Sessao sessao)
         {
@@ -85,15 +86,11 @@ namespace Core
             if (sessao.LstPautas != null)
                 umaSessao.LstPautas = sessao.LstPautas;
 
-            if (sessao.LstPautaEleitores != null)
-                umaSessao.LstPautaEleitores = sessao.LstPautaEleitores;
-                
-
-
-
             file.ManipulacaoDeArquivos(false, db);
 
             return new Retorno { Status = true, Resultado = umaSessao };
         }
+
+
     }
 }

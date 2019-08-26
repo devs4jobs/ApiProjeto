@@ -13,8 +13,8 @@ namespace ApiProject.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] PautaEleitor pauta)
         {
-            var Core = new PautaEleitorCore(pauta).Cadastro();
-            return Core.Status ? Created($"https://localhost/api/Pautas/{pauta.PautaId}", Core.Resultado) : BadRequest("Esse cadastro já existe.");
+            var Core = new PautaEleitorCore(pauta).Votar();
+            return Core.Status ? Created($"https://localhost/api/EleitoresPautas/{pauta.PautaId}", Core.Resultado) : BadRequest("Esse cadastro já existe.");
 
         }
         //Chamando  o metodo de achar por id

@@ -7,7 +7,7 @@ namespace Model
         // model para amarrar a pauta e o eleitor
         public Guid PautaId { get; set; }
         public Guid EleitorId { get; set; }
-        public bool Votou { get; set; }
+        public bool Votou { get; set; } = true;
         public string Voto { get; set; }
     }
 }
