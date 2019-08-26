@@ -2,6 +2,7 @@
 using FluentValidation;
 using Core.util;
 using System.Linq;
+using System;
 
 namespace Core
 {
@@ -19,12 +20,17 @@ namespace Core
             RuleFor(e => e.PautaId)
                 .NotNull()
                 .WithMessage("o id da pauta não pode ser nulo.");
+
+            RuleFor(e => e.Voto.ToLower().Trim())
+                .NotNull()
+                .Must(voto => voto.Equals("a favor") || voto.Equals("contra"))
+                .WithMessage("O voto não pode ser nulo e só pode ser 'a favor' ou 'contra'.");
+
         }
         public PautaEleitorCore() { }
 
         public Retorno CadastrarPautaEleitor()
         {
-
             var results = Validate(_pautaEleitor);
 
             // Se o modelo é inválido retorno false
@@ -33,19 +39,19 @@ namespace Core
             // Caso o modelo seja válido, escreve no arquivo db
             var db = file.ManipulacaoDeArquivos(true, null);
 
+            db.sistema.Pautas.Exists(p => p.Id.Equals(_pautaEleitor.PautaId));
+
             if (db.sistema == null) db.sistema = new Sistema();
-            if (!db.sistema.Pautas.Exists(p => p.Id.Equals(_pautaEleitor.PautaId)) && !db.sistema.Eleitores.Exists(e => e.Id.Equals(_pautaEleitor)))
+
+            if (!db.sistema.Pautas.Exists(p => p.Id.Equals(_pautaEleitor.PautaId)) || !db.sistema.Eleitores.Exists(e => e.Id.Equals(_pautaEleitor)))
                 return new Retorno() { Status = false, Resultado = "Não exite uma Pauta/Eleitor com esses ID's na Base de Dados." };
 
-            if (!db.sistema.EleitoresPauta.Exists(e => e.PautaId.Equals(_pautaEleitor.PautaId)))
-            {
-                db.sistema.EleitoresPauta.Add(_pautaEleitor);
-                file.ManipulacaoDeArquivos(false, db.sistema);
+            _pautaEleitor.Votou = true;
+            db.sistema.EleitoresPauta.Add(_pautaEleitor);
+            file.ManipulacaoDeArquivos(false, db.sistema);
 
-                return new Retorno() { Status = true, Resultado = _pautaEleitor };
-            }
-            else
-                return new Retorno() { Status = false, Resultado = "Já existe uma pauta eleitor com esse ID." };
+            return new Retorno() { Status = true, Resultado = _pautaEleitor };
+
 
         }
 
