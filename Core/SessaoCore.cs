@@ -13,7 +13,6 @@ namespace Core
         private Sistema Db { get; set; }
         public SessaoCore()
         {
-
             Db = file.ManipulacaoDeArquivos(true, null).sistema;
 
             if (Db == null)
@@ -31,7 +30,11 @@ namespace Core
             RuleFor(e => e.Eleitores)
                 .NotNull()
                 .WithMessage("Eleitores não pode ser nulo");
-
+            
+           // RuleForEach(e => e.Eleitores)
+           //     .Must(temp =>Db.Eleitores.SingleOrDefault(check => check.Id == temp) != null)
+           //     .WithMessage($"Eleitor com ID:{} não conta na base de dados");
+                
             RuleFor(e => e.Pautas)
                 .NotNull()
                 .WithMessage("Pautas não pode ser nulo");
@@ -42,15 +45,13 @@ namespace Core
         {
 
             var results = Validate(_Sessao);
-
             // Se o modelo é inválido retorno false
             if (!results.IsValid)
                 return new Retorno { Status = false, Resultado = results.Errors.Select(c => c.ErrorMessage) };
 
             _Sessao.Status = true;
-            _Sessao.Eleitores.ForEach(c => c = Db.Eleitores.SingleOrDefault(d => c.Id == d.Id));
-            _Sessao.Pautas.ForEach(c => c = Db.Pautas.SingleOrDefault(d => c.Id == d.Id));
-
+            _Sessao.Eleitores.ForEach(c => c.Trocar(Db.Eleitores.SingleOrDefault(d => d.Id == c.Id)));
+            _Sessao.Pautas.ForEach(c => c.Trocar(Db.Pautas.SingleOrDefault(d => d.Id == c.Id)));
 
             Db.Sessaos.Add(_Sessao);
 
@@ -69,7 +70,7 @@ namespace Core
             return new Retorno() { Status = true, Resultado = sessao };
         }
 
-        public Retorno Lista() => new Retorno() { Status = true, Resultado = Db.EleitoresPauta.OrderBy(e => e.Votou) };
+        public Retorno Lista() => new Retorno() { Status = true, Resultado = Db.Sessaos };
 
         public Retorno AdicionaPauta(Guid id,Pauta pauta)
         {

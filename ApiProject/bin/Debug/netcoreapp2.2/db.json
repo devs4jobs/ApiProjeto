@@ -1,1 +1,89 @@
-{"Eleitores":[{"Nome":"Goddart Hugganid","Documento":"10792851201","Sexo":"Male","Idade":40,"Id":"81b354ca-c7c1-4302-b8bc-31d25782df3e","DataCadastro":"2019-08-15T00:00:00"},{"Nome":"dart Huggan","Documento":"10792851209","Sexo":"Male","Idade":45,"Id":"81b354ca-c7c1-4302-b8bc-31d25782df3e","DataCadastro":"2019-08-15T00:00:00"},{"Nome":"dart gan","Documento":"10792854209","Sexo":"Male","Idade":45,"Id":"81b354ca-c7c1-4302-b8bc-31d25782df3e","DataCadastro":"2019-08-15T00:00:00"},{"Nome":"Sonshine Hugenin","Documento":"10742-85121","Sexo":"Feminino","Idade":23,"Id":"449d26aa-55f5-40b5-8d79-b73f79a2e43e","DataCadastro":"2019-08-19T12:40:33.0206668-03:00"},{"Nome":"Goddart Huggan","Documento":"10792851232","Sexo":"MASCULINO","Idade":40,"Id":"81b354ca-c7c1-4302-b8bc-31d25782df3e","DataCadastro":"2019-08-15T00:00:00"}],"Pautas":[{"Descricao":"Novos RPG serão melhores que os velhos?","Concluida":false,"Id":"7c45cfdf-7621-4752-b8ef-a286d49134cc","DataCadastro":"2019-08-24T11:42:03.7420955-03:00"}],"EleitoresPauta":[]}
+{
+  "Eleitores": [
+    {
+      "Nome": "Sonshine Hugenin",
+      "Documento": "10742-85121",
+      "Sexo": "Feminino",
+      "Idade": 23,
+      "Id": "449d26aa-55f5-40b5-8d79-b73f79a2e43e",
+      "DataCadastro": "2019-08-19T12:40:33.0206668-03:00"
+    },
+    {
+      "Nome": "Goddart Huggan",
+      "Documento": "10792851232",
+      "Sexo": "MASCULINO",
+      "Idade": 40,
+      "Id": "81b354ca-c7c1-4302-b8bc-31d25782df3e",
+      "DataCadastro": "2019-08-15T00:00:00"
+    },
+    {
+      "Nome": "Andre",
+      "Documento": "43831555885",
+      "Sexo": "masculino",
+      "Idade": 20,
+      "Id": "1fd3575e-dd09-4e39-8fb2-0ba1639201f8",
+      "DataCadastro": "2019-08-26T11:57:34.3740679-03:00"
+    }
+  ],
+  "Pautas": [
+    {
+      "Descricao": "Novos RPG serão melhores que os velhos?",
+      "Concluida": true,
+      "Id": "7c45cfdf-7621-4752-b8ef-a286d49134cc",
+      "DataCadastro": "2019-08-24T11:42:03.7420955-03:00"
+    },
+    {
+      "Descricao": "Estou finalizando todos os jogos que compro?",
+      "Concluida": false,
+      "Id": "e63d6d11-87b5-4641-893e-f511cca7e51c",
+      "DataCadastro": "2019-08-26T11:56:12.4643711-03:00"
+    }
+  ],
+  "EleitoresPauta": [
+    {
+      "PautaId": "7c45cfdf-7621-4752-b8ef-a286d49134cc",
+      "EleitorId": "81b354ca-c7c1-4302-b8bc-31d25782df3e",
+      "Votou": true,
+      "Voto": "a favor"
+    },
+    {
+      "PautaId": "7c45cfdf-7621-4752-b8ef-a286d49134cc",
+      "EleitorId": "449d26aa-55f5-40b5-8d79-b73f79a2e43e",
+      "Votou": true,
+      "Voto": "a favor"
+    }
+  ],
+  "Sessaos": [
+    {
+      "Pautas": [
+        {
+          "Descricao": "Novos RPG serão melhores que os velhos?",
+          "Concluida": true,
+          "Id": "7c45cfdf-7621-4752-b8ef-a286d49134cc",
+          "DataCadastro": "2019-08-24T11:42:03.7420955-03:00"
+        }
+      ],
+      "Eleitores": [
+        {
+          "Nome": "Goddart Huggan",
+          "Documento": "10792851232",
+          "Sexo": "MASCULINO",
+          "Idade": 40,
+          "Id": "81b354ca-c7c1-4302-b8bc-31d25782df3e",
+          "DataCadastro": "2019-08-15T00:00:00"
+        },
+        {
+          "Nome": "Sonshine Hugenin",
+          "Documento": "10742-85121",
+          "Sexo": "Feminino",
+          "Idade": 23,
+          "Id": "449d26aa-55f5-40b5-8d79-b73f79a2e43e",
+          "DataCadastro": "2019-08-19T12:40:33.0206668-03:00"
+        }
+      ],
+      "Status": false,
+      "Id": "248a4366-1bea-423d-8a2b-e268f0d9bee2",
+      "DataCadastro": "2019-08-26T11:54:10.4528266-03:00"
+    }
+  ]
+}

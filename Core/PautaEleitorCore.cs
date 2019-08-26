@@ -56,23 +56,31 @@ namespace Core
             //Procura se a sessão ja foi iniciada
             var sessao = Db.Sessaos.SingleOrDefault(c => c.Pautas.SingleOrDefault(d => d.Id == _PautaEleitor.PautaId).Id==_PautaEleitor.PautaId);
 
-            //Caso não exista a pauta
-            if (sessao == null)
-                return new Retorno() { Status = false, Resultado = "Sessão não iniciada" };
+            //Caso não exista a pauta ou ja tenha finalizada
+            if (sessao == null||sessao.Status==false)
+                return new Retorno() { Status = false, Resultado = "Sessão não iniciada ou Sessão ja finalizada" };
 
             //Caso não exista o eleitor
             if (sessao.Eleitores.SingleOrDefault(c => c.Id == _PautaEleitor.EleitorId) == null)
-                return new Retorno() { Status = false, Resultado = "Eleitor não cadastrada" };
+                return new Retorno() { Status = false, Resultado = "Eleitor não cadastrada para essa sessão" };
 
             //Caso ja tenha votado
             if (Db.EleitoresPauta.SingleOrDefault(c => c.PautaId == _PautaEleitor.PautaId&&c.EleitorId==_PautaEleitor.EleitorId) != null)
                 return new Retorno() { Status = false, Resultado = "Voto ja registrado" };
 
             Db.EleitoresPauta.Add(_PautaEleitor);
-
+            //Verifica se a Pauta deve ter votação encerrada & se a Sessão ja deve ser fechada
+            if (sessao.Eleitores.Count == Db.EleitoresPauta.Where(c => c.PautaId == _PautaEleitor.PautaId).ToList().Count)
+            {
+                var Pauta = Db.Pautas.SingleOrDefault(c => c.Id == _PautaEleitor.PautaId);
+                Pauta.Concluida = true;
+                Pauta=sessao.Pautas.SingleOrDefault(c => c.Id == _PautaEleitor.PautaId);
+                Pauta.Concluida = true;
+                if (sessao.PautaTrue(sessao.Pautas))
+                    sessao.Status = false;
+            }
             file.ManipulacaoDeArquivos(false, Db);
 
-            if(sessao.Eleitores.Count == Db.Pautas.Where(c => c.Id == _PautaEleitor.PautaId).ToList().Count)
 
 
             return new Retorno() { Status = true, Resultado = _PautaEleitor };

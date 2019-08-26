@@ -20,7 +20,7 @@ namespace Core.util
                 if (read)
                     return (false, JsonConvert.DeserializeObject<Sistema>(File.ReadAllText(arquivoDb)));
 
-                File.WriteAllText(arquivoDb, JsonConvert.SerializeObject(_sistema));
+                File.WriteAllText(arquivoDb, JsonConvert.SerializeObject(_sistema,Formatting.Indented));
 
                 return (true, null);
 
