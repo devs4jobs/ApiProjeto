@@ -107,7 +107,7 @@ namespace Core
         {
             if (velha.Descricao == null) nova.Descricao = velha.Descricao;
             velha.DataCadastro = nova.DataCadastro;
-            velha.Concluida = nova.Concluida;
+            velha.Encerrada = nova.Encerrada;
             nova.Id = velha.Id;
             return nova;
         }

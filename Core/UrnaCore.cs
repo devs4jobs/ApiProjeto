@@ -12,9 +12,8 @@ namespace Core
         private Urna _urna { get; set; }
         public UrnaCore(Urna urna)
         {
-            
             _urna = urna;
-            RuleFor(e => e.Id)
+            RuleFor(e => e.PautaId)
                 .NotNull()
                 .WithMessage("Pauta Id inválido");
 
@@ -39,11 +38,11 @@ namespace Core
             if (db.sistema == null)
                 db.sistema = new Sistema();
 
-            if (db.sistema.PautaEleitores.Exists(x => x.Id == _urna.Id))
+            if (db.sistema.Urnas.Exists(x => x.PautaId == _urna.PautaId))
             {
                 return new Retorno() { Status = true, Resultado = "já cadastrado" };
             }
-            db.sistema.PautaEleitores.Add(_urna);
+            db.sistema.Urnas.Add(_urna);
 
             file.ManipulacaoDeArquivos(false, db.sistema);
 
@@ -58,7 +57,7 @@ namespace Core
             if (t.sistema == null)
                 t.sistema = new Sistema();
 
-            var p = t.sistema.PautaEleitores.Where(x => x.Id == new Guid(id));
+            var p = t.sistema.Urnas.Where(x => x.PautaId == new Guid(id));
             return new Retorno() { Status = true, Resultado = p };
 
         }
@@ -69,7 +68,7 @@ namespace Core
             if (y.sistema == null)
                 y.sistema = new Sistema();
 
-            var q = y.sistema.PautaEleitores;
+            var q = y.sistema.Urnas;
             return new Retorno() { Status = true, Resultado = q };
         }
 
@@ -80,7 +79,7 @@ namespace Core
             if (t.sistema == null)
                 t.sistema = new Sistema();
 
-            var p = t.sistema.PautaEleitores.Remove(t.sistema.PautaEleitores.Find(s => s.Id == new Guid(id)));
+            var p = t.sistema.Urnas.Remove(t.sistema.Urnas.Find(s => s.PautaId == new Guid(id)));
 
             file.ManipulacaoDeArquivos(false, t.sistema);
 
@@ -94,11 +93,11 @@ namespace Core
             if (f.sistema == null)
                 f.sistema = new Sistema();
 
-            var velho = f.sistema.PautaEleitores.Find(s => s.Id == new Guid(id));
+            var velho = f.sistema.Urnas.Find(s => s.PautaId == new Guid(id));
             var troca = TrocaDados(novo, velho);
 
-            f.sistema.PautaEleitores.Add(troca);
-            f.sistema.PautaEleitores.Remove(velho);
+            f.sistema.Urnas.Add(troca);
+            f.sistema.Urnas.Remove(velho);
 
             file.ManipulacaoDeArquivos(false, f.sistema);
 
@@ -108,7 +107,7 @@ namespace Core
         public Urna TrocaDados(Urna novo, Urna velho)
         {
             novo.VotoAFavor = velho.VotoAFavor;
-            novo.Id = velho.Id;
+            novo.PautaId = velho.PautaId;
             novo.EleitorId = velho.EleitorId;
             velho.Votada = novo.Votada;
             return novo;
