@@ -1,24 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Treinamento 5\\Desktop\\EleicaoApi\\ApiProjeto\\Core\\Core.csproj": {}
+    "C:\\Users\\guibo\\Desktop\\EleicaoApi\\ApiProjeto\\Core\\Core.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Treinamento 5\\Desktop\\EleicaoApi\\ApiProjeto\\Core\\Core.csproj": {
+    "C:\\Users\\guibo\\Desktop\\EleicaoApi\\ApiProjeto\\Core\\Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Treinamento 5\\Desktop\\EleicaoApi\\ApiProjeto\\Core\\Core.csproj",
+        "projectUniqueName": "C:\\Users\\guibo\\Desktop\\EleicaoApi\\ApiProjeto\\Core\\Core.csproj",
         "projectName": "Core",
-        "projectPath": "C:\\Users\\Treinamento 5\\Desktop\\EleicaoApi\\ApiProjeto\\Core\\Core.csproj",
-        "packagesPath": "C:\\Users\\Treinamento 5\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Treinamento 5\\Desktop\\EleicaoApi\\ApiProjeto\\Core\\obj\\",
+        "projectPath": "C:\\Users\\guibo\\Desktop\\EleicaoApi\\ApiProjeto\\Core\\Core.csproj",
+        "packagesPath": "C:\\Users\\guibo\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\guibo\\Desktop\\EleicaoApi\\ApiProjeto\\Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Treinamento 5\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\guibo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp2.2"
@@ -30,8 +32,8 @@
         "frameworks": {
           "netcoreapp2.2": {
             "projectReferences": {
-              "C:\\Users\\Treinamento 5\\Desktop\\EleicaoApi\\ApiProjeto\\Model\\Model.csproj": {
-                "projectPath": "C:\\Users\\Treinamento 5\\Desktop\\EleicaoApi\\ApiProjeto\\Model\\Model.csproj"
+              "C:\\Users\\guibo\\Desktop\\EleicaoApi\\ApiProjeto\\Model\\Model.csproj": {
+                "projectPath": "C:\\Users\\guibo\\Desktop\\EleicaoApi\\ApiProjeto\\Model\\Model.csproj"
               }
             }
           }
@@ -68,21 +70,23 @@
         }
       }
     },
-    "C:\\Users\\Treinamento 5\\Desktop\\EleicaoApi\\ApiProjeto\\Model\\Model.csproj": {
+    "C:\\Users\\guibo\\Desktop\\EleicaoApi\\ApiProjeto\\Model\\Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Treinamento 5\\Desktop\\EleicaoApi\\ApiProjeto\\Model\\Model.csproj",
+        "projectUniqueName": "C:\\Users\\guibo\\Desktop\\EleicaoApi\\ApiProjeto\\Model\\Model.csproj",
         "projectName": "Model",
-        "projectPath": "C:\\Users\\Treinamento 5\\Desktop\\EleicaoApi\\ApiProjeto\\Model\\Model.csproj",
-        "packagesPath": "C:\\Users\\Treinamento 5\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Treinamento 5\\Desktop\\EleicaoApi\\ApiProjeto\\Model\\obj\\",
+        "projectPath": "C:\\Users\\guibo\\Desktop\\EleicaoApi\\ApiProjeto\\Model\\Model.csproj",
+        "packagesPath": "C:\\Users\\guibo\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\guibo\\Desktop\\EleicaoApi\\ApiProjeto\\Model\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Treinamento 5\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\guibo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp2.2"

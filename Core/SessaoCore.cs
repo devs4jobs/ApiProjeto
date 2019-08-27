@@ -24,7 +24,6 @@ namespace Core
 
             if (db == null) db = new Sistema();
 
-         //   RuleFor(a => a.LstPautaEleitores).Empty().WithMessage("A lista de votos precisa estar vazia");
             RuleFor(a => a.LstPautas).NotEmpty().WithMessage("Lista de Pautas nao pode ser vazia");
             RuleFor(a => a.Status).NotEqual(true).WithMessage("Não é possivel cadastrar uma sessao ja finalizada.");
           
@@ -92,5 +91,14 @@ namespace Core
         }
 
 
+        //public bool FinalizaSessao()
+        //{
+        //    //Procurar e relacionar todos os eleitores se ja votaram em determinada pauta.
+
+        //    var EleitoresID = db.EleitoresPauta.Select(c => c.EleitorId).ToList();
+        //    _sessao.LstPauta
+
+
+        //}
     }
 }

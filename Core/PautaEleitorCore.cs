@@ -29,7 +29,7 @@ namespace Core
 
         }
 
-        // Método para cadastro.
+        // Método para cadastro do voto.
         public Retorno Votar()
         {
 
@@ -39,13 +39,14 @@ namespace Core
             if (!results.IsValid)
                 return new Retorno { Status = false, Resultado = results.Errors.Select(c => c.ErrorMessage).ToList() };
 
-
+            // procura uma sessao
             var umaSessao = db.Sessoes.SingleOrDefault(c => c.LstPautas.SingleOrDefault(e => e.Id == _pautaeleitor.PautaId) != null);
 
+            // checa se a sessao é valida
             if (umaSessao == null || umaSessao.Status == false )
                 return new Retorno { Status = false, Resultado = "Essa Sessão é invalida!" };
 
-           
+           // checa se o eleitor existe nessa sessao
             if(!(umaSessao.LstEleitores.SingleOrDefault(c => c.Id == _pautaeleitor.EleitorId) != null))
                 return new Retorno { Status = false, Resultado = "Esse eleitor não existe" };
 

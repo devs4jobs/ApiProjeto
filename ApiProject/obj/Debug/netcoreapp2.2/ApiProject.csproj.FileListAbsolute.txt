@@ -74,3 +74,22 @@ C:\Users\Treinamento 5\Desktop\EleicaoApi\ApiProjeto\ApiProject\obj\Debug\netcor
 C:\Users\Treinamento 5\Desktop\EleicaoApi\ApiProjeto\ApiProject\obj\Debug\netcoreapp2.2\ApiProject.csproj.CopyComplete
 C:\Users\Treinamento 5\Desktop\EleicaoApi\ApiProjeto\ApiProject\obj\Debug\netcoreapp2.2\ApiProject.dll
 C:\Users\Treinamento 5\Desktop\EleicaoApi\ApiProjeto\ApiProject\obj\Debug\netcoreapp2.2\ApiProject.pdb
+C:\Users\guibo\Desktop\EleicaoApi\ApiProjeto\ApiProject\bin\Debug\netcoreapp2.2\ApiProject.deps.json
+C:\Users\guibo\Desktop\EleicaoApi\ApiProjeto\ApiProject\bin\Debug\netcoreapp2.2\ApiProject.runtimeconfig.json
+C:\Users\guibo\Desktop\EleicaoApi\ApiProjeto\ApiProject\bin\Debug\netcoreapp2.2\ApiProject.runtimeconfig.dev.json
+C:\Users\guibo\Desktop\EleicaoApi\ApiProjeto\ApiProject\bin\Debug\netcoreapp2.2\ApiProject.dll
+C:\Users\guibo\Desktop\EleicaoApi\ApiProjeto\ApiProject\bin\Debug\netcoreapp2.2\ApiProject.pdb
+C:\Users\guibo\Desktop\EleicaoApi\ApiProjeto\ApiProject\bin\Debug\netcoreapp2.2\Core.dll
+C:\Users\guibo\Desktop\EleicaoApi\ApiProjeto\ApiProject\bin\Debug\netcoreapp2.2\Model.dll
+C:\Users\guibo\Desktop\EleicaoApi\ApiProjeto\ApiProject\bin\Debug\netcoreapp2.2\Core.pdb
+C:\Users\guibo\Desktop\EleicaoApi\ApiProjeto\ApiProject\bin\Debug\netcoreapp2.2\Model.pdb
+C:\Users\guibo\Desktop\EleicaoApi\ApiProjeto\ApiProject\obj\Debug\netcoreapp2.2\ApiProject.csprojAssemblyReference.cache
+C:\Users\guibo\Desktop\EleicaoApi\ApiProjeto\ApiProject\obj\Debug\netcoreapp2.2\ApiProject.csproj.CoreCompileInputs.cache
+C:\Users\guibo\Desktop\EleicaoApi\ApiProjeto\ApiProject\obj\Debug\netcoreapp2.2\ApiProject.RazorAssemblyInfo.cache
+C:\Users\guibo\Desktop\EleicaoApi\ApiProjeto\ApiProject\obj\Debug\netcoreapp2.2\ApiProject.RazorAssemblyInfo.cs
+C:\Users\guibo\Desktop\EleicaoApi\ApiProjeto\ApiProject\obj\Debug\netcoreapp2.2\ApiProject.AssemblyInfoInputs.cache
+C:\Users\guibo\Desktop\EleicaoApi\ApiProjeto\ApiProject\obj\Debug\netcoreapp2.2\ApiProject.AssemblyInfo.cs
+C:\Users\guibo\Desktop\EleicaoApi\ApiProjeto\ApiProject\obj\Debug\netcoreapp2.2\ApiProject.RazorTargetAssemblyInfo.cache
+C:\Users\guibo\Desktop\EleicaoApi\ApiProjeto\ApiProject\obj\Debug\netcoreapp2.2\ApiProject.csproj.CopyComplete
+C:\Users\guibo\Desktop\EleicaoApi\ApiProjeto\ApiProject\obj\Debug\netcoreapp2.2\ApiProject.dll
+C:\Users\guibo\Desktop\EleicaoApi\ApiProjeto\ApiProject\obj\Debug\netcoreapp2.2\ApiProject.pdb
