@@ -2,6 +2,7 @@
 using FluentValidation;
 using Core.util;
 using System.Linq;
+using System;
 
 namespace Core
 {
@@ -15,6 +16,7 @@ namespace Core
             RuleFor(e => e.lstPautas)
                 .NotEmpty()
                 .WithMessage("Não pode cadastrar uma sessão sem uma lista de ID de Pautas.");
+                
 
             RuleFor(s => s.lstEleitores)
                 .NotEmpty()
@@ -48,18 +50,20 @@ namespace Core
             else
                 return new Retorno() { Status = false, Resultado = "Já existe uma sessão com esse ID." };
         }
-        //quantos votaram 
-        //public Retorno QuantosVoltaram()
-        //{
-        //    var db = file.ManipulacaoDeArquivos(true, null);
-        //    return Retorno;
-        //}
-        ////quantos faltam
-        //public Retorno QuantosFaltamVotar()
-        //{
-        //    var db = file.ManipulacaoDeArquivos(true, null);
-        //    return Retorno;
-        //}
+        
+       public Retorno StatusSessao(Guid SessaoID)
+       {
+           var db = file.ManipulacaoDeArquivos(true, null);
+            
+            if (db.sistema.Sessao.Exists(s => s.Id.Equals(SessaoID)))
+            {
+                var sessaoSelecionada = db.sistema.Sessao.Single(s => s.Id.Equals(SessaoID));
+
+                return new Retorno() { Status = true, Resultado = $"A Sessão está finalizada : {sessaoSelecionada.Status} Sua identificação é {sessaoSelecionada.Id}" };
+            }
+            return new Retorno() { Status = false, Resultado = $"Não existe uma Sessão com o ID inserido." };
+
+        }
 
         public Retorno ProcurarPorID(string id)
         {

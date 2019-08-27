@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Core;
 using Microsoft.AspNetCore.Mvc;
@@ -18,7 +19,11 @@ namespace ApiProject.Controllers
             return cadastro.Status ? Created($"https://localhost:44323/api/Pautas/{sessao.Id}", cadastro.Resultado) : BadRequest(cadastro.Resultado);
         }
 
-        //Get ID eu vou buscar todas as sessões abertas 
+        //Vou buscar as sessões pelo ID dela e Exibir o Status Dela ! 
+        [HttpGet("status/{id}")]
+        public async Task<IActionResult> GetStatusById(Guid id) { var pauta = new SessaoCore().StatusSessao(id); return pauta.Status ? Ok(pauta.Resultado) : BadRequest(pauta.Resultado); }
+
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(string id){  var pauta = new SessaoCore().ProcurarPorID(id); return pauta.Status ? Ok(pauta.Resultado) : BadRequest(pauta.Resultado); }
         //Get all eu vou buscar Todas as sessões estajam elas Abertas ou Fechadas 
