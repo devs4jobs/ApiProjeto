@@ -46,3 +46,15 @@ C:\Users\Treinamento 5\Desktop\EleicaoApi\ApiProjeto\Core\obj\Debug\netcoreapp2.
 C:\Users\Treinamento 5\Desktop\EleicaoApi\ApiProjeto\Core\obj\Debug\netcoreapp2.2\Core.csproj.CopyComplete
 C:\Users\Treinamento 5\Desktop\EleicaoApi\ApiProjeto\Core\obj\Debug\netcoreapp2.2\Core.dll
 C:\Users\Treinamento 5\Desktop\EleicaoApi\ApiProjeto\Core\obj\Debug\netcoreapp2.2\Core.pdb
+C:\Users\guibo\Desktop\EleicaoApi\ApiProjeto\Core\bin\Debug\netcoreapp2.2\Core.deps.json
+C:\Users\guibo\Desktop\EleicaoApi\ApiProjeto\Core\bin\Debug\netcoreapp2.2\Core.dll
+C:\Users\guibo\Desktop\EleicaoApi\ApiProjeto\Core\bin\Debug\netcoreapp2.2\Core.pdb
+C:\Users\guibo\Desktop\EleicaoApi\ApiProjeto\Core\bin\Debug\netcoreapp2.2\Model.dll
+C:\Users\guibo\Desktop\EleicaoApi\ApiProjeto\Core\bin\Debug\netcoreapp2.2\Model.pdb
+C:\Users\guibo\Desktop\EleicaoApi\ApiProjeto\Core\obj\Debug\netcoreapp2.2\Core.csprojAssemblyReference.cache
+C:\Users\guibo\Desktop\EleicaoApi\ApiProjeto\Core\obj\Debug\netcoreapp2.2\Core.csproj.CoreCompileInputs.cache
+C:\Users\guibo\Desktop\EleicaoApi\ApiProjeto\Core\obj\Debug\netcoreapp2.2\Core.AssemblyInfoInputs.cache
+C:\Users\guibo\Desktop\EleicaoApi\ApiProjeto\Core\obj\Debug\netcoreapp2.2\Core.AssemblyInfo.cs
+C:\Users\guibo\Desktop\EleicaoApi\ApiProjeto\Core\obj\Debug\netcoreapp2.2\Core.csproj.CopyComplete
+C:\Users\guibo\Desktop\EleicaoApi\ApiProjeto\Core\obj\Debug\netcoreapp2.2\Core.dll
+C:\Users\guibo\Desktop\EleicaoApi\ApiProjeto\Core\obj\Debug\netcoreapp2.2\Core.pdb

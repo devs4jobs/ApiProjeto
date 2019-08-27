@@ -14,7 +14,7 @@ namespace ApiProject.Controllers
         public async Task<IActionResult> Post([FromBody] Sessao sessao)
         {
             var Core = new SessaoCore(sessao).Cadastro();
-            return Core.Status ? Created($"https://localhost/api/Sessoes/{sessao.Id}", Core.Resultado) : BadRequest("Esse cadastro já existe.");
+            return Core.Status ? Created($"https://localhost/api/Sessoes/{sessao.Id}", Core.Resultado) : BadRequest(Core.Resultado);
 
         }
         //Chamando  o metodo de achar por id
@@ -27,12 +27,17 @@ namespace ApiProject.Controllers
         // Chamando o metodo achar todos
         [HttpGet]
         public async Task<IActionResult> Get() => Ok(new SessaoCore().AcharTodos().Resultado);
-        // Chamando o metodo de atualização
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Put([FromBody] Sessao sessao, string id) => Ok(new SessaoCore().AtualizarUm(id, sessao).Resultado);
+   
         // chamando o metodo para deletar um registro
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(string id) => Accepted(new SessaoCore().DeletarId(id));
+
+        // chamando o metodo para mostrar o status da sessao
+        [HttpGet("status/{id}")]
+        public async Task<IActionResult> Status(string id) => Ok(new SessaoCore().RetornaStatus(id).Resultado);
+
+
+
 
     }
 }

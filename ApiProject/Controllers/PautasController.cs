@@ -14,7 +14,7 @@ namespace ApiProject.Controllers
         public async Task<IActionResult> Post([FromBody] Pauta pauta)
         {
             var Core = new PautaCore(pauta).CadastroEleitor();
-            return Core.Status ? Created($"https://localhost/api/Pautas/{pauta.Id}", Core.Resultado) : BadRequest("Esse cadastro já existe.");
+            return Core.Status ? Created($"https://localhost/api/Pautas/{pauta.Id}", Core.Resultado) : BadRequest(Core.Resultado);
 
         }
         //Chamando  o metodo de achar por id

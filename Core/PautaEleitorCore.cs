@@ -29,32 +29,55 @@ namespace Core
 
         }
 
-        // Método para cadastro.
+        // Método para cadastro do voto.
         public Retorno Votar()
         {
-
             var results = Validate(_pautaeleitor);
 
             // Se o modelo é inválido retorno false
             if (!results.IsValid)
                 return new Retorno { Status = false, Resultado = results.Errors.Select(c => c.ErrorMessage).ToList() };
 
-
+            // procura uma sessao
             var umaSessao = db.Sessoes.SingleOrDefault(c => c.LstPautas.SingleOrDefault(e => e.Id == _pautaeleitor.PautaId) != null);
 
-            if (umaSessao == null || umaSessao.Status == false )
+            // checa se a sessao é valida
+            if (umaSessao == null || umaSessao.Status)
                 return new Retorno { Status = false, Resultado = "Essa Sessão é invalida!" };
 
-           
+           // checa se o eleitor existe nessa sessao
             if(!(umaSessao.LstEleitores.SingleOrDefault(c => c.Id == _pautaeleitor.EleitorId) != null))
                 return new Retorno { Status = false, Resultado = "Esse eleitor não existe" };
 
-
-
-
-
-
+            // adciona na lista d
             db.EleitoresPauta.Add(_pautaeleitor);
+
+            // busca a quantidade de votos da pauta a ser votada
+            var qtdVotos = db.EleitoresPauta.Where(a => a.PautaId == _pautaeleitor.PautaId).ToList().Count();
+
+            // busca a quantiade de votos eleitores na sessao;
+            var qdtEleitores = umaSessao.LstEleitores.Count();
+
+            // busco a pauta e comparo com a quantaidade de para fazer a mudança no status dela;
+            if (qtdVotos == qdtEleitores)
+            {
+                
+                var umaPauta = umaSessao.LstPautas.SingleOrDefault(d => d.Id == _pautaeleitor.PautaId);
+
+                umaPauta.Concluida = true;
+
+            }
+
+            // Checo se a sessao foi finalizada, se sim ja faço um novo retorno.
+            if (umaSessao.LstPautas.All(e => e.Concluida))
+            {
+                umaSessao.Status = true;
+
+                file.ManipulacaoDeArquivos(false, db);
+
+                return new Retorno { Status = true, Resultado = $"Essa Sessao foi Finalizada! : Status: {umaSessao.Status} ID {umaSessao.Id}" };
+            }
+
             file.ManipulacaoDeArquivos(false, db);
             return new Retorno() { Status = true, Resultado = _pautaeleitor };
         }
@@ -77,7 +100,7 @@ namespace Core
         public Retorno DeletarId(string id)
         {
            
-           var umaPautaEleitor = db.EleitoresPauta.Find(c => c.PautaId.ToString() == id);
+           var umaPautaEleitor = db.EleitoresPauta.Find(c => c.EleitorId.ToString() == id);
 
             db.EleitoresPauta.Remove(umaPautaEleitor);
 
@@ -102,5 +125,6 @@ namespace Core
 
             return new Retorno { Status = true, Resultado = umaPautaEleitor };
         }
+   
     }
 }
