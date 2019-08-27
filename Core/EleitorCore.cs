@@ -8,11 +8,11 @@ namespace Core
 {
     public class EleitorCore : AbstractValidator<Eleitor>
     {
-        //getters setters privados
+        
         private Eleitor _eleitor { get; set; }
         public EleitorCore(Eleitor eleitor)
         {
-            //regras para os atributos de eleitor
+           
             _eleitor = eleitor;
 
             RuleFor(e => e.Documento)
@@ -25,19 +25,18 @@ namespace Core
                 .NotNull()
                 .WithMessage("O nome deve ser preenchido e deve ter o mínimo de 3 caracteres");
         }
-        //construtor
+      
         public EleitorCore(){ }
 
-        //método de criação de Eleitor 
+       
         public Retorno CadastroEleitor() {
 
             var results = Validate(_eleitor);
 
-            // Se o modelo é inválido, retorno false
+           
             if (!results.IsValid)
                 return new Retorno { Status = false, Resultado = results.Errors };
 
-            // Caso o modelo seja válido, escreve no arquivo db
             var db = file.ManipulacaoDeArquivos(true, null);
 
             if (db.sistema == null)
@@ -130,7 +129,7 @@ namespace Core
 
             var q = y.sistema.Eleitores.Find(x=>x.Id== new Guid(idEleitor));
             var sessao = y.sistema.todasSessoes.Find(d=>d.eleitoresSessao.Exists(x=>x.Id==q.Id));
-            var votos = sessao.urnasSessao.Where(d => d.EleitorId==q.Id).ToList();
+            var votos = sessao.votoSessao.Where(d => d.EleitorId==q.Id).ToList();
             var listPauta = sessao.pautasSessao.Where(p=>votos.Exists(v=>v.PautaId==p.Id));
 
             return new Retorno() { Status = true, Resultado = q };
