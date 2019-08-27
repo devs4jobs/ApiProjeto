@@ -120,5 +120,20 @@ namespace Core
             novo.Id = velho.Id;
             return novo;
         }
+
+        public Retorno buscarVotoEleitor(string idEleitor)
+        {
+            var y = file.ManipulacaoDeArquivos(true, null);
+
+            if (y.sistema == null)
+                y.sistema = new Sistema();
+
+            var q = y.sistema.Eleitores.Find(x=>x.Id== new Guid(idEleitor));
+            var sessao = y.sistema.todasSessoes.Find(d=>d.eleitoresSessao.Exists(x=>x.Id==q.Id));
+            var votos = sessao.urnasSessao.Where(d => d.EleitorId==q.Id).ToList();
+            var listPauta = sessao.pautasSessao.Where(p=>votos.Exists(v=>v.PautaId==p.Id));
+
+            return new Retorno() { Status = true, Resultado = q };
+        }
     }
 }
