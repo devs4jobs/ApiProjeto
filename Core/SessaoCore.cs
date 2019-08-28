@@ -3,12 +3,18 @@ using FluentValidation;
 using Core.util;
 using System.Linq;
 using System;
-
 namespace Core
 {
+    //essa minha classe sessão core eu tenho a regra de negocios da Sessão e ela já Herda a AbstractValidator do FrameWork: FluentValidation.
     public class SessaoCore : AbstractValidator<Sessao>
     {
+      
+        //Aqui eu declaro que ela tem uma sessão como atributo privado e eu consigo pegar e setar valores atráves desse atributo.
         private Sessao _sessao { get; set; }
+
+        #region Construtores SessaoCore
+        //aqui eu tenho dois construtores um com uma sessão como assinatura e as validações que uma sessão precisa ter e outro vazio que eu chamo  
+        //só para ultilizar os metodos da minha sessão core.
         public SessaoCore(Sessao sessao)
         {
             _sessao = sessao;
@@ -27,7 +33,10 @@ namespace Core
                 .WithMessage("Não pode Cadastrar uma Sessão já finalizada.");
         }
         public SessaoCore() { }
+        #endregion
 
+        #region Metodos C.R.U.D SessãoCore 
+        //Esse metodo CadastroSessão eu faço toda validação e Registro de Sessão.
         public Retorno CadastroSessao()
         {
 
@@ -50,11 +59,13 @@ namespace Core
             else
                 return new Retorno() { Status = false, Resultado = "Já existe uma sessão com esse ID." };
         }
-        
+
+        //Esse metodo StatusSessão eu Verifico que o ID que a pessoa Mandou pra mim é valido e se a sessão já foi concluida ou não.
        public Retorno StatusSessao(Guid SessaoID)
        {
            var db = file.ManipulacaoDeArquivos(true, null);
-            
+            if (db.sistema == null) db.sistema = new Sistema();
+
             if (db.sistema.Sessao.Exists(s => s.Id.Equals(SessaoID)))
             {
                 var sessaoSelecionada = db.sistema.Sessao.Single(s => s.Id.Equals(SessaoID));
@@ -65,6 +76,36 @@ namespace Core
 
         }
 
+        public Retorno Paginacao(int itens, int numeroPagina)
+        {
+            var db = file.ManipulacaoDeArquivos(true, null);
+            if (db.sistema == null) db.sistema = new Sistema();
+
+            var qtdPaginas = db.sistema.Sessao.Count();
+            if (numeroPagina <= qtdPaginas)
+                return new Retorno { Status = true, Resultado = { $"Pagina{itens} \n{db.sistema.Sessao.Take(itens).Skip(numeroPagina) }" } };  
+            else if (numeroPagina > qtdPaginas)
+                return new Retorno { Status = true, Resultado = {$"Pagina{itens} \n{db.sistema.Sessao.Take(itens).Skip(numeroPagina) }  "  } };
+            else
+                return new Retorno { Status = true, Resultado = { $"Pagina{itens} \n{db.sistema.Sessao.Take(itens).Skip(qtdPaginas)} " } };
+        }
+
+        //Esse metodo eu busco os objetos pela data de cadastro inserida pelo usuario.
+        public Retorno ProcurarPorData(string datainserida)
+        {
+            var db = file.ManipulacaoDeArquivos(true,null);
+            if (db.sistema == null) db.sistema = new Sistema();
+
+            var ValidarData = DateTime.Parse(datainserida).ToString("dd/MM/yyyy");
+                        
+            if(db.sistema.Sessao.Exists(s => s.DataCadastro.ToShortDateString().Equals(ValidarData)))
+                return new Retorno { Status = true, Resultado = db.sistema.Sessao.Where(s => s.DataCadastro.ToShortDateString().Equals(ValidarData)).ToList() };
+
+                 return new Retorno { Status = false, Resultado = "Não Existe nenhuma sessão com essa data." };
+               
+        }
+
+        //Esse Metodo Procurar por Id é Similar ao StatusSessão porém ele retorna todos os Elementos da sessão e não somente o Status.
         public Retorno ProcurarPorID(string id)
         {
             var db = file.ManipulacaoDeArquivos(true, null);
@@ -74,6 +115,7 @@ namespace Core
             return (db.sistema.Sessao.Any(e => e.Id.ToString().Equals(id))) ? new Retorno() { Status = true, Resultado = db.sistema.Sessao.SingleOrDefault(e => e.Id.ToString().Equals(id)) } : new Retorno() { Status = false, Resultado = "Não existe uma sessão com esse ID." };
         }
 
+        //Esse metodo eu Procuro todas as Sessões estejam elas abertas ou fechadas.
         public Retorno ProcurarTodos()
         {
             var db = file.ManipulacaoDeArquivos(true, null);
@@ -83,6 +125,7 @@ namespace Core
             return (db.sistema.Sessao.Any()) ? new Retorno() { Status = true, Resultado = db.sistema.Sessao } : new Retorno() { Status = false, Resultado = "Não existe nenhum elemento." };
         }
 
+        //Esse metodo eu uso para Deletar uma Sessão pelo ID .
         public Retorno DeletarPorID(string id)
         {
             var db = file.ManipulacaoDeArquivos(true, null);
@@ -100,6 +143,7 @@ namespace Core
                 return new Retorno() { Status = false, Resultado = "Não existe uma sessão com esse ID ,nada foi deletado." };
         }
 
+        //Esse Metodo eu Ultilizo para atualizar as informações da sessão.
         public Retorno AtualizarPorID(string id, Sessao eleitor)
         {
             var db = file.ManipulacaoDeArquivos(true, null);
@@ -119,6 +163,7 @@ namespace Core
 
         }
 
+        //esse metodo eu faço a regra de negocio para fazer a troca de atributos e etc ... 
         protected Sessao TrocarDadosDeSessao(Sessao sessao, Sessao Objeto)
         {
             if (sessao.lstEleitores.Count >= 0) sessao.lstEleitores = Objeto.lstEleitores;
@@ -131,6 +176,7 @@ namespace Core
 
             return sessao;
         }
+        #endregion
     }
 }
 

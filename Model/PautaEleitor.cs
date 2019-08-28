@@ -1,7 +1,7 @@
 ﻿using System;
-
 namespace Model
 {
+    //essa minha classe PautaEleitor serve para fazer a junção de um eleitor a uma pauta e ela já é o voto em si.
     public class PautaEleitor
     {
         public Guid PautaId { get; set; }

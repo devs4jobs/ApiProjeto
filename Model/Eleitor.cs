@@ -1,5 +1,6 @@
 ﻿namespace Model
 {
+    //essa minha classe eleitor é o eleitor mesmo aqui eu guardo todos os dados do eleitor.
     public class Eleitor : Base
     {
         public string Nome { get; set; }

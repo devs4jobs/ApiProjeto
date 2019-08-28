@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-
 namespace Model
 {
+    //essa minha classe sistema serve para armazenar todos os dados é ela que eu serializo.
     public class Sistema
     {
- 
         public List<Eleitor> Eleitores { get; set; } = new List<Eleitor>();
         public List<Pauta> Pautas { get; set; } = new List<Pauta>();
         public List<PautaEleitor> EleitoresPauta { get; set; } = new List<PautaEleitor>();

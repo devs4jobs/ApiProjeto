@@ -2,13 +2,17 @@
 using FluentValidation;
 using Core.util;
 using System.Linq;
-using System;
-
 namespace Core
 {
+    //essa minha classe PautaEleitorCore eu tenho a regra de negocios da PautaEleitor(Voto) e ela já Herda a AbstractValidator do FrameWork: FluentValidation.
     public class PautaEleitorCore : AbstractValidator<PautaEleitor>
     {
+        //Aqui eu declaro que ela tem uma PautaEleitor como atributo privado e eu consigo pegar e setar valores atráves desse atributo.
         private PautaEleitor _pautaEleitor { get; set; }
+
+        #region  #region Construtores PautaEleitorCore
+        //aqui eu tenho dois construtores um com uma PautaEleitor como assinatura e as validações que uma PautaEleitor precisa ter e outro vazio que eu chamo  
+        //só para ultilizar os metodos da minha PautaEleitorCore.
         public PautaEleitorCore(PautaEleitor pautaeleitor)
         {
             _pautaEleitor = pautaeleitor;
@@ -28,7 +32,10 @@ namespace Core
 
         }
         public PautaEleitorCore() { }
+        #endregion
 
+        #region Metodos C.R.U.D PautaEleitorCore
+        //Esse metodo CadastrarPautaEleitor eu faço toda validação e Registro de PautaEleitor(Voto).
         public Retorno CadastrarPautaEleitor()
         {
             var db = file.ManipulacaoDeArquivos(true, null);
@@ -162,7 +169,7 @@ namespace Core
 
             return inserida;
         }
-
+        #endregion
     }
 
 }
