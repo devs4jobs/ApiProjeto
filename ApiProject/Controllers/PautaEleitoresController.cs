@@ -15,10 +15,9 @@ namespace ApiProject.Controllers
         {
             var cadastro = new PautaEleitorCore(Voto).Votacao();
 
-            if (cadastro.Status)
-                return Created($"https://localhost/api/votacoes/{Voto.PautaId}", cadastro.Resultado);
-
-            return BadRequest(cadastro.Resultado);
+            return cadastro.Status
+                ? (IActionResult)Created($"https://localhost/api/votacoes/{Voto.PautaId}", cadastro.Resultado)
+                : (IActionResult)BadRequest(cadastro.Resultado);
         }
 
         [HttpGet("{id}")]
@@ -26,10 +25,7 @@ namespace ApiProject.Controllers
         {
             var retorno = new PautaEleitorCore().ID(id);
 
-            if (retorno.Status)
-                return Ok(retorno.Resultado);
-
-            return BadRequest(retorno.Resultado);
+            return retorno.Status ? (IActionResult)Ok(retorno.Resultado) : (IActionResult)BadRequest(retorno.Resultado);
         }
 
         [HttpGet]
@@ -40,19 +36,16 @@ namespace ApiProject.Controllers
         {
             var cadastro = new PautaEleitorCore(Voto).AtualizaVoto();
 
-            if (cadastro.Status)
-                return Accepted($"https://localhost/api/votacoes/{Voto.PautaId}", cadastro.Resultado);
-
-            return BadRequest(cadastro.Resultado);
+            return cadastro.Status
+                ? (IActionResult)Accepted($"https://localhost/api/votacoes/{Voto.PautaId}", cadastro.Resultado)
+                : (IActionResult)BadRequest(cadastro.Resultado);
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
             var cadastro = new EleitorCore().DeletaEleitor(id);
-            if (cadastro.Status)
-                return NoContent();
-            return NotFound(cadastro.Resultado);
+            return cadastro.Status ? NoContent() : (IActionResult)NotFound(cadastro.Resultado);
         }
     }
 }

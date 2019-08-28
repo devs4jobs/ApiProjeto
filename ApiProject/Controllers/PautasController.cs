@@ -15,10 +15,7 @@ namespace ApiProject.Controllers
         {
             var cadastro = new PautaCore(pauta).CadastroPauta();
 
-            if (cadastro.Status)
-                return Created($"https://localhost/api/pautas/{pauta.Id}", cadastro.Resultado);
-
-            return BadRequest(cadastro.Resultado);
+            return cadastro.Status ? (IActionResult)Created($"https://localhost/api/pautas/{pauta.Id}", cadastro.Resultado) : (IActionResult)BadRequest(cadastro.Resultado);
         }
 
         [HttpGet("{id}")]
@@ -26,10 +23,22 @@ namespace ApiProject.Controllers
         {
             var retorno=new PautaCore().ID(id).Resultado;
 
-            if (retorno.Status)
-                return Ok(retorno.Resultado);
+            return retorno.Status ? (IActionResult)Ok(retorno.Resultado) : (IActionResult)BadRequest(retorno.Resultado);
+        }
 
-            return BadRequest(retorno.Resultado);
+        [HttpGet("por-data")]
+        public async Task<IActionResult> GetPorData([FromQuery] string Date, [FromQuery] string Time)
+        {
+            var retorno = new PautaCore().PorData(Date, Time);
+
+            return retorno.Status ? Ok(retorno.Resultado) : BadRequest(retorno.Resultado);
+        }
+
+        [HttpGet("{direcao}/{Npagina}/{TPagina}")]
+        public async Task<IActionResult> BuscaPorPagina(string Direcao, int NPagina, int TPagina)
+        {
+            var retorno = new PautaCore().PorPagina(NPagina, Direcao, TPagina);
+            return retorno.Status ? Ok(retorno.Resultado) : BadRequest(retorno.Resultado);
         }
 
         [HttpGet]
@@ -40,19 +49,14 @@ namespace ApiProject.Controllers
         {
             var cadastro = new PautaCore(pauta).AtualizaPauta();
 
-            if (cadastro.Status)
-                return Accepted($"https://localhost/api/pautas/{pauta.Id}", cadastro.Resultado);
-
-            return BadRequest(cadastro.Resultado);
+            return cadastro.Status ? (IActionResult)Accepted($"https://localhost/api/pautas/{pauta.Id}", cadastro.Resultado) : (IActionResult)BadRequest(cadastro.Resultado);
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
             var cadastro = new PautaCore().DeletaPauta(id);
-            if (cadastro.Status)
-                return NoContent();
-            return NotFound(cadastro.Resultado);
+            return cadastro.Status ? NoContent() : (IActionResult)NotFound(cadastro.Resultado);
         }
     }
 }

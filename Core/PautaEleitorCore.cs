@@ -69,30 +69,28 @@ namespace Core
                 return new Retorno() { Status = false, Resultado = "Voto ja registrado" };
 
             Db.EleitoresPauta.Add(_PautaEleitor);
-            //Verifica se a Pauta deve ter votação encerrada & se a Sessão ja deve ser fechada
+            //Verifica se a Pauta deve ter votação encerrada
             if (sessao.Eleitores.Count == Db.EleitoresPauta.Where(c => c.PautaId == _PautaEleitor.PautaId).ToList().Count)
             {
+                //Alterando a pauta na arquivo na parte pautas
                 var Pauta = Db.Pautas.SingleOrDefault(c => c.Id == _PautaEleitor.PautaId);
                 Pauta.Concluida = true;
+                //Alterando a pauta no arquivo na parte da sessão
                 Pauta=sessao.Pautas.SingleOrDefault(c => c.Id == _PautaEleitor.PautaId);
                 Pauta.Concluida = true;
+                //Verifica se a Sessão ja deve ser fechada
                 if (sessao.PautaTrue(sessao.Pautas))
                     sessao.Status = false;
             }
             file.ManipulacaoDeArquivos(false, Db);
 
-
-
             return new Retorno() { Status = true, Resultado = _PautaEleitor };
         }
-
         public Retorno ID(Guid id)
         {
             var Votos = Db.EleitoresPauta.Where(e => e.PautaId == id).ToList();
-
             if (Votos == null)
                 return new Retorno() { Status = false, Resultado = "Pauta não existe" };
-
             return new Retorno() { Status = true, Resultado = Votos };
         }
         public Retorno Lista() => new Retorno() { Status = true, Resultado = Db.EleitoresPauta.OrderBy(e=>e.Votou) };

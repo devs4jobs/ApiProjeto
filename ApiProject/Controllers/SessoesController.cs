@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Core;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Model;
 
@@ -18,13 +14,25 @@ namespace ApiProject.Controllers
         {
             var cadastro = new SessaoCore(sessao).IniciarSessao();
 
-            if (cadastro.Status)
-                return Created($"https://localhost/api/sessoes/{sessao.Id}", cadastro.Resultado);
-
-            return BadRequest(cadastro.Resultado);
+            return cadastro.Status ? (IActionResult)Created($"https://localhost/api/sessoes/{sessao.Id}", cadastro.Resultado) : (IActionResult)BadRequest(cadastro.Resultado);
         }
 
         [HttpGet]
         public async Task<IActionResult> Get() => Ok(new SessaoCore().Lista().Resultado);
+
+        [HttpGet("por-data")]
+        public async Task<IActionResult> GetPorData([FromQuery] string Date, [FromQuery] string Time)
+        {
+            var retorno = new SessaoCore().PorData(Date, Time);
+
+            return retorno.Status ? Ok(retorno.Resultado) : BadRequest(retorno.Resultado);
+        }
+
+        [HttpGet("{direcao}/{Npagina}/{TPagina}")]
+        public async Task<IActionResult> BuscaPorPagina(string Direcao ,int NPagina,int TPagina)
+        {
+            var retorno = new SessaoCore().PorPagina(NPagina, Direcao, TPagina);
+            return retorno.Status ? Ok(retorno.Resultado) : BadRequest(retorno.Resultado);
+        }
     }
 }

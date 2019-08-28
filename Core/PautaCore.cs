@@ -51,6 +51,35 @@ namespace Core
             return new Retorno() { Status = true, Resultado = _Pauta };
         }
 
+        public Retorno PorData(string date, string time)
+        {
+            //Testa se os dados são datas
+            if (!DateTime.TryParse(date, out DateTime date1) && !DateTime.TryParse(time, out DateTime time1))
+                return new Retorno() { Status = false, Resultado = "Dados Invalidos" };
+
+            //Caso Data final seja nula ou errada
+            if (!DateTime.TryParse(time, out time1))
+                return new Retorno() { Status = true, Resultado = Db.Pautas.Where(x => x.DataCadastro >= date1) };
+
+            //Caso Data inicial seja nula ou errada
+            if (!DateTime.TryParse(date, out date1))
+                return new Retorno() { Status = true, Resultado = Db.Pautas.Where(x => x.DataCadastro <= time1) };
+
+            return new Retorno() { Status = true, Resultado = Db.Pautas.Where(x => x.DataCadastro >= date1 && x.DataCadastro <= time1) };
+        }
+
+        public Retorno PorPagina(int NPagina, string Direcao, int TPagina)
+        {
+            if (Direcao.ToLower() == "asc" && NPagina >= 1 && TPagina >= 1)
+                return new Retorno() { Status = true, Resultado = Db.Pautas.OrderBy(x => x.Descricao).Skip((NPagina - 1) * TPagina).Take(TPagina).ToList() };
+
+            if (Direcao.ToLower() == "des" && NPagina >= 1 && TPagina >= 1)
+                return new Retorno() { Status = true, Resultado = Db.Pautas.OrderByDescending(x => x.Descricao).Skip((NPagina - 1) * TPagina).Take(TPagina).ToList() };
+
+            //se paginação é não é possivel
+            return new Retorno() { Status = false, Resultado = "Digite as propriedades corretas" };
+        }
+
         public Retorno ID(Guid id)
         {
             var Pauta = Db.Pautas.SingleOrDefault(e => e.Id == id);
@@ -65,11 +94,12 @@ namespace Core
         public Retorno AtualizaPauta()
         {
             var pauta = Db.Pautas.SingleOrDefault(c => c.Id == _Pauta.Id);
+
             if (pauta == null)
                 return new Retorno { Status = false, Resultado = "Pauta não existe" };
 
-            if(_Pauta.Concluida==true) pauta.Concluida = _Pauta.Concluida;
             if (_Pauta.Descricao != null) pauta.Descricao = _Pauta.Descricao;
+
             file.ManipulacaoDeArquivos(false, Db);
 
             return new Retorno() { Status = true, Resultado = pauta };
