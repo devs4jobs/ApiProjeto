@@ -28,37 +28,49 @@ namespace Core
 
         public Retorno CadastroVoto()
         {
-            Sessao sessao = new Sessao();
-
-            var results = Validate(_voto);
-            if (!results.IsValid)
-                return new Retorno { Status = false, Resultado = results.Errors };
-
-            var db = file.ManipulacaoDeArquivos(true, null);
-
-            if (db.sistema == null)
-                db.sistema = new Sistema();
-
-            if (db.sistema.Votos.Exists(x => x.PautaId == _voto.PautaId && x.EleitorId == _voto.EleitorId))
+            //validar se ssesao est aberta (bool), aplicar na logica antes de adicionar o voto
+            try
             {
-                return new Retorno() { Status = true, Resultado = "já cadastrado" };
+                var results = Validate(_voto);
+                if (!results.IsValid)
+                    return new Retorno { Status = false, Resultado = results.Errors };
+
+                var db = file.ManipulacaoDeArquivos(true, null);
+
+                var sessao = db.sistema.todasSessoes.Find(d => d.eleitoresSessao.Exists(x => x.Id == _voto.EleitorId));
+
+                if (db.sistema == null)
+                    db.sistema = new Sistema();
+
+                if (sessao.votoSessao.Exists(x => x.PautaId == _voto.PautaId && x.EleitorId == _voto.EleitorId))
+                {
+                    return new Retorno() { Status = true, Resultado = "Já votado" };
+                }
+
+                var pautaSendoVotada = sessao.pautasSessao.Find(u => u.Id == _voto.PautaId);
+
+                if (pautaSendoVotada.Encerrada == true)
+                    return new Retorno() { Status = true, Resultado = "Pauta já encerrada" };
+
+                db.sistema.Votos.Add(_voto);
+                sessao.votoSessao.Add(_voto);
+                var votosDaPauta = sessao.votoSessao.Where(s => s.PautaId == pautaSendoVotada.Id);
+
+                pautaSendoVotada.Encerrada = !(sessao.eleitoresSessao.Count() > votosDaPauta.Count());
+
+                sessao.Encerrada = true;
+
+                foreach (var item in sessao.pautasSessao)
+                    if (!item.Encerrada)
+                        sessao.Encerrada = false;
+
+                file.ManipulacaoDeArquivos(false, db.sistema);
+                return new Retorno() { Status = true, Resultado = _voto };
             }
-
-            var pautaSendoVotada = sessao.pautasSessao.Find(u => u.Id == _voto.PautaId);
-
-            if (pautaSendoVotada.Encerrada == true)
-                return new Retorno() { Status = true, Resultado = "Pauta já encerrada" };
-
-            db.sistema.Votos.Add(_voto);
-
-            if (pautaSendoVotada.Encerrada == true)
-                return new Retorno() { Status = true, Resultado = "Pauta Encerrou agora" };
-
-            if (!sessao.pautasSessao.Exists(e => e.Encerrada == true))
-                sessao.Aberta = false;
-
-            file.ManipulacaoDeArquivos(false, db.sistema);
-            return new Retorno() { Status = true, Resultado = _voto };
+            catch
+            {
+                return new Retorno() { Status = true, Resultado = "Eleitor não pertence à sessão" };
+            }
         }
        
         public Retorno ExibirTodosVotos()
@@ -83,9 +95,3 @@ namespace Core
         }
     }
 }
-//validacoes: se a pauta ja nao esta encerrada
-//e se pertence aquela sessao
-//verificar se nessa sessao q tem essa pauta contem algum eleitor que ainda nao votou
-//caso nao tenha eleitores que ainda nao votaram encerrar pauta atraves de um true no booleano 
-//perguntar se agora, após o voto feito existe algum eleitor que nao votou?
-//se nao tiver encerrar pauta

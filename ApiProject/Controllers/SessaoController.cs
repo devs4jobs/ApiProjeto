@@ -15,8 +15,8 @@ namespace ApiProject.Controllers
         [ProducesResponseType(201, Type = typeof(Sessao))]
         [ProducesResponseType(400)]
         [ProducesResponseType(401)]
-        public async Task<IActionResult> Post([FromBody] Sessao sessao)
-        {        
+        public async Task<IActionResult> insere([FromBody] Sessao sessao)
+        {
             var cadastro = new SessaoCore(sessao).CadastroSessao();
             if (cadastro.Status)
                 return Created("https://localhost", cadastro.Resultado);
@@ -24,26 +24,26 @@ namespace ApiProject.Controllers
             return BadRequest(cadastro.Resultado);
         }
 
-        [HttpPost]
+        [HttpPost("AdicionarEleitor")]
         [ProducesResponseType(201, Type = typeof(Sessao))]
         [ProducesResponseType(400)]
         [ProducesResponseType(401)]
-        public async Task<IActionResult> AdicionaEleitor([FromBody] Sessao sessao, string idSessao, string idEleitor)
+        public async Task<IActionResult> adicionaEleitor([FromBody] AdicionaPtEl addSessao)
         {
-            var cadastro = new SessaoCore(sessao).adicionarPauta(idSessao, idEleitor);
+            var cadastro = new SessaoCore().adicionarEleitor(addSessao);
             if (cadastro.Status)
                 return Created("https://localhost", cadastro.Resultado);
 
             return BadRequest(cadastro.Resultado);
         }
 
-        [HttpPost]
+        [HttpPost("AdicionarPauta")]
         [ProducesResponseType(201, Type = typeof(Sessao))]
         [ProducesResponseType(400)]
         [ProducesResponseType(401)]
-        public async Task<IActionResult> AdicionaPauta([FromBody] Sessao sessao, string idSessao, string idPauta)
+        public async Task<IActionResult> adicionaPauta([FromBody] AdicionaPtEl addSessao)
         {
-            var cadastro = new SessaoCore(sessao).adicionarPauta(idSessao, idPauta);
+            var cadastro = new SessaoCore().adicionarPauta(addSessao);
             if (cadastro.Status)
                 return Created("https://localhost", cadastro.Resultado);
 
@@ -55,7 +55,7 @@ namespace ApiProject.Controllers
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(401)]
-        public async Task<IActionResult> Get(string id)
+        public async Task<IActionResult> buscaId(string id)
         {
             var exibe = new SessaoCore().ExibirSessaoId(id);
             if (exibe.Status)
@@ -70,7 +70,7 @@ namespace ApiProject.Controllers
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(401)]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> getAll()
         {
             var exibe = new SessaoCore().ExibirTodasSessoes();
             if (exibe.Status)
@@ -84,7 +84,7 @@ namespace ApiProject.Controllers
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(401)]
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> delete(string id)
         {
             var deleta = new SessaoCore().DeletarSessaoId(id);
             if (deleta.Status)

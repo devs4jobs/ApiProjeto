@@ -52,36 +52,37 @@ namespace Core
         }
 
 
-        public Retorno adicionarPauta(string idSessao, string idPauta)
+        public Retorno adicionarPauta(AdicionaPtEl addPauta)
         {
-
+            //validar se ssesao est aberta (bool), aplicar na logica antes de adicionar a Pauta
             var t = file.ManipulacaoDeArquivos(true, null);
 
             if (t.sistema == null)
                 t.sistema = new Sistema();
 
-            var p = t.sistema.Pautas.Find(x => x.Id == new Guid(idPauta));
-            if(t.sistema.todasSessoes.Exists(y=>y.pautasSessao.Exists(pauta=>pauta.Id == p.Id)))
+            var p = t.sistema.Pautas.Find(x => x.Id == new Guid(addPauta.idPauta));
+            if(t.sistema.todasSessoes.Exists(y=>y.pautasSessao.Exists(pauta =>pauta.Id == p.Id)))
                 new Retorno() { Status = false, Resultado = "Pauta ja cadastrada em outra sessao" };
-            var s = t.sistema.todasSessoes.Find(x => x.Id == new Guid(idSessao));
+            var s = t.sistema.todasSessoes.Find(x => x.Id == new Guid(addPauta.idSessao));
             s.pautasSessao.Add(p);
             var d = file.ManipulacaoDeArquivos(false, t.sistema);
             return new Retorno() { Status = true, Resultado = "Pauta adicionada com sucesso!" };
 
         }
 
-        public Retorno adicionarEleitor(string idSessao, string idEleitor)
+        public Retorno adicionarEleitor(AdicionaPtEl addSessao)
         {
-
+            //validar se ssesao est aberta (bool), aplicar na logica antes de adicionar o Eleitor
             var t = file.ManipulacaoDeArquivos(true, null);
 
             if (t.sistema == null)
                 t.sistema = new Sistema();
 
-            var p = t.sistema.Eleitores.Find(x => x.Id == new Guid(idEleitor));
-            if(t.sistema.todasSessoes.Exists(x => x.eleitoresSessao.Exists(eleitor => eleitor.Id == p.Id)))
+            var p = t.sistema.Eleitores.Find(x => x.Id == new Guid(addSessao.idEleitor));
+
+            if (t.sistema.todasSessoes.Exists(x => x.eleitoresSessao.Exists(eleitor => eleitor.Id == p.Id)))
                 new Retorno() { Status = false, Resultado = "Eleitor ja cadastrado em outra sessao" };
-            var s = t.sistema.todasSessoes.Find(q => q.Id == new Guid(idSessao));
+            var s = t.sistema.todasSessoes.Find(q => q.Id == new Guid(addSessao.idSessao));
             s.eleitoresSessao.Add(p);
             var d = file.ManipulacaoDeArquivos(false, t.sistema);
             return new Retorno() { Status = true, Resultado = "Eleitor adicionado com sucesso!" };
