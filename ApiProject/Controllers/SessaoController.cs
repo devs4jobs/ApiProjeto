@@ -23,27 +23,14 @@ namespace ApiProject.Controllers
 
             return BadRequest(cadastro.Resultado);
         }
-
-        [HttpPost("AdicionarEleitor")]
+  
+        [HttpPost("AdicionarPautaEleitor")]
         [ProducesResponseType(201, Type = typeof(Sessao))]
         [ProducesResponseType(400)]
         [ProducesResponseType(401)]
-        public async Task<IActionResult> adicionaEleitor([FromBody] AdicionaPtEl addSessao)
+        public async Task<IActionResult> adicionaPautaEleitor([FromBody] AdicionaPtEl addSessao)
         {
-            var cadastro = new SessaoCore().adicionarEleitor(addSessao);
-            if (cadastro.Status)
-                return Created("https://localhost", cadastro.Resultado);
-
-            return BadRequest(cadastro.Resultado);
-        }
-
-        [HttpPost("AdicionarPauta")]
-        [ProducesResponseType(201, Type = typeof(Sessao))]
-        [ProducesResponseType(400)]
-        [ProducesResponseType(401)]
-        public async Task<IActionResult> adicionaPauta([FromBody] AdicionaPtEl addSessao)
-        {
-            var cadastro = new SessaoCore().adicionarPauta(addSessao);
+            var cadastro = new SessaoCore().adicionarPautaEleitor(addSessao);
             if (cadastro.Status)
                 return Created("https://localhost", cadastro.Resultado);
 

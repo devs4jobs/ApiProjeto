@@ -6,10 +6,9 @@ using System;
 
 namespace Core
 {
-
     public class VotoCore : AbstractValidator<Voto>
     {
-       
+
         //getters setters privados
         private Voto _voto { get; set; }
         public VotoCore(Voto voto)
@@ -24,11 +23,10 @@ namespace Core
                 .WithMessage("Eleitor Id inválido");
         }
         //construtor vazio
-        public VotoCore(){}
+        public VotoCore() { }
 
         public Retorno CadastroVoto()
         {
-            //validar se ssesao est aberta (bool), aplicar na logica antes de adicionar o voto
             try
             {
                 var results = Validate(_voto);
@@ -39,12 +37,15 @@ namespace Core
 
                 var sessao = db.sistema.todasSessoes.Find(d => d.eleitoresSessao.Exists(x => x.Id == _voto.EleitorId));
 
+                if (sessao.Encerrada == true)
+                    return new Retorno { Status = false, Resultado = "Esta sessão já foi encerrada" };
+
                 if (db.sistema == null)
                     db.sistema = new Sistema();
 
                 if (sessao.votoSessao.Exists(x => x.PautaId == _voto.PautaId && x.EleitorId == _voto.EleitorId))
                 {
-                    return new Retorno() { Status = true, Resultado = "Já votado" };
+                    return new Retorno() { Status = true, Resultado = "Eleitor já votou" };
                 }
 
                 var pautaSendoVotada = sessao.pautasSessao.Find(u => u.Id == _voto.PautaId);
@@ -54,44 +55,50 @@ namespace Core
 
                 db.sistema.Votos.Add(_voto);
                 sessao.votoSessao.Add(_voto);
+
                 var votosDaPauta = sessao.votoSessao.Where(s => s.PautaId == pautaSendoVotada.Id);
 
-                pautaSendoVotada.Encerrada = !(sessao.eleitoresSessao.Count() > votosDaPauta.Count());
+                pautaSendoVotada.Encerrada = sessao.eleitoresSessao.Count() == votosDaPauta.Count();
 
-                sessao.Encerrada = true;
+                var pautaVelha = db.sistema.Pautas.Find(w => w.Id == pautaSendoVotada.Id);
+
+                db.sistema.Pautas.Remove(pautaVelha);
+                db.sistema.Pautas.Add(pautaSendoVotada);
 
                 foreach (var item in sessao.pautasSessao)
-                    if (!item.Encerrada)
+                    if (item.Encerrada == false)
                         sessao.Encerrada = false;
+                    else
+                        sessao.Encerrada = true;
 
                 file.ManipulacaoDeArquivos(false, db.sistema);
                 return new Retorno() { Status = true, Resultado = _voto };
             }
             catch
             {
-                return new Retorno() { Status = true, Resultado = "Eleitor não pertence à sessão" };
+                return new Retorno() { Status = true, Resultado = "Eleitor ou Pauta não pertencem à sessão" };
             }
         }
-       
+
         public Retorno ExibirTodosVotos()
         {
-            var y = file.ManipulacaoDeArquivos(true, null);
+            var arquivo = file.ManipulacaoDeArquivos(true, null);
+                
+            if (arquivo.sistema == null)
+                arquivo.sistema = new Sistema();
 
-            if (y.sistema == null)
-                y.sistema = new Sistema();
-
-            var q = y.sistema.Votos;
-            return new Retorno() { Status = true, Resultado = q };
+            var votos = arquivo.sistema.Votos;
+            return new Retorno() { Status = true, Resultado = votos };
         }
 
         public Retorno ExibirVotoId(string id)
         {
-            var t = file.ManipulacaoDeArquivos(true, null);
-
-            if (t.sistema == null)
-                t.sistema = new Sistema();
-            var p = t.sistema.Votos.Where(x => x.PautaId == new Guid(id));
-            return new Retorno() { Status = true, Resultado = p };
+            var arquivo = file.ManipulacaoDeArquivos(true, null);
+                
+            if (arquivo.sistema == null)
+                arquivo.sistema = new Sistema();
+            var votos = arquivo.sistema.Votos.Where(x => x.PautaId == new Guid(id));
+            return new Retorno() { Status = true, Resultado = votos };
         }
     }
 }

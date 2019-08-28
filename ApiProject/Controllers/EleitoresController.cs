@@ -42,6 +42,21 @@ namespace ApiProject.Controllers
  
             return BadRequest(exibe.Resultado);
         }
+
+        [HttpGet("{dataCadastro}")]
+
+        [ProducesResponseType(200, Type = typeof(Eleitor))]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
+        public async Task<IActionResult> GetData(string dataCadastro)
+        {
+            var exibe = new EleitorCore().ExibirEleitorDataCadastro(dataCadastro);
+            if (exibe.Status)
+                return Ok(exibe.Resultado);
+            return BadRequest(exibe.Resultado);
+        }
+
         [HttpGet]  
          
         [ProducesResponseType(200, Type = typeof(List<Eleitor>))]

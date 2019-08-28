@@ -32,8 +32,6 @@ namespace Core
         public Retorno CadastroEleitor() {
 
             var results = Validate(_eleitor);
-
-           
             if (!results.IsValid)
                 return new Retorno { Status = false, Resultado = results.Errors };
 
@@ -56,55 +54,66 @@ namespace Core
         public Retorno ExibirEleitorId(string id)
         {
 
-            var t = file.ManipulacaoDeArquivos(true, null);
+            var arquivo = file.ManipulacaoDeArquivos(true, null);
 
-            if (t.sistema == null)
-                t.sistema = new Sistema();
+            if (arquivo.sistema == null)
+                arquivo.sistema = new Sistema();
 
-            var p = t.sistema.Eleitores.Where(x => x.Id == new Guid(id));
-            return new Retorno() { Status = true, Resultado = p };
+            var resultado = arquivo.sistema.Eleitores.Where(x => x.Id == new Guid(id));
+            return new Retorno() { Status = true, Resultado = resultado };
 
+        }
+
+        public Retorno ExibirEleitorDataCadastro(string dataCadastro)
+        {
+            var arquivo = file.ManipulacaoDeArquivos(true, null);
+
+            if (arquivo.sistema == null)
+                arquivo.sistema = new Sistema();
+
+            var resultado = arquivo.sistema.Eleitores.Where(x => x.DataCadastro.ToString().Equals(dataCadastro));
+            return new Retorno() { Status = true, Resultado = resultado };
         }
 
         public Retorno ExibirTodos()
         {
-            var y = file.ManipulacaoDeArquivos(true, null);
+            var arquivo = file.ManipulacaoDeArquivos(true, null);
 
-            if (y.sistema == null)
-                y.sistema = new Sistema();
+            if (arquivo.sistema == null)
+                arquivo.sistema = new Sistema();
 
-            var q = y.sistema.Eleitores;
-            return new Retorno() { Status = true, Resultado = q };
+            var resultado = arquivo.sistema.Eleitores;
+            return new Retorno() { Status = true, Resultado = resultado };
         }
 
         public Retorno DeletarEleitorId(string id)
         {
-            var t = file.ManipulacaoDeArquivos(true, null);
+            var arquivo = file.ManipulacaoDeArquivos(true, null);
 
-            if (t.sistema == null)
-                t.sistema = new Sistema();
+            if (arquivo.sistema == null)
+                arquivo.sistema = new Sistema();
 
-            var p = t.sistema.Eleitores.Remove(t.sistema.Eleitores.Find(s=> s.Id == new Guid(id)));
+            var resultado = arquivo.sistema.Eleitores.Remove(arquivo.sistema.Eleitores.Find(s=> s.Id == new Guid(id)));
 
-            file.ManipulacaoDeArquivos(false, t.sistema);
+            file.ManipulacaoDeArquivos(false, arquivo.sistema);
 
             return new Retorno() { Status = true, Resultado = null };
         }
 
         public Retorno AtualizarId(Eleitor novo, string id)
         {
-            var f = file.ManipulacaoDeArquivos(true, null);
+            var arquivo = file.ManipulacaoDeArquivos(true, null);
 
-            if(f.sistema == null)
-                f.sistema = new Sistema();
+            if(arquivo.sistema == null)
+                arquivo.sistema = new Sistema();
 
-            var velho = f.sistema.Eleitores.Find(s => s.Id == new Guid(id));
+            var velho = arquivo.sistema.Eleitores.Find(s => s.Id == new Guid(id));
             var troca = TrocaDados(novo, velho);
 
-            f.sistema.Eleitores.Add(troca);
-            f.sistema.Eleitores.Remove(velho);
+            arquivo.sistema.Eleitores.Add(troca);
+            arquivo.sistema.Eleitores.Remove(velho);
             
-            file.ManipulacaoDeArquivos(false, f.sistema);
+            file.ManipulacaoDeArquivos(false, arquivo.sistema);
 
             return new Retorno() { Status = true, Resultado = troca};
         }
@@ -118,21 +127,6 @@ namespace Core
             velho.DataCadastro = novo.DataCadastro;
             novo.Id = velho.Id;
             return novo;
-        }
-
-        public Retorno buscarVotoEleitor(string idEleitor)
-        {
-            var y = file.ManipulacaoDeArquivos(true, null);
-
-            if (y.sistema == null)
-                y.sistema = new Sistema();
-
-            var q = y.sistema.Eleitores.Find(x=>x.Id== new Guid(idEleitor));
-            var sessao = y.sistema.todasSessoes.Find(d=>d.eleitoresSessao.Exists(x=>x.Id==q.Id));
-            var votos = sessao.votoSessao.Where(d => d.EleitorId==q.Id).ToList();
-            var listPauta = sessao.pautasSessao.Where(p=>votos.Exists(v=>v.PautaId==p.Id));
-
-            return new Retorno() { Status = true, Resultado = q };
         }
     }
 }

@@ -25,12 +25,9 @@ namespace Core
        {
 
            var results = Validate(_pauta);
-
-           // Se o modelo é inválido, retorno false
            if (!results.IsValid)
                return new Retorno { Status = false, Resultado = results.Errors };
 
-           // Caso o modelo seja válido, escreve no arquivo db
            var db = file.ManipulacaoDeArquivos(true, null);
 
            if (db.sistema == null)
@@ -40,7 +37,6 @@ namespace Core
            {
                return new Retorno() { Status = true, Resultado = "Pauta já cadastrada" };
            }
-
             db.sistema.Pautas.Add(_pauta);
 
            file.ManipulacaoDeArquivos(false, db.sistema);
@@ -51,54 +47,66 @@ namespace Core
         public Retorno ExibirPautaId(string id)
         {
 
-            var t = file.ManipulacaoDeArquivos(true, null);
-
-            if (t.sistema == null)
-                t.sistema = new Sistema();
-            var p = t.sistema.Pautas.Where(x => x.Id == new Guid(id));
-            return new Retorno() { Status = true, Resultado = p };
+            var arquivo = file.ManipulacaoDeArquivos(true, null);
+            if (arquivo.sistema == null)
+                arquivo.sistema = new Sistema();
+            var resultado = arquivo.sistema.Pautas.Where(x => x.Id == new Guid(id));
+            return new Retorno() { Status = true, Resultado = resultado };
 
         }
 
+        //public Retorno ExibirPautaDataCadastro(DateTime datacadastro)
+        //{
+
+        //    var t = file.ManipulacaoDeArquivos(true, null);
+
+        //    if (t.sistema == null)
+        //        t.sistema = new Sistema();
+
+        //    var p = t.sistema.Pautas.Where(x => x.DataCadastro == datacadastro);
+        //    return new Retorno() { Status = true, Resultado = p };
+
+        //}
+
         public Retorno ExibirTodasPautas()
         {
-            var y = file.ManipulacaoDeArquivos(true, null);
+            var arquivo = file.ManipulacaoDeArquivos(true, null);
+                
+            if (arquivo.sistema == null)
+                arquivo.sistema = new Sistema();
 
-            if (y.sistema == null)
-                y.sistema = new Sistema();
-
-            var q = y.sistema.Pautas;
-            return new Retorno() { Status = true, Resultado = q };
+            var resultado= arquivo.sistema.Pautas;
+            return new Retorno() { Status = true, Resultado = resultado };
         }
 
         public Retorno DeletarPautaId(string id)
         {
-            var t = file.ManipulacaoDeArquivos(true, null);
+            var arquivo = file.ManipulacaoDeArquivos(true, null);
+                
+            if (arquivo.sistema == null)
+                arquivo.sistema = new Sistema();
 
-            if (t.sistema == null)
-                t.sistema = new Sistema();
+            var resultado = arquivo.sistema.Pautas.Remove(arquivo.sistema.Pautas.Find(s => s.Id == new Guid(id)));
 
-            var p = t.sistema.Pautas.Remove(t.sistema.Pautas.Find(s => s.Id == new Guid(id)));
-
-            file.ManipulacaoDeArquivos(false, t.sistema);
+            file.ManipulacaoDeArquivos(false, arquivo.sistema);
 
             return new Retorno() { Status = true, Resultado = "Pauta Deletada!" };
         }
 
         public Retorno AtualizarPautaId(Pauta nova, string id)
         {
-            var f = file.ManipulacaoDeArquivos(true, null);
+            var arquivo = file.ManipulacaoDeArquivos(true, null);
+                
+            if (arquivo.sistema == null)
+                arquivo.sistema = new Sistema();
 
-            if (f.sistema == null)
-                f.sistema = new Sistema();
-
-            var velha = f.sistema.Pautas.Find(s => s.Id == new Guid(id));
+            var velha = arquivo.sistema.Pautas.Find(s => s.Id == new Guid(id));
             var troca = TrocaPauta(nova, velha);
 
-            f.sistema.Pautas.Add(troca);
-            f.sistema.Pautas.Remove(velha);
+            arquivo.sistema.Pautas.Add(troca);
+            arquivo.sistema.Pautas.Remove(velha);
 
-            file.ManipulacaoDeArquivos(false, f.sistema);
+            file.ManipulacaoDeArquivos(false, arquivo.sistema);
 
             return new Retorno() { Status = true, Resultado = $"{troca}\n\nPauta Atualizada!" };
         }
