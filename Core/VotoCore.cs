@@ -83,7 +83,7 @@ namespace Core
         public Retorno ExibirTodosVotos()
         {
             var arquivo = file.ManipulacaoDeArquivos(true, null);
-                
+
             if (arquivo.sistema == null)
                 arquivo.sistema = new Sistema();
 
@@ -94,7 +94,7 @@ namespace Core
         public Retorno ExibirVotoId(string id)
         {
             var arquivo = file.ManipulacaoDeArquivos(true, null);
-                
+
             if (arquivo.sistema == null)
                 arquivo.sistema = new Sistema();
             var votos = arquivo.sistema.Votos.Where(x => x.PautaId == new Guid(id));

@@ -3,9 +3,7 @@ using FluentValidation;
 using Model;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Text;
 
 namespace Core
 {
@@ -45,13 +43,13 @@ namespace Core
             file.ManipulacaoDeArquivos(false, db.sistema);
             return new Retorno() { Status = true, Resultado = _sessao };
         }
-    
+
 
         public Retorno adicionarPautaEleitor(AdicionaPtEl addSessao)
         {
             //validar se ssesao est aberta (bool), aplicar na logica antes de adicionar o Eleitor
             var arquivo = file.ManipulacaoDeArquivos(true, null);
-                
+
             if (arquivo.sistema == null)
                 arquivo.sistema = new Sistema();
 
@@ -59,11 +57,11 @@ namespace Core
 
             if (addSessao.eleitoresId.Count == 0 && addSessao.pautasId.Count == 0)
                 new Retorno() { Status = false, Resultado = "Nada está sendo adicionado!" };
-        
-            if (addSessao.eleitoresId.Count > 0 )
+
+            if (addSessao.eleitoresId.Count > 0)
             {
                 foreach (var eleitorId in addSessao.eleitoresId)
-                    sessao.eleitoresSessao.Add(eleitorId);            
+                    sessao.eleitoresSessao.Add(eleitorId);
             }
             if (addSessao.pautasId.Count > 0)
             {
@@ -76,13 +74,16 @@ namespace Core
 
         }
 
-        public Retorno ExibirTodasSessoes()
+        public Retorno ExibirTodasSessoes(int page, int sizePage)
         {
             var arquivo = file.ManipulacaoDeArquivos(true, null);
             if (arquivo.sistema == null)
                 arquivo.sistema = new Sistema();
-            var lstSessao = arquivo.sistema.todasSessoes;
-            return new Retorno() { Status = true, Resultado = lstSessao };
+
+            Base classeBase = new Base();
+
+            List<Sessao> thirdPage = classeBase.GetPage(arquivo.sistema.todasSessoes, page, sizePage);
+            return new Retorno() { Status = true, Resultado = thirdPage };
         }
 
         public Retorno ExibirSessaoId(string id)

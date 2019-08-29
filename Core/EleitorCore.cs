@@ -5,22 +5,20 @@ using System.Linq;
 using System;
 using System.Collections.Generic;
 
+
 namespace Core
 {
     public class EleitorCore : AbstractValidator<Eleitor>
     {
-
         private Eleitor _eleitor { get; set; }
         public EleitorCore(Eleitor eleitor)
         {
-
             _eleitor = eleitor;
 
             RuleFor(e => e.Documento)
                 .Length(11, 11)
                 .NotNull()
                 .WithMessage("Cpf inválido");
-
             RuleFor(e => e.Nome)
                 .MinimumLength(3)
                 .NotNull()
@@ -29,10 +27,8 @@ namespace Core
 
         public EleitorCore() { }
 
-
         public Retorno CadastroEleitor()
         {
-
             var results = Validate(_eleitor);
             if (!results.IsValid)
                 return new Retorno { Status = false, Resultado = results.Errors };
@@ -43,10 +39,8 @@ namespace Core
                 db.sistema = new Sistema();
 
             if (db.sistema.Eleitores.Exists(x => x.Documento == _eleitor.Documento))
-            {
-
                 return new Retorno() { Status = true, Resultado = "CPF já cadastrado" };
-            }
+
             db.sistema.Eleitores.Add(_eleitor);
 
             file.ManipulacaoDeArquivos(false, db.sistema);
@@ -79,13 +73,15 @@ namespace Core
 
         public Retorno ExibirTodos(int page, int sizePage)
         {
-            
+         
             var arquivo = file.ManipulacaoDeArquivos(true, null);
 
             if (arquivo.sistema == null)
                 arquivo.sistema = new Sistema();
 
-            List<Eleitor> thirdPage = GetPage(arquivo.sistema.Eleitores, page, sizePage);
+            Base classeBase = new Base();
+
+            List<Eleitor> thirdPage = classeBase.GetPage(arquivo.sistema.Eleitores, page, sizePage);
 
             return new Retorno() { Status = true, Resultado = thirdPage };
         }
@@ -100,7 +96,6 @@ namespace Core
             var resultado = arquivo.sistema.Eleitores.Remove(arquivo.sistema.Eleitores.Find(s => s.Id == new Guid(id)));
 
             file.ManipulacaoDeArquivos(false, arquivo.sistema);
-
             return new Retorno() { Status = true, Resultado = null };
         }
 
@@ -131,14 +126,6 @@ namespace Core
             velho.DataCadastro = novo.DataCadastro;
             novo.Id = velho.Id;
             return novo;
-        }
-
-
-        List<Eleitor> GetPage(List<Eleitor> list, int page, int pageSize)
-        {
-            if (page <= 0)
-                return new List<Eleitor>();
-            return list.Skip(page - 1 * pageSize).Take(pageSize).ToList();
-        }
+        }        
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Model
 {
@@ -8,5 +9,9 @@ namespace Model
         public List<Eleitor> Eleitores { get; set; } = new List<Eleitor>();
         public List<Pauta> Pautas { get; set; } = new List<Pauta>();
         public List<Voto> Votos { get; set; } = new List<Voto>();
+
+        
     }
+
+    
 }

@@ -14,50 +14,40 @@ namespace ApiProject.Controllers
         [HttpPost]
         [ProducesResponseType(201, Type = typeof(Sessao))]
         [ProducesResponseType(400)]
-        [ProducesResponseType(401)]
-        public async Task<IActionResult> insere([FromBody] Sessao sessao)
+        public async Task<IActionResult> Post([FromBody] Sessao sessao)
         {
             var cadastro = new SessaoCore(sessao).CadastroSessao();
             if (cadastro.Status)
                 return Created("https://localhost", cadastro.Resultado);
-
             return BadRequest(cadastro.Resultado);
         }
-  
+
         [HttpPost("AdicionarPautaEleitor")]
         [ProducesResponseType(201, Type = typeof(Sessao))]
         [ProducesResponseType(400)]
-        [ProducesResponseType(401)]
-        public async Task<IActionResult> adicionaPautaEleitor([FromBody] AdicionaPtEl addSessao)
+        public async Task<IActionResult> addPautaEleitor([FromBody] AdicionaPtEl addSessao)
         {
             var cadastro = new SessaoCore().adicionarPautaEleitor(addSessao);
             if (cadastro.Status)
                 return Created("https://localhost", cadastro.Resultado);
-
             return BadRequest(cadastro.Resultado);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("buscaPorId")]
         [ProducesResponseType(200, Type = typeof(Sessao))]
-        [ProducesResponseType(204)]
         [ProducesResponseType(400)]
-        [ProducesResponseType(401)]
-        public async Task<IActionResult> Get(string id)
+        public async Task<IActionResult> Get([FromQuery]string id)
         {
             var exibe = new SessaoCore().ExibirSessaoId(id);
             if (exibe.Status)
-
                 return Ok(exibe.Resultado);
-
             return BadRequest(exibe.Resultado);
         }
 
-        [HttpGet("buscaData/{dataCadastro}")]
+        [HttpGet("buscaPorData")]
         [ProducesResponseType(200, Type = typeof(Sessao))]
-        [ProducesResponseType(204)]
         [ProducesResponseType(400)]
-        [ProducesResponseType(401)]
-        public async Task<IActionResult> GetDate(string dataCadastro)
+        public async Task<IActionResult> GetDate([FromQuery]string dataCadastro)
         {
             var exibe = new SessaoCore().ExibirSessaoDataCadastro(dataCadastro);
             if (exibe.Status)
@@ -65,32 +55,25 @@ namespace ApiProject.Controllers
             return BadRequest(exibe.Resultado);
         }
 
-        [HttpGet]
+        [HttpGet("buscaPaginada")]
         [ProducesResponseType(200, Type = typeof(List<Sessao>))]
-        [ProducesResponseType(204)]
         [ProducesResponseType(400)]
-        [ProducesResponseType(401)]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery] int page,[FromQuery] int sizePage)
         {
-            var exibe = new SessaoCore().ExibirTodasSessoes();
+            var exibe = new SessaoCore().ExibirTodasSessoes(page, sizePage);
             if (exibe.Status)
-
                 return Ok(exibe.Resultado);
-
             return BadRequest(exibe.Resultado);
         }
 
-        [HttpDelete("{id}")]
-        [ProducesResponseType(204)]
+        [HttpDelete("deletePorId")]
+        [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        [ProducesResponseType(401)]
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete([FromQuery]string id)
         {
             var deleta = new SessaoCore().DeletarSessaoId(id);
             if (deleta.Status)
-
                 return Ok(deleta.Resultado);
-
             return BadRequest(deleta.Resultado);
         }
     }
