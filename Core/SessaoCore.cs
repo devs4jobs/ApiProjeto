@@ -76,18 +76,16 @@ namespace Core
 
         }
 
+        //esse metodo eu utilizo para retorna somente a guantidade de itens e a pagina que o usuario digita. 
         public Retorno Paginacao(int itens, int numeroPagina)
         {
             var db = file.ManipulacaoDeArquivos(true, null);
             if (db.sistema == null) db.sistema = new Sistema();
 
-            var qtdPaginas = db.sistema.Sessao.Count();
-            if (numeroPagina <= qtdPaginas)
-                return new Retorno { Status = true, Resultado = { $"Pagina{itens} \n{db.sistema.Sessao.Take(itens).Skip(numeroPagina) }" } };  
-            else if (numeroPagina > qtdPaginas)
-                return new Retorno { Status = true, Resultado = {$"Pagina{itens} \n{db.sistema.Sessao.Take(itens).Skip(numeroPagina) }  "  } };
-            else
-                return new Retorno { Status = true, Resultado = { $"Pagina{itens} \n{db.sistema.Sessao.Take(itens).Skip(qtdPaginas)} " } };
+            if (numeroPagina > 0 && itens > 0 )
+                return new Retorno { Status = true, Resultado = { {db.sistema.Sessao.Skip((numeroPagina - 1) * itens).Take(itens).ToList() } } };
+
+            return new Retorno { Status = true, Resultado = { "Número da Pagina ou a Quantidade de itens não pode ser igual a 0" } };
         }
 
         //Esse metodo eu busco os objetos pela data de cadastro inserida pelo usuario.

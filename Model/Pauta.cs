@@ -6,5 +6,6 @@
     {
         public string Descricao { get; set; }
         public bool Concluida { get; set; }
+        public string Resultado { get; set; }
     }
 }

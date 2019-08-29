@@ -18,8 +18,15 @@ namespace ApiProject.Controllers
         }
 
         //aqui eu vou buscar minhas sessões por paginas !
+        [HttpGet("page")]
+        public async Task<IActionResult> GetByPage([FromQuery]int itens, [FromQuery]int pagina)
+        {
+            var conteudo = new SessaoCore().Paginacao(itens, pagina);
 
+            if (conteudo.Resultado.Count == 0) { conteudo.Status = false; conteudo.Resultado = "Não temos a quantidade de itens nessa pagina"; };
 
+            return conteudo.Status ? Ok(conteudo.Resultado) : BadRequest(conteudo.Resultado);
+        }
 
         //Aqui vou buscar todas as lista por uma data declarada pelo usuario.
         [HttpGet("find-by-data")]
@@ -35,11 +42,11 @@ namespace ApiProject.Controllers
         //Get all eu vou buscar Todas as sessões estajam elas Abertas ou Fechadas 
         [HttpGet]
         public async Task<IActionResult> GetAll() {var todos = new SessaoCore().ProcurarTodos(); return todos.Status ? Ok(todos.Resultado) : BadRequest(todos.Resultado);}
-        //Vou fazer a votação atráves desse Verbo "PUT"
+        //Vou fazer a atualização de dados através do verbo Put
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(string id, [FromBody]Sessao pauta){var atualizar = new SessaoCore().AtualizarPorID(id, pauta); return atualizar.Status ? Ok(atualizar.Resultado) : BadRequest(atualizar.Resultado);
         }
-        //Não vou disponibilizar o Deletar pelo fato de ter todos os registros de Salvos!.
+        //Aqui consigo apagar um elemento pelo verbo Delete.
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(string id){var excluir = new SessaoCore().DeletarPorID(id); return excluir.Status ? Ok(excluir.Resultado) : BadRequest(excluir.Resultado);}
     }

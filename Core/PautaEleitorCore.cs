@@ -2,6 +2,8 @@
 using FluentValidation;
 using Core.util;
 using System.Linq;
+using System.Globalization;
+
 namespace Core
 {
     //essa minha classe PautaEleitorCore eu tenho a regra de negocios da PautaEleitor(Voto) e ela já Herda a AbstractValidator do FrameWork: FluentValidation.
@@ -41,7 +43,6 @@ namespace Core
             var db = file.ManipulacaoDeArquivos(true, null);
             var results = Validate(_pautaEleitor);
 
-
             //se não tiver uma pauta com o Idpauta inserido ou um Eleitor com ideleitor inserido então eu retorno uma menssagem de erro pro usuario !
             if (!db.sistema.Pautas.Exists(p => p.Id.Equals(_pautaEleitor.PautaId)) || !db.sistema.Eleitores.Exists(e => e.Id.Equals(_pautaEleitor.EleitorId)))
                 return new Retorno() { Status = false, Resultado = "Não exite uma Pauta/Eleitor com esses ID's na Base de Dados." };
@@ -53,6 +54,7 @@ namespace Core
             // o Id do eleitor inserido deve estar ná sessão que tem aquela determinada pauta !
             if (!ValidarVotoPauta.lstEleitores.Exists(e => e.Id.Equals(_pautaEleitor.EleitorId)))
                 return new Retorno() { Status = false, Resultado = "Não exite um Eleitor com esses ID na Sessão da Pauta inserida." };
+
 
             //a pauta tenque esta aberta e não pode ser nula.
             if (ValidarVotoPauta.Status || ValidarVotoPauta == null)
@@ -76,10 +78,23 @@ namespace Core
             //quantidades de eleitores que devem votar na sessão .
             var QtdEleitores = ValidarVotoPauta.lstEleitores.Count();
 
+            //essas variaveis eu ultilizo para contar a quantidades de votos a favor e contra para fazer o calculo de porcentagem futuramente.
+            double afavor = 0.0, contra = 0.0;
+            afavor = db.sistema.EleitoresPauta.Where(p => p.PautaId.Equals(_pautaEleitor.PautaId) && p.Voto.Equals("a favor")).ToList().Count();
+
+            contra = db.sistema.EleitoresPauta.Where(p => p.PautaId.Equals(_pautaEleitor.PautaId) && p.Voto.Equals("contra")).ToList().Count();
             //se os eleitores votaram na pauta então  eu seleciono a pauta lá da lista de pautas da sessão e dou a Pauta como concluida.
-            if(QtdEleitores == VotosNaPauta)
+            if (QtdEleitores == VotosNaPauta)
             {
                 var PautaSelecionada = ValidarVotoPauta.lstPautas.Single(p => p.Id.Equals(_pautaEleitor.PautaId));
+
+                 var PorcAfavor = ((double)afavor * 10 / (double)db.sistema.EleitoresPauta.Where(p => p.PautaId.Equals(_pautaEleitor.PautaId)).ToList().Count()) * 10;
+
+                var PorcContra = ((double)contra * 10 / (double)db.sistema.EleitoresPauta.Where(p => p.PautaId.Equals(_pautaEleitor.PautaId)).ToList().Count()) * 10;
+
+                if (afavor > contra) PautaSelecionada.Resultado = $"APROVADA com {PorcAfavor.ToString("F2", CultureInfo.InvariantCulture)}% de Porcentagem a favor.";
+                else PautaSelecionada.Resultado = $"REPROVADA com {PorcContra.ToString("F2",CultureInfo.InvariantCulture)}% de Porcentagem contra.";
+
                 PautaSelecionada.Concluida = true;
             }
 
@@ -94,6 +109,19 @@ namespace Core
 
 
         }
+
+        //esse metodo eu utilizo para retorna somente a guantidade de itens e a pagina que o usuario digita. 
+        public Retorno Paginacao(int itens, int numeroPagina)
+        {
+            var db = file.ManipulacaoDeArquivos(true, null);
+            if (db.sistema == null) db.sistema = new Sistema();
+
+            if (numeroPagina > 0 && itens > 0)
+                return new Retorno { Status = true, Resultado = db.sistema.EleitoresPauta.Skip((numeroPagina - 1) * itens).Take(itens).ToList() };
+
+            return new Retorno { Status = true, Resultado = { "Número da Pagina ou a Quantidade de itens não pode ser igual a 0" } };
+        }
+
         //EU CRIEI ESSE METODO PARA PODER EXIBIR  VOTO(PautaEleitor) POR ID.
         public Retorno ProcurarPorID(string id)
         {

@@ -2,6 +2,7 @@
 using FluentValidation;
 using Core.util;
 using System.Linq;
+using System;
 namespace Core
 {
     //essa minha classe EleitorCore eu tenho a regra de negocios da Sessão e ela já Herda a AbstractValidator do FrameWork: FluentValidation.
@@ -68,6 +69,34 @@ namespace Core
             if (db.sistema == null) db.sistema = new Sistema();
 
             return (db.sistema.Eleitores.Any(e => e.Id.ToString().Equals(id))) ? new Retorno() { Status = true, Resultado = db.sistema.Eleitores.SingleOrDefault(e => e.Id.ToString().Equals(id))} : new Retorno() { Status = false, Resultado = "Não existe um eleitor com esse ID." };
+        }
+
+
+        //esse metodo eu utilizo para retorna somente a guantidade de itens e a pagina que o usuario digita. 
+        public Retorno Paginacao(int itens, int numeroPagina)
+        {
+            var db = file.ManipulacaoDeArquivos(true, null);
+            if (db.sistema == null) db.sistema = new Sistema();
+
+            if (numeroPagina > 0 && itens > 0)
+                return new Retorno { Status = true, Resultado = db.sistema.Eleitores.Skip((numeroPagina - 1) * itens).Take(itens).ToList() };
+
+            return new Retorno { Status = true, Resultado = { "Número da Pagina ou a Quantidade de itens não pode ser igual a 0" } };
+        }
+
+        //Esse metodo eu busco os objetos pela data de cadastro inserida pelo usuario.
+        public Retorno ProcurarPorData(string datainserida)
+        {
+            var db = file.ManipulacaoDeArquivos(true, null);
+            if (db.sistema == null) db.sistema = new Sistema();
+
+            var ValidarData = DateTime.Parse(datainserida).ToString("dd/MM/yyyy");
+
+            if (db.sistema.Eleitores.Exists(s => s.DataCadastro.ToShortDateString().Equals(ValidarData)))
+                return new Retorno { Status = true, Resultado = db.sistema.Eleitores.Where(s => s.DataCadastro.ToShortDateString().Equals(ValidarData)).ToList() };
+
+            return new Retorno { Status = false, Resultado = "Não Existe nenhum Eleitor com essa data de cadastro." };
+
         }
 
         //Esse metodo eu Procuro todos os Eleitores Cadastrados.
