@@ -15,7 +15,7 @@ namespace ApiProject.Controllers
         {
             var cadastro = new PautaCore(pauta).CadastroPauta();
 
-            return cadastro.Status ? (IActionResult)Created($"https://localhost/api/pautas/{pauta.Id}", cadastro.Resultado) : (IActionResult)BadRequest(cadastro.Resultado);
+            return cadastro.Status ? Created($"https://localhost/api/pautas/{pauta.Id}", cadastro.Resultado) : BadRequest(cadastro.Resultado);
         }
 
         [HttpGet("{id}")]
@@ -23,7 +23,7 @@ namespace ApiProject.Controllers
         {
             var retorno=new PautaCore().ID(id).Resultado;
 
-            return retorno.Status ? (IActionResult)Ok(retorno.Resultado) : (IActionResult)BadRequest(retorno.Resultado);
+            return retorno.Status ? Ok(retorno.Resultado) : BadRequest(retorno.Resultado);
         }
 
         [HttpGet("por-data")]
@@ -49,14 +49,14 @@ namespace ApiProject.Controllers
         {
             var cadastro = new PautaCore(pauta).AtualizaPauta();
 
-            return cadastro.Status ? (IActionResult)Accepted($"https://localhost/api/pautas/{pauta.Id}", cadastro.Resultado) : (IActionResult)BadRequest(cadastro.Resultado);
+            return cadastro.Status ? Accepted($"https://localhost/api/pautas/{pauta.Id}", cadastro.Resultado) :BadRequest(cadastro.Resultado);
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
             var cadastro = new PautaCore().DeletaPauta(id);
-            return cadastro.Status ? NoContent() : (IActionResult)NotFound(cadastro.Resultado);
+            return cadastro.Status ? NoContent() : NotFound(cadastro.Resultado);
         }
     }
 }

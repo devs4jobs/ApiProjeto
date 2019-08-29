@@ -33,15 +33,16 @@ namespace Core
 
             RuleForEach(e => e.Eleitores)
                 .Must(temp => Db.Eleitores.SingleOrDefault(check => check.Id == temp.Id) != null)
-                .WithMessage($"Eleitor com o ID:{_Sessao.Eleitores.SingleOrDefault(temp => Db.Eleitores.SingleOrDefault(check => check.Id == temp.Id) == null).Id.ToString()} não conta na base de dados");
-
+                .WithMessage($"Eleitor um ou mais não conta na base de dados");
+           // { _Sessao.Eleitores.SingleOrDefault(temp => Db.Eleitores.SingleOrDefault(check => check.Id == temp.Id) == null).Id.ToString()}
             RuleFor(e => e.Pautas)
                 .NotNull()
                 .WithMessage("Pautas não pode ser nulo");
 
             RuleForEach(e=>e.Pautas)
                 .Must(temp => Db.Pautas.SingleOrDefault(check => check.Id == temp.Id) != null)
-                .WithMessage($"Pauta com o ID:{_Sessao.Pautas.SingleOrDefault(temp=>Db.Pautas.SingleOrDefault(check=>check.Id==temp.Id)==null).Id.ToString()} não conta na base de dados");
+                .WithMessage($"Pauta um ou mais não conta na base de dados");
+            //{_Sessao.Pautas.SingleOrDefault(temp=>Db.Pautas.SingleOrDefault(check=>check.Id==temp.Id)==null).Id.ToString()}
         }
 
         public Retorno IniciarSessao()
@@ -106,9 +107,9 @@ namespace Core
         }
 
         public Retorno Lista() => new Retorno() { Status = true, Resultado = Db.Sessaos };
-        public Retorno AdicionaPauta(Guid id,Pauta pauta)
+        public Retorno AdicionaPauta(string id,Pauta pauta)
         {
-            var Sessao = Db.Sessaos.SingleOrDefault(c => c.Id == id);
+            var Sessao = Db.Sessaos.SingleOrDefault(c => c.Id.ToString() == id);
             if (Sessao == null)
                 return new Retorno() { Status = false, Resultado = "Sessão não existe" };
 
@@ -121,9 +122,9 @@ namespace Core
             return new Retorno() { Status = true, Resultado = Sessao };
         }
 
-        public Retorno AdicionaEleitor(Guid id, Eleitor eleitor)
+        public Retorno AdicionaEleitor(string id, Eleitor eleitor)
         {
-            var Sessao = Db.Sessaos.SingleOrDefault(c => c.Id == id);
+            var Sessao = Db.Sessaos.SingleOrDefault(c => c.Id.ToString() == id);
             if (Sessao == null)
                 return new Retorno() { Status = false, Resultado = "Sessão não existe" };
 

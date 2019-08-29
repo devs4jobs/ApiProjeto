@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Core;
 using Microsoft.AspNetCore.Mvc;
 using Model;
@@ -14,7 +15,7 @@ namespace ApiProject.Controllers
         {
             var cadastro = new SessaoCore(sessao).IniciarSessao();
 
-            return cadastro.Status ? (IActionResult)Created($"https://localhost/api/sessoes/{sessao.Id}", cadastro.Resultado) : (IActionResult)BadRequest(cadastro.Resultado);
+            return cadastro.Status ? Created($"https://localhost/api/sessoes/{sessao.Id}", cadastro.Resultado) : BadRequest(cadastro.Resultado);
         }
 
         [HttpGet]
@@ -29,10 +30,24 @@ namespace ApiProject.Controllers
         }
 
         [HttpGet("{direcao}/{Npagina}/{TPagina}")]
-        public async Task<IActionResult> BuscaPorPagina(string Direcao ,int NPagina,int TPagina)
+        public async Task<IActionResult> BuscaPorPagina(string Direcao, int NPagina, int TPagina)
         {
             var retorno = new SessaoCore().PorPagina(NPagina, Direcao, TPagina);
             return retorno.Status ? Ok(retorno.Resultado) : BadRequest(retorno.Resultado);
+        }
+
+        [HttpPut("pautas/{id}")]
+        public async Task<IActionResult> AdicionarPauta(string id, [FromBody] Pauta objeto)
+        {
+            var retornor = new SessaoCore().AdicionaPauta(id, objeto);
+            return retornor.Status ? Ok(retornor.Resultado) : BadRequest(retornor.Resultado);
+        }
+
+        [HttpPut("eleitor/{id}")]
+        public async Task<IActionResult> AdicionarEleitor(string id, [FromBody] Eleitor objeto)
+        {
+            var retornor = new SessaoCore().AdicionaEleitor(id, objeto);
+            return retornor.Status ? Ok(retornor.Resultado) : BadRequest(retornor.Resultado);
         }
     }
 }

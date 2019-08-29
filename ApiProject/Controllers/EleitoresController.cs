@@ -16,8 +16,8 @@ namespace ApiProject.Controllers
             var cadastro = new EleitorCore(eleitor).CadastroEleitor();
 
             return cadastro.Status
-                ? (IActionResult)Created($"https://localhost/api/eleitores/{eleitor.Id}", cadastro.Resultado)
-                : (IActionResult)BadRequest(cadastro.Resultado);
+                ? Created($"https://localhost/api/eleitores/{eleitor.Id}", cadastro.Resultado)
+                : BadRequest(cadastro.Resultado);
         }
 
         [HttpGet("por-data")]
@@ -40,7 +40,7 @@ namespace ApiProject.Controllers
         {
             var retorno=new EleitorCore().ID(id);
 
-            return retorno.Status ? (IActionResult)Ok(retorno.Resultado) : (IActionResult)BadRequest(retorno.Resultado);
+            return retorno.Status ? Ok(retorno.Resultado) : BadRequest(retorno.Resultado);
         }
 
         [HttpGet]

@@ -16,8 +16,8 @@ namespace ApiProject.Controllers
             var cadastro = new PautaEleitorCore(Voto).Votacao();
 
             return cadastro.Status
-                ? (IActionResult)Created($"https://localhost/api/votacoes/{Voto.PautaId}", cadastro.Resultado)
-                : (IActionResult)BadRequest(cadastro.Resultado);
+                ? Created($"https://localhost/api/votacoes/{Voto.PautaId}", cadastro.Resultado)
+                : BadRequest(cadastro.Resultado);
         }
 
         [HttpGet("{id}")]
