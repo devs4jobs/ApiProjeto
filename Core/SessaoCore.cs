@@ -55,17 +55,24 @@ namespace Core
             if (arquivo.sistema == null)
                 arquivo.sistema = new Sistema();
 
-            var pteleitor = arquivo.sistema.Eleitores.Find(x => x.Id == new Guid(addSessao.idEleitor));
-
-            if (arquivo.sistema.todasSessoes.Exists(x => x.eleitoresSessao.Exists(eleitor => eleitor.Id == pteleitor.Id)))
-                new Retorno() { Status = false, Resultado = "Eleitor ja cadastrado em outra sessao" };
-
             var sessao = arquivo.sistema.todasSessoes.Find(q => q.Id == new Guid(addSessao.idSessao));
 
-            sessao.eleitoresSessao.Add(pteleitor);
+            if (addSessao.eleitoresId.Count == 0 && addSessao.pautasId.Count == 0)
+                new Retorno() { Status = false, Resultado = "Nada está sendo adicionado!" };
+        
+            if (addSessao.eleitoresId.Count > 0 )
+            {
+                foreach (var eleitorId in addSessao.eleitoresId)
+                    sessao.eleitoresSessao.Add(eleitorId);            
+            }
+            if (addSessao.pautasId.Count > 0)
+            {
+                foreach (var pautasId in addSessao.pautasId)
+                    sessao.pautasSessao.Add(pautasId);
+            }
 
             var salva = file.ManipulacaoDeArquivos(false, arquivo.sistema);
-            return new Retorno() { Status = true, Resultado = "Eleitor adicionado com sucesso!" };
+            return new Retorno() { Status = true, Resultado = "Iten(s) adicionados com sucesso!" };
 
         }
 
@@ -87,14 +94,16 @@ namespace Core
             return new Retorno() { Status = true, Resultado = sessaoFiltrada };
         }
 
-        //public Retorno ExibirSessaoDataCadastro(string datacadastro)
-        //{
-        //    var t = file.ManipulacaoDeArquivos(true, null);
-        //    if (t.sistema == null)
-        //        t.sistema = new Sistema();
-        //    var p = t.sistema.todasSessoes.Where(x => x.DataCadastro.ToString() == datacadastro);
-        //    return new Retorno() { Status = true, Resultado = p };
-        //}
+        public Retorno ExibirSessaoDataCadastro(string dataCadastro)
+        {
+            var arquivo = file.ManipulacaoDeArquivos(true, null);
+
+            if (arquivo.sistema == null)
+                arquivo.sistema = new Sistema();
+
+            var resultado = arquivo.sistema.todasSessoes.Where(x => x.DataCadastro.ToString("ddMMyyyy").Equals(dataCadastro));
+            return new Retorno() { Status = true, Resultado = resultado };
+        }
 
         public Retorno DeletarSessaoId(string id)
         {

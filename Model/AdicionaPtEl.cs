@@ -7,7 +7,7 @@ namespace Model
     public class AdicionaPtEl
     {
         public string idSessao { get; set; }
-        public string idEleitor { get; set; }
-        public string idPauta { get; set; }
+        public List<Eleitor> eleitoresId { get; set; }
+        public List<Pauta> pautasId { get; set; }
     }
 }

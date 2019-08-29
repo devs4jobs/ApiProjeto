@@ -41,8 +41,20 @@ namespace ApiProject.Controllers
             return BadRequest(exibe.Resultado);
         }
 
+        [HttpGet("buscaData/{dataCadastro}")]
+        [ProducesResponseType(200, Type = typeof(Pauta))]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
+        public async Task<IActionResult> GetDate(string dataCadastro)
+        {
+            var exibe = new PautaCore().ExibirPautaDataCadastro(dataCadastro);
+            if (exibe.Status)
+                return Ok(exibe.Resultado);
+            return BadRequest(exibe.Resultado);
+        }
+
         [HttpGet]
-      
         [ProducesResponseType(200, Type = typeof(List<Pauta>))]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
@@ -62,7 +74,7 @@ namespace ApiProject.Controllers
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(401)]
-        public async Task<IActionResult> DeletarPautaId(string id)
+        public async Task<IActionResult> Delete(string id)
         {
 
             var deleta = new PautaCore().DeletarPautaId(id);

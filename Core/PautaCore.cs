@@ -55,18 +55,16 @@ namespace Core
 
         }
 
-        //public Retorno ExibirPautaDataCadastro(DateTime datacadastro)
-        //{
+        public Retorno ExibirPautaDataCadastro(string dataCadastro)
+        {
+            var arquivo = file.ManipulacaoDeArquivos(true, null);
 
-        //    var t = file.ManipulacaoDeArquivos(true, null);
+            if (arquivo.sistema == null)
+                arquivo.sistema = new Sistema();
 
-        //    if (t.sistema == null)
-        //        t.sistema = new Sistema();
-
-        //    var p = t.sistema.Pautas.Where(x => x.DataCadastro == datacadastro);
-        //    return new Retorno() { Status = true, Resultado = p };
-
-        //}
+            var resultado = arquivo.sistema.Pautas.Where(x => x.DataCadastro.ToString("ddMMyyyy").Equals(dataCadastro));
+            return new Retorno() { Status = true, Resultado = resultado };
+        }
 
         public Retorno ExibirTodasPautas()
         {

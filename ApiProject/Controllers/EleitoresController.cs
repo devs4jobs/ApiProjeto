@@ -43,13 +43,13 @@ namespace ApiProject.Controllers
             return BadRequest(exibe.Resultado);
         }
 
-        [HttpGet("{dataCadastro}")]
+        [HttpGet("buscaData/{dataCadastro}")]
 
         [ProducesResponseType(200, Type = typeof(Eleitor))]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(401)]
-        public async Task<IActionResult> GetData(string dataCadastro)
+        public async Task<IActionResult> GetDate(string dataCadastro)
         {
             var exibe = new EleitorCore().ExibirEleitorDataCadastro(dataCadastro);
             if (exibe.Status)
@@ -57,16 +57,15 @@ namespace ApiProject.Controllers
             return BadRequest(exibe.Resultado);
         }
 
-        [HttpGet]  
-         
+        [HttpGet("{page}/{sizePage}")]         
         [ProducesResponseType(200, Type = typeof(List<Eleitor>))]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(401)]
-        public async Task<IActionResult> GetAll()   
+        public async Task<IActionResult> GetAll(int page, int sizePage)   
         {
           
-            var exibe = new EleitorCore().ExibirTodos();
+            var exibe = new EleitorCore().ExibirTodos(page, sizePage);
             if (exibe.Status)
                
                 return Ok(exibe.Resultado);

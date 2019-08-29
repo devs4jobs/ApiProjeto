@@ -686,23 +686,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Treinamento 1\\.nuget\\packages\\": {},
+    "C:\\Users\\mathe\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Treinamento 1\\Desktop\\CloneDesafio\\ApiProjeto\\Model\\Model.csproj",
+      "projectUniqueName": "C:\\Users\\mathe\\Desktop\\VotacaoApi\\ApiProjeto\\Model\\Model.csproj",
       "projectName": "Model",
-      "projectPath": "C:\\Users\\Treinamento 1\\Desktop\\CloneDesafio\\ApiProjeto\\Model\\Model.csproj",
-      "packagesPath": "C:\\Users\\Treinamento 1\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Treinamento 1\\Desktop\\CloneDesafio\\ApiProjeto\\Model\\obj\\",
+      "projectPath": "C:\\Users\\mathe\\Desktop\\VotacaoApi\\ApiProjeto\\Model\\Model.csproj",
+      "packagesPath": "C:\\Users\\mathe\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\mathe\\Desktop\\VotacaoApi\\ApiProjeto\\Model\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Treinamento 1\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\mathe\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

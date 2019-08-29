@@ -3,16 +3,17 @@ using FluentValidation;
 using Core.util;
 using System.Linq;
 using System;
+using System.Collections.Generic;
 
 namespace Core
 {
     public class EleitorCore : AbstractValidator<Eleitor>
     {
-        
+
         private Eleitor _eleitor { get; set; }
         public EleitorCore(Eleitor eleitor)
         {
-           
+
             _eleitor = eleitor;
 
             RuleFor(e => e.Documento)
@@ -25,11 +26,12 @@ namespace Core
                 .NotNull()
                 .WithMessage("O nome deve ser preenchido e deve ter o mínimo de 3 caracteres");
         }
-      
-        public EleitorCore(){ }
 
-       
-        public Retorno CadastroEleitor() {
+        public EleitorCore() { }
+
+
+        public Retorno CadastroEleitor()
+        {
 
             var results = Validate(_eleitor);
             if (!results.IsValid)
@@ -39,8 +41,9 @@ namespace Core
 
             if (db.sistema == null)
                 db.sistema = new Sistema();
-            
-            if (db.sistema.Eleitores.Exists(x => x.Documento == _eleitor.Documento)) {
+
+            if (db.sistema.Eleitores.Exists(x => x.Documento == _eleitor.Documento))
+            {
 
                 return new Retorno() { Status = true, Resultado = "CPF já cadastrado" };
             }
@@ -61,7 +64,6 @@ namespace Core
 
             var resultado = arquivo.sistema.Eleitores.Where(x => x.Id == new Guid(id));
             return new Retorno() { Status = true, Resultado = resultado };
-
         }
 
         public Retorno ExibirEleitorDataCadastro(string dataCadastro)
@@ -71,19 +73,21 @@ namespace Core
             if (arquivo.sistema == null)
                 arquivo.sistema = new Sistema();
 
-            var resultado = arquivo.sistema.Eleitores.Where(x => x.DataCadastro.ToString().Equals(dataCadastro));
+            var resultado = arquivo.sistema.Eleitores.Where(x => x.DataCadastro.ToString("ddMMyyyy").Equals(dataCadastro));
             return new Retorno() { Status = true, Resultado = resultado };
         }
 
-        public Retorno ExibirTodos()
+        public Retorno ExibirTodos(int page, int sizePage)
         {
+            
             var arquivo = file.ManipulacaoDeArquivos(true, null);
 
             if (arquivo.sistema == null)
                 arquivo.sistema = new Sistema();
 
-            var resultado = arquivo.sistema.Eleitores;
-            return new Retorno() { Status = true, Resultado = resultado };
+            List<Eleitor> thirdPage = GetPage(arquivo.sistema.Eleitores, page, sizePage);
+
+            return new Retorno() { Status = true, Resultado = thirdPage };
         }
 
         public Retorno DeletarEleitorId(string id)
@@ -93,7 +97,7 @@ namespace Core
             if (arquivo.sistema == null)
                 arquivo.sistema = new Sistema();
 
-            var resultado = arquivo.sistema.Eleitores.Remove(arquivo.sistema.Eleitores.Find(s=> s.Id == new Guid(id)));
+            var resultado = arquivo.sistema.Eleitores.Remove(arquivo.sistema.Eleitores.Find(s => s.Id == new Guid(id)));
 
             file.ManipulacaoDeArquivos(false, arquivo.sistema);
 
@@ -104,7 +108,7 @@ namespace Core
         {
             var arquivo = file.ManipulacaoDeArquivos(true, null);
 
-            if(arquivo.sistema == null)
+            if (arquivo.sistema == null)
                 arquivo.sistema = new Sistema();
 
             var velho = arquivo.sistema.Eleitores.Find(s => s.Id == new Guid(id));
@@ -112,21 +116,29 @@ namespace Core
 
             arquivo.sistema.Eleitores.Add(troca);
             arquivo.sistema.Eleitores.Remove(velho);
-            
+
             file.ManipulacaoDeArquivos(false, arquivo.sistema);
 
-            return new Retorno() { Status = true, Resultado = troca};
+            return new Retorno() { Status = true, Resultado = troca };
         }
 
         public Eleitor TrocaDados(Eleitor novo, Eleitor velho)
         {
             if (velho.Nome == null) novo.Nome = velho.Nome;
             if (velho.Documento == null) novo.Documento = velho.Documento;
-            if (velho.Sexo == null) novo.Sexo = velho.Sexo; 
+            if (velho.Sexo == null) novo.Sexo = velho.Sexo;
             if (velho.Idade == 0) novo.Idade = velho.Idade;
             velho.DataCadastro = novo.DataCadastro;
             novo.Id = velho.Id;
             return novo;
+        }
+
+
+        List<Eleitor> GetPage(List<Eleitor> list, int page, int pageSize)
+        {
+            if (page <= 0)
+                return new List<Eleitor>();
+            return list.Skip(page - 1 * pageSize).Take(pageSize).ToList();
         }
     }
 }
