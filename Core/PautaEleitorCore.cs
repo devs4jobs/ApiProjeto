@@ -49,7 +49,7 @@ namespace Core
             if(!(umaSessao.LstEleitores.SingleOrDefault(c => c.Id == _pautaeleitor.EleitorId) != null))
                 return new Retorno { Status = false, Resultado = "Esse eleitor não existe" };
 
-            // adciona na lista d
+            // adciona na lista de eleitores
             db.EleitoresPauta.Add(_pautaeleitor);
 
             // busca a quantidade de votos da pauta a ser votada

@@ -27,12 +27,27 @@ namespace ApiProject.Controllers
         // Chamando o metodo achar todos
         [HttpGet]
         public async Task<IActionResult> Get() => Ok(new PautaCore().AcharTodos().Resultado);
+
+
+        [HttpGet("Data")]
+        // Buscar por data
+        public async Task<IActionResult> AcharPordata([FromQuery] string DataComeco, [FromQuery] string DataFim)
+        {
+            var Cor = new PautaCore().BuscaPorData(DataComeco, DataFim);
+
+            return Cor.Status ? Ok(Cor.Resultado) : BadRequest(Cor.Resultado);
+
+        }
+
+
         // Chamando o metodo de atualização
         [HttpPut("{id}")]
         public async Task<IActionResult> Put([FromBody] Pauta pauta, string id) => Ok(new PautaCore().AtualizarUm(id, pauta).Resultado);
         // chamando o metodo para deletar um registro
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(string id) => Accepted(new PautaCore().DeletarId(id));
+
+      
 
     }
 }

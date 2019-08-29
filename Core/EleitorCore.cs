@@ -2,6 +2,7 @@
 using FluentValidation;
 using Core.util;
 using System.Linq;
+using System;
 
 namespace Core
 {
@@ -57,10 +58,31 @@ namespace Core
             return new Retorno() { Status = true, Resultado = _eleitor };
         }
 
+        public Retorno BuscaPorData(string dataComeço, string dataFim)
+        {
+            // Tento fazer a conversao e checho se ela nao for feita corretamente, se ambas nao forem corretas retorno FALSE
+            if (!DateTime.TryParse(dataComeço, out DateTime primeiraData) && !DateTime.TryParse(dataFim, out DateTime segundaData))
+                return new Retorno() { Status = false, Resultado = "Dados Invalidos" };
+
+            // Tento fazer a conversao da segunda data for invalida faço somente a pesquisa da primeira data
+            if (!DateTime.TryParse(dataFim, out segundaData))
+                return new Retorno { Status = true, Resultado = db.Eleitores.Where(c => c.DataCadastro >= primeiraData).ToList() };
+
+            // Tento fazer a conversao da primeiradata for invalida faço somente a pesquisa da segunda data
+            if (!DateTime.TryParse(dataComeço, out primeiraData))
+                return new Retorno { Status = true, Resultado = db.Eleitores.Where(c => c.DataCadastro <= segundaData).ToList() };
+
+            // returno a lista completa entre as duas datas informadas.
+            return new Retorno { Status = true, Resultado = db.Eleitores.Where(c => c.DataCadastro >= primeiraData && c.DataCadastro <= segundaData).ToList() };
+
+        }
+
+
+
         // Método para buscar um eleitor
         public Retorno AcharUm(string id)
         {
-           if (!db.Eleitores.Exists(e => e.Id.ToString() == id))
+            if (!db.Eleitores.Exists(e => e.Id.ToString() == id))
                 return new Retorno() { Status = false, Resultado = null };
 
             var UmEleitor = db.Eleitores.Find(c => c.Id.ToString() == id);
@@ -68,7 +90,7 @@ namespace Core
         }
         //Método para buscar todos os eleitores 
         public Retorno AcharTodos() => new Retorno() { Status = true, Resultado = db.Eleitores };
-    //    public Retorno AcharTodos() => new Retorno() { Status = true, Resultado = db.Eleitores };
+        //    public Retorno AcharTodos() => new Retorno() { Status = true, Resultado = db.Eleitores };
 
 
 
@@ -100,9 +122,6 @@ namespace Core
 
             if (eleitor.Nome != null)
                 umEleitor.Nome = eleitor.Nome;
-
-            if (eleitor.Id != null)
-                umEleitor.Id = eleitor.Id;
 
             if (eleitor.Documento != null)
                 umEleitor.Documento = eleitor.Documento;

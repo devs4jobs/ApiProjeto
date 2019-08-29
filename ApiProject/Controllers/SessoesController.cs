@@ -37,7 +37,15 @@ namespace ApiProject.Controllers
         public async Task<IActionResult> Status(string id) => Ok(new SessaoCore().RetornaStatus(id).Resultado);
 
 
+        [HttpGet("Data")]
+        // Buscar por data
+        public async Task<IActionResult> AcharPordata([FromQuery] string DataComeco, [FromQuery] string DataFim)
+        {
+            var Cor = new SessaoCore().BuscaPorData(DataComeco, DataFim);
 
+            return Cor.Status ? Ok(Cor.Resultado) : BadRequest(Cor.Resultado);
+
+        }
 
     }
 }

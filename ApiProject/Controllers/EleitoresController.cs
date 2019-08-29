@@ -34,5 +34,17 @@ namespace ApiProject.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(string id) => Accepted(new EleitorCore().DeletarId(id));
 
+
+
+        [HttpGet("Data")]
+        // Buscar por data
+        public async Task<IActionResult> AcharPordata([FromQuery] string DataComeco, [FromQuery] string DataFim)
+        {
+            var Cor = new EleitorCore().BuscaPorData(DataComeco, DataFim);
+
+            return Cor.Status ? Ok(Cor.Resultado) : BadRequest(Cor.Resultado);
+
+        }
+
     }
 }

@@ -2,6 +2,7 @@
 using FluentValidation;
 using Core.util;
 using System.Linq;
+using System;
 
 namespace Core
 {
@@ -96,9 +97,6 @@ namespace Core
             if (pauta.Descricao != null)
                 umaPauta.Descricao = pauta.Descricao;
 
-            if (pauta.Id != null)
-                umaPauta.Id = pauta.Id;
-
             if (pauta.Concluida == true)
                 umaPauta.Concluida = pauta.Concluida;
 
@@ -107,5 +105,28 @@ namespace Core
 
             return new Retorno { Status = true, Resultado = umaPauta };
         }
+
+
+        public Retorno BuscaPorData(string dataComeço, string dataFim)
+        {
+            // Tento fazer a conversao e checho se ela nao for feita corretamente, se ambas nao forem corretas retorno FALSE
+            if (!DateTime.TryParse(dataComeço, out DateTime primeiraData) && !DateTime.TryParse(dataFim, out DateTime segundaData))
+                return new Retorno() { Status = false, Resultado = "Dados Invalidos" };
+
+            // Tento fazer a conversao da segunda data for invalida faço somente a pesquisa da primeira data
+            if (!DateTime.TryParse(dataFim, out segundaData))
+                return new Retorno { Status = true, Resultado = db.Pautas.Where(c => c.DataCadastro >= primeiraData).ToList()  };
+
+            // Tento fazer a conversao da primeiradata for invalida faço somente a pesquisa da segunda data
+            if (!DateTime.TryParse(dataComeço, out  primeiraData))
+                return new Retorno { Status = true, Resultado = db.Pautas.Where(c => c.DataCadastro <= segundaData).ToList() };
+          
+           // returno a lista completa entre as duas datas informadas.
+            return new Retorno { Status = true, Resultado = db.Pautas.Where(c => c.DataCadastro >= primeiraData && c.DataCadastro <= segundaData).ToList() };
+
+        }
+
+
+
     }
 }
