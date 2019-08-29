@@ -58,6 +58,7 @@ namespace Core
             return new Retorno() { Status = true, Resultado = _eleitor };
         }
 
+
         public Retorno BuscaPorData(string dataComeço, string dataFim)
         {
             // Tento fazer a conversao e checho se ela nao for feita corretamente, se ambas nao forem corretas retorno FALSE
@@ -74,49 +75,38 @@ namespace Core
 
             // returno a lista completa entre as duas datas informadas.
             return new Retorno { Status = true, Resultado = db.Eleitores.Where(c => c.DataCadastro >= primeiraData && c.DataCadastro <= segundaData).ToList() };
-
         }
-
-
 
         // Método para buscar um eleitor
         public Retorno AcharUm(string id)
         {
-            if (!db.Eleitores.Exists(e => e.Id.ToString() == id))
-                return new Retorno() { Status = false, Resultado = null };
+            if (!db.Eleitores.Any(p => p.Id.ToString() == id))
+                return new Retorno() { Status = false, Resultado = "Esse eleitor não existe na base de dados" };
 
             var UmEleitor = db.Eleitores.Find(c => c.Id.ToString() == id);
             return new Retorno() { Status = true, Resultado = UmEleitor };
         }
+
         //Método para buscar todos os eleitores 
         public Retorno AcharTodos() => new Retorno() { Status = true, Resultado = db.Eleitores };
-        //    public Retorno AcharTodos() => new Retorno() { Status = true, Resultado = db.Eleitores };
-
-
-
-
+        
         // Método deletar por id
         public Retorno DeletarId(string id)
         {
+            if (!db.Eleitores.Any(p => p.Id.ToString() == id))
+                return new Retorno() { Status = false, Resultado = "Esse eleitor não existe na base de dados" };
 
-            if (!db.Eleitores.Exists(e => e.Id.ToString() == id))
-                return new Retorno() { Status = false, Resultado = null };
-
-            var umEleitor = db.Eleitores.Find(c => c.Id.ToString() == id);
-
-            db.Eleitores.Remove(umEleitor);
+            db.Eleitores.Remove(db.Eleitores.Find(c => c.Id.ToString() == id));
 
             file.ManipulacaoDeArquivos(false, db);
-
             return new Retorno { Status = true, Resultado = null };
-
         }
 
         // Método para efetuar a atualização de um eleitor por id
         public Retorno AtualizarUm(string id, Eleitor eleitor)
         {
-            if (!db.Eleitores.Exists(e => e.Id.ToString() == id))
-                return new Retorno() { Status = false, Resultado = null };
+            if (!db.Eleitores.Any(p => p.Id.ToString() == id))
+                return new Retorno() { Status = false, Resultado = "Esse eleitor não existe na base de dados" };
 
             var umEleitor = db.Eleitores.Find(c => c.Id.ToString() == id);
 
@@ -133,9 +123,30 @@ namespace Core
                 umEleitor.Idade = eleitor.Idade;
 
             file.ManipulacaoDeArquivos(false, db);
-
             return new Retorno { Status = true, Resultado = umEleitor };
+        }
 
+        // Método para realizar a paginação
+        public Retorno PorPaginacao(string ordempor, int numeroPagina, int qtdRegistros)
+        {
+            // checo se as paginação é valida pelas variaveis e se sim executo o skip take contendo o calculo
+            if (numeroPagina > 0 && qtdRegistros > 0 && ordempor == null)
+                return new Retorno() { Status = true, Resultado = db.Eleitores.Skip((numeroPagina - 1) * qtdRegistros).Take(qtdRegistros).ToList() };
+
+            // faço a verificação e depois ordeno por nome. 
+            if (numeroPagina > 0 && qtdRegistros > 0 && ordempor.ToUpper().Trim() == "NOME")
+                return new Retorno() { Status = true, Resultado = db.Eleitores.OrderBy(c => c.Nome).Skip((numeroPagina - 1) * qtdRegistros).Take(qtdRegistros).ToList() };
+
+            // faço a verificação e depois ordeno por data. 
+            if (numeroPagina > 0 && qtdRegistros > 0 && ordempor.ToUpper().Trim() == "DATA")
+                return new Retorno() { Status = true, Resultado = db.Eleitores.OrderBy(c => c.DataCadastro).Skip((numeroPagina - 1) * qtdRegistros).Take(qtdRegistros).ToList() };
+
+            // faço a verificação e depois ordeno por idade. 
+            if (numeroPagina > 0 && qtdRegistros > 0 && ordempor.ToUpper().Trim() == "IDADE")
+                return new Retorno() { Status = true, Resultado = db.Eleitores.OrderBy(c => c.Idade).Skip((numeroPagina - 1) * qtdRegistros).Take(qtdRegistros).ToList() };
+
+            // se nao der pra fazer a paginação
+            return new Retorno() { Status = false, Resultado = "Dados inválidos, nao foi possivel realizar a paginação." };
         }
     }
 }
