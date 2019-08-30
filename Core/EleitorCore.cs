@@ -3,6 +3,7 @@ using System;
 using FluentValidation;
 using Core.util;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace Core
 {
@@ -99,7 +100,7 @@ namespace Core
                 return new Retorno() { Status = true, Resultado = Db.Eleitores.OrderByDescending(x => x.Nome).Skip((NPagina - 1) * TPagina).Take(TPagina).ToList() };
 
             //se paginação é não é possivel
-            return new Retorno() { Status = false, Resultado = "Digite as propriedades corretas" };
+            return new Retorno() { Status = false, Resultado = new List<string>() { "Digite as propriedades corretas" } };
         }
 
         public Retorno Lista()=> new Retorno() { Status = true, Resultado = Db.Eleitores};

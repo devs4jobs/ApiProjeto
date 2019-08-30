@@ -86,7 +86,7 @@ namespace Core
                 return new Retorno() { Status = true, Resultado = Db.Sessaos.OrderByDescending(x => x.Status).Skip((NPagina - 1) * TPagina).Take(TPagina).ToList() };
 
             //se paginação é não é possivel
-            return new Retorno() { Status = false, Resultado = "Digite as propriedades corretas" };
+            return new Retorno() { Status = false, Resultado = new List<string>() { "Digite as propriedades corretas" } };
         }
 
         public Retorno PorData(string date, string time)

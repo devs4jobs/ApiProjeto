@@ -2,6 +2,7 @@
 using FluentValidation;
 using Model;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Core
@@ -77,7 +78,7 @@ namespace Core
                 return new Retorno() { Status = true, Resultado = Db.Pautas.OrderByDescending(x => x.Descricao).Skip((NPagina - 1) * TPagina).Take(TPagina).ToList() };
 
             //se paginação é não é possivel
-            return new Retorno() { Status = false, Resultado = "Digite as propriedades corretas" };
+            return new Retorno() { Status = false, Resultado = new List<string>() { "Digite as propriedades corretas" } };
         }
 
         public Retorno ID(Guid id)

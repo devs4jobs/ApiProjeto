@@ -57,7 +57,7 @@ namespace Core
             var sessao = Db.Sessaos.SingleOrDefault(c => c.Pautas.SingleOrDefault(d => d.Id == _PautaEleitor.PautaId).Id==_PautaEleitor.PautaId);
 
             //Caso não exista a pauta ou ja tenha finalizada
-            if (sessao == null||sessao.Status==false)
+            if (sessao == null||!sessao.Status)
                 return new Retorno() { Status = false, Resultado = "Sessão não iniciada ou Sessão ja finalizada" };
 
             //Caso não exista o eleitor
