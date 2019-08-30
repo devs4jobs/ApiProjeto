@@ -39,7 +39,7 @@ namespace Core
                 db.sistema = new Sistema();
 
             if (db.sistema.Eleitores.Exists(x => x.Documento == _eleitor.Documento))
-                return new Retorno() { Status = true, Resultado = "CPF já cadastrado" };
+                return new Retorno() { Status = false, Resultado = "Eleitor já cadastrado" };
 
             db.sistema.Eleitores.Add(_eleitor);
 

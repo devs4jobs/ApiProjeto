@@ -45,13 +45,13 @@ namespace Core
 
                 if (sessao.votoSessao.Exists(x => x.PautaId == _voto.PautaId && x.EleitorId == _voto.EleitorId))
                 {
-                    return new Retorno() { Status = true, Resultado = "Eleitor já votou" };
+                    return new Retorno() { Status = false, Resultado = "Este Eleitor já votou" };
                 }
 
                 var pautaSendoVotada = sessao.pautasSessao.Find(u => u.Id == _voto.PautaId);
 
                 if (pautaSendoVotada.Encerrada == true)
-                    return new Retorno() { Status = true, Resultado = "Pauta já encerrada" };
+                    return new Retorno() { Status = false, Resultado = "Pauta já encerrada" };
 
                 db.sistema.Votos.Add(_voto);
                 sessao.votoSessao.Add(_voto);

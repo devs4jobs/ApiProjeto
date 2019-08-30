@@ -37,7 +37,7 @@ namespace Core
 
             if (db.sistema.Pautas.Exists(x => x.Descricao == _pauta.Descricao))
             {
-                return new Retorno() { Status = true, Resultado = "Pauta já cadastrada" };
+                return new Retorno() { Status = false, Resultado = "Pauta já cadastrada" };
             }
             db.sistema.Pautas.Add(_pauta);
 
@@ -122,7 +122,5 @@ namespace Core
             nova.Id = velha.Id;
             return nova;
         }
-
-      
     }
 }

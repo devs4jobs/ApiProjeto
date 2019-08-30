@@ -37,7 +37,7 @@ namespace Core
 
             if (db.sistema.Pautas.Exists(x => x.Id == _sessao.Id))
             {
-                return new Retorno() { Status = true, Resultado = "Pauta já cadastrada" };
+                return new Retorno() { Status = false, Resultado = "Sessão já cadastrada" };
             }
             db.sistema.todasSessoes.Add(_sessao);
             file.ManipulacaoDeArquivos(false, db.sistema);
