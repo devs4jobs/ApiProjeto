@@ -27,6 +27,7 @@ namespace Core
 
         public Retorno CadastroVoto()
         {
+            //cadastrando voto
             try
             {
                 var results = Validate(_voto);
@@ -39,32 +40,31 @@ namespace Core
 
                 if (sessao.Encerrada == true)
                     return new Retorno { Status = false, Resultado = "Esta sessão já foi encerrada" };
-
+                //vendo se o sistema esta nulo
                 if (db.sistema == null)
                     db.sistema = new Sistema();
 
-                if (sessao.votoSessao.Exists(x => x.PautaId == _voto.PautaId && x.EleitorId == _voto.EleitorId))
-                {
-                    return new Retorno() { Status = false, Resultado = "Este Eleitor já votou" };
-                }
-
+                if (sessao.votoSessao.Exists(x => x.PautaId == _voto.PautaId && x.EleitorId == _voto.EleitorId))               
+                   return new Retorno() { Status = false, Resultado = "Este Eleitor já votou" };
+                
+                //após validações realizando o voto
                 var pautaSendoVotada = sessao.pautasSessao.Find(u => u.Id == _voto.PautaId);
 
                 if (pautaSendoVotada.Encerrada == true)
                     return new Retorno() { Status = false, Resultado = "Pauta já encerrada" };
-
+                //addicionando o voto
                 db.sistema.Votos.Add(_voto);
                 sessao.votoSessao.Add(_voto);
 
                 var votosDaPauta = sessao.votoSessao.Where(s => s.PautaId == pautaSendoVotada.Id);
-
+                //conferindo se podemos encerrar a pauta que esta sendo votada
                 pautaSendoVotada.Encerrada = sessao.eleitoresSessao.Count() == votosDaPauta.Count();
 
                 var pautaVelha = db.sistema.Pautas.Find(w => w.Id == pautaSendoVotada.Id);
-
+                //atualizando na lista de pautas o voto
                 db.sistema.Pautas.Remove(pautaVelha);
                 db.sistema.Pautas.Add(pautaSendoVotada);
-
+                //percorrendo a lista e vendo se há pautas nao encerradas
                 foreach (var item in sessao.pautasSessao)
                     if (item.Encerrada == false)
                         sessao.Encerrada = false;
@@ -82,6 +82,7 @@ namespace Core
 
         public Retorno ExibirTodosVotos()
         {
+            //exibindo votos 
             var arquivo = file.ManipulacaoDeArquivos(true, null);
 
             if (arquivo.sistema == null)
@@ -93,6 +94,7 @@ namespace Core
 
         public Retorno ExibirVotoId(string id)
         {
+            //exibindo o voto por Id de pauta
             var arquivo = file.ManipulacaoDeArquivos(true, null);
 
             if (arquivo.sistema == null)

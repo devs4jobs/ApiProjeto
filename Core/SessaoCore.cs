@@ -57,18 +57,15 @@ namespace Core
 
             if (addSessao.eleitoresId.Count == 0 && addSessao.pautasId.Count == 0)
                 new Retorno() { Status = false, Resultado = "Nada está sendo adicionado!" };
-
-            if (addSessao.eleitoresId.Count > 0)
-            {
-                foreach (var eleitorId in addSessao.eleitoresId)
-                    sessao.eleitoresSessao.Add(eleitorId);
-            }
-            if (addSessao.pautasId.Count > 0)
-            {
-                foreach (var pautasId in addSessao.pautasId)
-                    sessao.pautasSessao.Add(pautasId);
-            }
-
+            //validando o que esta sendo passado para a sessao em quantidade
+            if (addSessao.eleitoresId.Count > 0)          
+               foreach (var eleitorId in addSessao.eleitoresId)
+                   sessao.eleitoresSessao.Add(eleitorId);
+            
+            if (addSessao.pautasId.Count > 0)          
+              foreach (var pautasId in addSessao.pautasId)
+                 sessao.pautasSessao.Add(pautasId);
+           
             var salva = file.ManipulacaoDeArquivos(false, arquivo.sistema);
             return new Retorno() { Status = true, Resultado = "Iten(s) adicionados com sucesso!" };
 

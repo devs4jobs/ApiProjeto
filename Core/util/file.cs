@@ -27,7 +27,6 @@ namespace Core.util
             }
             catch (Exception)
             {
-
                 throw;
             }
 

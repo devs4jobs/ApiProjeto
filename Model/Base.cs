@@ -8,7 +8,7 @@ namespace Model
     {
         public Guid Id { get; set; } = Guid.NewGuid();
         public DateTime DataCadastro { get; set; } = DateTime.Now;
-        
+        //método genérico para paginar minhas listas
         public List<T> GetPage<T>(List<T> list, int page, int pageSize)
         {
             if (page <= 0)

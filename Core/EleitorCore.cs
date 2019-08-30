@@ -12,7 +12,7 @@ namespace Core
     {
         private Eleitor _eleitor { get; set; }
         public EleitorCore(Eleitor eleitor)
-        {
+        {//regras para criar eleitor
             _eleitor = eleitor;
 
             RuleFor(e => e.Documento)
@@ -29,6 +29,7 @@ namespace Core
 
         public Retorno CadastroEleitor()
         {
+            //cadastrando eleitor
             var results = Validate(_eleitor);
             if (!results.IsValid)
                 return new Retorno { Status = false, Resultado = results.Errors };
@@ -37,10 +38,10 @@ namespace Core
 
             if (db.sistema == null)
                 db.sistema = new Sistema();
-
+            //validando se eleitor ja foi cadastraado
             if (db.sistema.Eleitores.Exists(x => x.Documento == _eleitor.Documento))
                 return new Retorno() { Status = false, Resultado = "Eleitor já cadastrado" };
-
+            //adicionando-o na lista
             db.sistema.Eleitores.Add(_eleitor);
 
             file.ManipulacaoDeArquivos(false, db.sistema);
@@ -55,7 +56,7 @@ namespace Core
 
             if (arquivo.sistema == null)
                 arquivo.sistema = new Sistema();
-
+            //filtrando eleitor a ser exibido por Id
             var resultado = arquivo.sistema.Eleitores.Where(x => x.Id == new Guid(id));
             return new Retorno() { Status = true, Resultado = resultado };
         }
@@ -66,7 +67,7 @@ namespace Core
 
             if (arquivo.sistema == null)
                 arquivo.sistema = new Sistema();
-
+            //filtrando eleitor a ser exibido por Idata de cadastro
             var resultado = arquivo.sistema.Eleitores.Where(x => x.DataCadastro.ToString("ddMMyyyy").Equals(dataCadastro));
             return new Retorno() { Status = true, Resultado = resultado };
         }
@@ -78,9 +79,9 @@ namespace Core
 
             if (arquivo.sistema == null)
                 arquivo.sistema = new Sistema();
-
+            //instancia de base para paginação
             Base classeBase = new Base();
-
+            //passando a lista de eleitor para ser paginada no metodo generico
             List<Eleitor> thirdPage = classeBase.GetPage(arquivo.sistema.Eleitores, page, sizePage);
 
             return new Retorno() { Status = true, Resultado = thirdPage };
@@ -92,7 +93,7 @@ namespace Core
 
             if (arquivo.sistema == null)
                 arquivo.sistema = new Sistema();
-
+            //filtrando eleitor a ser removido
             var resultado = arquivo.sistema.Eleitores.Remove(arquivo.sistema.Eleitores.Find(s => s.Id == new Guid(id)));
 
             file.ManipulacaoDeArquivos(false, arquivo.sistema);
@@ -105,13 +106,14 @@ namespace Core
 
             if (arquivo.sistema == null)
                 arquivo.sistema = new Sistema();
-
+            //armazenando o eleitor antigo
             var velho = arquivo.sistema.Eleitores.Find(s => s.Id == new Guid(id));
+            //passando para trocadados o eleitor a ser atualizado
             var troca = TrocaDados(novo, velho);
-
+            //fazendo a troca deles na lista
             arquivo.sistema.Eleitores.Add(troca);
             arquivo.sistema.Eleitores.Remove(velho);
-
+            //salvando alterações
             file.ManipulacaoDeArquivos(false, arquivo.sistema);
 
             return new Retorno() { Status = true, Resultado = troca };
@@ -119,6 +121,7 @@ namespace Core
 
         public Eleitor TrocaDados(Eleitor novo, Eleitor velho)
         {
+            //método para substituição dos atributos frombody
             if (velho.Nome == null) novo.Nome = velho.Nome;
             if (velho.Documento == null) novo.Documento = velho.Documento;
             if (velho.Sexo == null) novo.Sexo = velho.Sexo;

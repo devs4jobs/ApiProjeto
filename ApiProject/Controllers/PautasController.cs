@@ -11,6 +11,7 @@ namespace ApiProject.Controllers
     public class PautasController : ControllerBase
     {
         [HttpPost]
+        //post de pauta frombody
         [ProducesResponseType(201, Type = typeof(Pauta))]
         [ProducesResponseType(400)]
         public async Task<IActionResult> Post([FromBody] Pauta pauta)
@@ -22,6 +23,7 @@ namespace ApiProject.Controllers
         }
 
         [HttpGet("buscaPorId")]
+        //get por id da pauta
         [ProducesResponseType(200, Type = typeof(Pauta))]
         [ProducesResponseType(400)]
         public async Task<IActionResult> Get([FromQuery] string id)
@@ -33,6 +35,7 @@ namespace ApiProject.Controllers
         }
 
         [HttpGet("buscaPorData")]
+        //buscando por data
         [ProducesResponseType(200, Type = typeof(Pauta))]
         [ProducesResponseType(400)]
         public async Task<IActionResult> GetDate([FromQuery]string dataCadastro)
@@ -44,6 +47,7 @@ namespace ApiProject.Controllers
         }
 
         [HttpGet("buscaPaginada")]
+        //paginando as pautas fromquery
         [ProducesResponseType(200, Type = typeof(List<Pauta>))]
         [ProducesResponseType(400)]
         public async Task<IActionResult> GetAll([FromQuery] int page,[FromQuery] int sizePage)
@@ -55,6 +59,7 @@ namespace ApiProject.Controllers
         }
 
         [HttpDelete("deletePorId")]
+        //deletando uma pauta por id
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         public async Task<IActionResult> Delete([FromQuery]string id)
@@ -66,6 +71,7 @@ namespace ApiProject.Controllers
         }
 
         [HttpPut("atualizaPorId")]
+        //atualizando a pauta frombody
         [ProducesResponseType(200, Type = typeof(Pauta))]
         [ProducesResponseType(400)]
         public async Task<IActionResult> Put([FromQuery]string id, [FromBody] Pauta pauta)

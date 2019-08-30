@@ -25,7 +25,7 @@ namespace Core
 
         public Retorno CadastroPauta()
         {
-
+            //cadastrando a pauta
             var results = Validate(_pauta);
             if (!results.IsValid)
                 return new Retorno { Status = false, Resultado = results.Errors };
@@ -35,10 +35,9 @@ namespace Core
             if (db.sistema == null)
                 db.sistema = new Sistema();
 
-            if (db.sistema.Pautas.Exists(x => x.Descricao == _pauta.Descricao))
-            {
-                return new Retorno() { Status = false, Resultado = "Pauta já cadastrada" };
-            }
+            if (db.sistema.Pautas.Exists(x => x.Descricao == _pauta.Descricao))          
+               return new Retorno() { Status = false, Resultado = "Pauta já cadastrada" };
+            //add na lista
             db.sistema.Pautas.Add(_pauta);
 
             file.ManipulacaoDeArquivos(false, db.sistema);
@@ -48,7 +47,7 @@ namespace Core
 
         public Retorno ExibirPautaId(string id)
         {
-
+            //exibindo por id
             var arquivo = file.ManipulacaoDeArquivos(true, null);
             if (arquivo.sistema == null)
                 arquivo.sistema = new Sistema();
@@ -64,13 +63,14 @@ namespace Core
             if (arquivo.sistema == null)
                 arquivo.sistema = new Sistema();
 
-
+            //filtrando a exibição por data cadastro
             var resultado = arquivo.sistema.Pautas.Where(x => x.DataCadastro.ToString("ddMMyyyy").Equals(dataCadastro));
             return new Retorno() { Status = true, Resultado = resultado };
         }
 
         public Retorno ExibirTodasPautas(int page, int sizePage)
         {
+            //exibição paginada
             var arquivo = file.ManipulacaoDeArquivos(true, null);
 
             if (arquivo.sistema == null)
@@ -84,6 +84,7 @@ namespace Core
 
         public Retorno DeletarPautaId(string id)
         {
+            //deleção por id
             var arquivo = file.ManipulacaoDeArquivos(true, null);
 
             if (arquivo.sistema == null)
@@ -98,6 +99,7 @@ namespace Core
 
         public Retorno AtualizarPautaId(Pauta nova, string id)
         {
+            //atualizando a pauta 
             var arquivo = file.ManipulacaoDeArquivos(true, null);
 
             if (arquivo.sistema == null)
@@ -116,6 +118,7 @@ namespace Core
 
         public Pauta TrocaPauta(Pauta nova, Pauta velha)
         {
+            //substituindo os dados
             if (velha.Descricao == null) nova.Descricao = velha.Descricao;
             velha.DataCadastro = nova.DataCadastro;
             velha.Encerrada = nova.Encerrada;

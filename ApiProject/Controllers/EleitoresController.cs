@@ -12,6 +12,7 @@ namespace ApiProject.Controllers
     public class EleitoresController : ControllerBase
     {
         [HttpPost]
+        //post frombody de um eleitor
         [ProducesResponseType(201, Type = typeof(Eleitor))]
         [ProducesResponseType(400)]
         public async Task<IActionResult> Post([FromBody] Eleitor eleitor)
@@ -23,6 +24,7 @@ namespace ApiProject.Controllers
         }
 
         [HttpGet("buscaPorId")]
+        //buscando por id
         [ProducesResponseType(200, Type = typeof(Eleitor))]
         [ProducesResponseType(400)]
         public async Task<IActionResult> Get([FromQuery]string id)
@@ -34,6 +36,7 @@ namespace ApiProject.Controllers
         }
 
         [HttpGet("buscaPorData")]
+        //buscando por data
         [ProducesResponseType(200, Type = typeof(Eleitor))]
         [ProducesResponseType(400)]
         public async Task<IActionResult> GetDate([FromQuery] string dataCadastro)
@@ -45,6 +48,7 @@ namespace ApiProject.Controllers
         }
 
         [HttpGet("buscaPaginada")]
+        //configurando como sera a paginação formquery
         [ProducesResponseType(200, Type = typeof(List<Eleitor>))]
         [ProducesResponseType(400)]
         public async Task<IActionResult> GetAll([FromQuery] int page,[FromQuery] int sizePage)

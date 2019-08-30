@@ -12,6 +12,7 @@ namespace ApiProject.Controllers
     public class SessaoController : ControllerBase
     {
         [HttpPost]
+        //post de sessao 
         [ProducesResponseType(201, Type = typeof(Sessao))]
         [ProducesResponseType(400)]
         public async Task<IActionResult> Post([FromBody] Sessao sessao)
@@ -23,6 +24,7 @@ namespace ApiProject.Controllers
         }
 
         [HttpPost("AdicionarPautaEleitor")]
+        //adicionando pauta e eleitor em uma sessão
         [ProducesResponseType(201, Type = typeof(Sessao))]
         [ProducesResponseType(400)]
         public async Task<IActionResult> addPautaEleitor([FromBody] AdicionaPtEl addSessao)
@@ -34,6 +36,7 @@ namespace ApiProject.Controllers
         }
 
         [HttpGet("buscaPorId")]
+        //buscando a sessao por id
         [ProducesResponseType(200, Type = typeof(Sessao))]
         [ProducesResponseType(400)]
         public async Task<IActionResult> Get([FromQuery]string id)
@@ -45,6 +48,7 @@ namespace ApiProject.Controllers
         }
 
         [HttpGet("buscaPorData")]
+        //buscando por data
         [ProducesResponseType(200, Type = typeof(Sessao))]
         [ProducesResponseType(400)]
         public async Task<IActionResult> GetDate([FromQuery]string dataCadastro)
@@ -56,6 +60,7 @@ namespace ApiProject.Controllers
         }
 
         [HttpGet("buscaPaginada")]
+        //paginando todas as sessaoes
         [ProducesResponseType(200, Type = typeof(List<Sessao>))]
         [ProducesResponseType(400)]
         public async Task<IActionResult> GetAll([FromQuery] int page,[FromQuery] int sizePage)
@@ -67,6 +72,7 @@ namespace ApiProject.Controllers
         }
 
         [HttpDelete("deletePorId")]
+        //deletando uma sessao
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         public async Task<IActionResult> Delete([FromQuery]string id)
