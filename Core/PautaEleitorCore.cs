@@ -3,6 +3,7 @@ using FluentValidation;
 using Core.util;
 using System.Linq;
 using System;
+using System.Collections.Generic;
 
 namespace Core
 {
@@ -93,7 +94,7 @@ namespace Core
                 return new Retorno() { Status = true, Resultado = db.EleitoresPauta.OrderBy(c => c.Voto == "a favor").Skip((numeroPagina - 1) * qtdRegistros).Take(qtdRegistros).ToList() };
 
             // se nao der pra fazer a paginação
-            return new Retorno() { Status = false, Resultado = "Dados inválidos, nao foi possivel realizar a paginação." };
+            return new Retorno() { Status = false, Resultado = new List<string>() { "Dados inválidos, nao foi possivel realizar a paginação." } };
         }
         // Método para buscar uma pauta
         public Retorno AcharUm(string id)

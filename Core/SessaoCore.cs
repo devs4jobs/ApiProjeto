@@ -3,6 +3,7 @@ using FluentValidation;
 using Core.util;
 using System.Linq;
 using System;
+using System.Collections.Generic;
 
 namespace Core
 {
@@ -70,9 +71,9 @@ namespace Core
             // faço a verificação e depois ordeno por data. 
             if (numeroPagina > 0 && qtdRegistros > 0 && ordempor.ToUpper().Trim() == "DATA")
                 return new Retorno() { Status = true, Resultado = db.Sessoes.OrderBy(c => c.DataCadastro).Skip((numeroPagina - 1) * qtdRegistros).Take(qtdRegistros).ToList() };
-
+           
             // se nao der pra fazer a paginação
-            return new Retorno() { Status = false, Resultado = "Dados inválidos, nao foi possivel realizar a paginação." };
+            return new Retorno() { Status = false, Resultado = new List<string>() { "Dados inválidos, nao foi possivel realizar a paginação." } };
         }
 
         public Retorno BuscaPorData(string dataComeço, string dataFim)
