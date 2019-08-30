@@ -43,7 +43,7 @@ namespace Core
             var umaSessao = db.Sessoes.SingleOrDefault(c => c.LstPautas.SingleOrDefault(e => e.Id == _pautaeleitor.PautaId) != null);
 
             // checa se a sessao é valida
-            if (umaSessao == null || umaSessao.Status)
+            if (umaSessao == null || umaSessao.Status || DateTime.Now > umaSessao.DataFim)
                 return new Retorno { Status = false, Resultado = "Essa Sessão é invalida!" };
 
             // checa se o eleitor existe nessa sessao

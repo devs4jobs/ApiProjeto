@@ -13,22 +13,12 @@ namespace Model
         public bool Status { get; set; } = false;
         public DateTime DataFim { get; set; } = DateTime.Now.AddDays(1);
 
-
-        // metodo para finalizar a sessao por tempo.
-        public bool ValidaSessao(DateTime datafim)
-        {
-            if (datafim >= DateTime.Now)
-                return false;
-
-                    return true;
-        }
-
         // meotodo para validaçao das pautas.
         public bool ValidaPauta()
         {
             foreach (var item in LstPautas)
             {
-                if (item.Concluida == false)
+                if (item.Concluida)
                     return false;
             }
                

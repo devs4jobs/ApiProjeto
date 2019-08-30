@@ -8,5 +8,15 @@ namespace Model
         public string Documento { get; set; }
         public string Sexo { get; set; }
         public int Idade { get; set; }
+
+
+        public void TrocandoDados(Eleitor eleitor)
+        {
+            Idade = eleitor.Idade;
+            Documento = eleitor.Documento;
+            Sexo = eleitor.Sexo;
+            Nome = eleitor.Nome;
+            DataCadastro = eleitor.DataCadastro;
+        }
     }
 }

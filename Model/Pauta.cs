@@ -6,5 +6,13 @@
         public string Descricao { get; set; }
         public bool Concluida { get; set; }
 
+
+
+        public void TrocandoDados(Pauta pauta)
+        {
+            Descricao = pauta.Descricao;
+            DataCadastro = pauta.DataCadastro;
+        }
+
     }
 }

@@ -16,7 +16,6 @@ namespace Core
 
             if (db == null) db = new Sistema();
         }
-
         public EleitorCore(Eleitor eleitor)
         {
             db = file.ManipulacaoDeArquivos(true, null).sistema;
@@ -57,7 +56,6 @@ namespace Core
 
             return new Retorno() { Status = true, Resultado = _eleitor };
         }
-
 
         public Retorno BuscaPorData(string dataComeço, string dataFim)
         {

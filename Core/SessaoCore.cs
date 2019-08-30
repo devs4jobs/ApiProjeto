@@ -27,6 +27,11 @@ namespace Core
 
             RuleFor(a => a.LstPautas).NotEmpty().WithMessage("Lista de Pautas nao pode ser vazia");
             RuleFor(a => a.Status).NotEqual(true).WithMessage("Não é possivel cadastrar uma sessao ja finalizada.");
+
+            _sessao.LstEleitores.ForEach(c => c.TrocandoDados(db.Eleitores.FirstOrDefault(e => e.Id == c.Id)));
+            _sessao.LstPautas.ForEach(c => c.TrocandoDados(db.Pautas.FirstOrDefault(e => e.Id == c.Id)));
+
+
         }
         // Método para cadastro.
         public Retorno Cadastro()
@@ -34,7 +39,7 @@ namespace Core
             var results = Validate(_sessao);
 
             // Se o modelo é inválido retorno false
-            if (!results.IsValid || _sessao.ValidaPauta() || _sessao.ValidaSessao(_sessao.DataFim))
+            if (!results.IsValid || !_sessao.ValidaPauta())
                 return new Retorno { Status = false, Resultado = results.Errors.Select(c => c.ErrorMessage).ToList() };
 
             db.Sessoes.Add(_sessao);
@@ -59,7 +64,7 @@ namespace Core
                 return new Retorno() { Status = true, Resultado = db.Sessoes.Skip((numeroPagina - 1) * qtdRegistros).Take(qtdRegistros).ToList() };
 
             // faço a verificação e depois ordeno por nome. 
-            if (numeroPagina > 0 && qtdRegistros > 0 && ordempor.ToUpper().Trim() == "NOME")
+            if (numeroPagina > 0 && qtdRegistros > 0 && ordempor.ToUpper().Trim() == "STATUS")
                 return new Retorno() { Status = true, Resultado = db.Sessoes.OrderBy(c => c.Status).Skip((numeroPagina - 1) * qtdRegistros).Take(qtdRegistros).ToList() };
 
             // faço a verificação e depois ordeno por data. 
