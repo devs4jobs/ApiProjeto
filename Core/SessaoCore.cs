@@ -52,6 +52,7 @@ namespace Core
 
             if (arquivo.sistema == null)
                 arquivo.sistema = new Sistema();
+            //filtrando a sessao por id
 
             var sessao = arquivo.sistema.todasSessoes.Find(q => q.Id == new Guid(addSessao.idSessao));
 
@@ -61,7 +62,7 @@ namespace Core
             if (addSessao.eleitoresId.Count > 0)          
                foreach (var eleitorId in addSessao.eleitoresId)
                    sessao.eleitoresSessao.Add(eleitorId);
-            
+            //validando o tamanho da lista de pautas que esta sendo passada
             if (addSessao.pautasId.Count > 0)          
               foreach (var pautasId in addSessao.pautasId)
                  sessao.pautasSessao.Add(pautasId);
